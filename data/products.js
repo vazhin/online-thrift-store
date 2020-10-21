@@ -2,13 +2,17 @@ const sqlite = require('sqlite3');
 
 //TODO: CREATE A RELATIONSHIP BETWEEN USERS AND PRODUCTS TABLE. EACH USER HAS MANY PRODUCTS.
 
+// TODO: picture of product.
+
 /* 
 
 Q\ do I need to change the price data type to money?
-Note\ the condition property can either be new
+Note\ the condition property can either be (new with tags, like-new, gently-used, signs of wear) 
 Thought\ should I add "MEASUREMENTS" property or I don't need to I guess.
 
 */
+
+// TODO: add category field. think about filtering the products.
 
 class Product {
   constructor(
@@ -19,7 +23,8 @@ class Product {
     owner_phoneNumber,
     description,
     condition,
-    date_added
+    date_added,
+    category
   ) {
     this.product_id = product_id;
     this.name = name;
@@ -29,13 +34,14 @@ class Product {
     this.description = description;
     this.condition = condition;
     this.date_added = date_added;
+    this.category = category;
   }
 
   create(product, callback) {
     let success = true;
     let error_message = '';
 
-    // connect to the debug
+    // connect to the database
 
     const db = new sqlite.Database('./data/database.db', (err) => {
       if (err) {
@@ -55,7 +61,8 @@ class Product {
       owner_phoneNumber INTEGER NOT NULL,
       description TEXT NOT NULL,
       condition TEXT NOT NULL,
-      date_added TEXT NOT NULL
+      date_added TEXT NOT NULL,
+      category TEXT NOT NULL
     )`;
 
     db.serialize(() => {
@@ -75,16 +82,29 @@ class Product {
       });
     });
 
+    let createProductSql = `INSERT INTO products(product_id,
+      name,
+      owner,
+      price,
+      owner_phoneNumber,
+      description,
+      condition,
+      date_added,
+      category) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
     db.run(
-      `INSERT INTO products(product_id,
-        name,
-        owner,
-        price,
-        owner_phoneNumber,
-        description,
-        condition,
-        date_added) VALUES(1, "t-shirt", "vazhin", 50, 07503424424, "it's a t-shirt.", "it's new.", "2 Jan, 2020" )`,
-      [],
+      createProductSql,
+      [
+        product.product_id,
+        product.name,
+        product.owner,
+        product.price,
+        product.owner_phoneNumber,
+        product.description,
+        product.condition,
+        product.date_added,
+        product.category,
+      ],
       function (err) {
         if (err) {
           return console.log(err.message);
