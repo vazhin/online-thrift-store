@@ -8,34 +8,44 @@ const sqlite = require('sqlite3');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-const db = new sqlite.Database('./data/database.db', (err) => {
-  if (err) {
-    console.error(err.message);
-  }
+// const db = new sqlite.Database('./data/database.db', (err) => {
+//   if (err) {
+//     console.error(err.message);
+//   }
 
-  console.log('Connected to the database.');
-});
+//   console.log('Connected to the database.');
+// });
 
-db.serialize(() => {
-  db.each(
-    `SELECT ProductId as id,
-                  Name as name
-           FROM products`,
-    (err, row) => {
-      if (err) {
-        console.error(err.message);
-      }
-      console.log(row);
-    }
-  );
-});
+// db.serialize(() => {
+//   let sql = `SELECT ProductId as id, Name as name FROM products ORDER BY ProductId ASC`;
+//   db.each(sql, [], (err, row) => {
+//     if (err) {
+//       console.error(err.message);
+//     }
+//     console.log(row);
+//   });
 
-db.close((err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Closed the database connection.');
-});
+//   db.serialize(() => {
+//     db.run(
+//       `INSERT INTO langs(name) VALUES(?), (?), (?)`,
+//       ['C', 'JS', 'GO'],
+//       function (err) {
+//         if (err) {
+//           return console.log(err.message);
+//         }
+//         // get the last insert id
+//         console.log(`A row has been inserted with rowid ${this.changes}`);
+//       }
+//     );
+//   });
+// });
+
+// db.close((err) => {
+//   if (err) {
+//     console.error(err.message);
+//   }
+//   console.log('Closed the database connection.');
+// });
 
 var app = express();
 
