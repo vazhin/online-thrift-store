@@ -1,5 +1,12 @@
 const sqlite = require('sqlite3');
 
+// TODO: get the inserted row. ///////////////
+
+const {
+  connectToTheDatabase,
+  closeTheDatabaseConnection,
+} = require('./db-common-functions');
+
 //TODO: CREATE A RELATIONSHIP BETWEEN USERS AND PRODUCTS TABLE. EACH USER HAS MANY PRODUCTS.
 
 // TODO: picture of product.
@@ -37,24 +44,94 @@ class Product {
     this.category = category;
   }
 
+  getAll(callback) {
+    let success = true;
+    let error_message = '';
+    let products = [];
+
+    const db = connectToTheDatabase();
+
+    db.all(
+      `SELECT product_id,
+    name,
+    owner,
+    price,
+    owner_phoneNumber,
+    description,
+    condition,
+    date_added FROM products`,
+      [],
+      (err, rows) => {
+        if (err) {
+          console.error(err.message);
+        }
+        products = [...rows];
+      }
+    );
+
+    console.log(products);
+  }
+
   create(product, callback) {
     let success = true;
     let error_message = '';
+    let product_id = undefined;
 
     // connect to the database
 
-    const db = new sqlite.Database('./data/database.db', (err) => {
-      if (err) {
-        console.error(err.message);
-      }
+    const db = connectToTheDatabase();
 
-      console.log('Connected to the database.');
+    db.serialize(() => {
+      //create table if not exists
+
+      this.createTable(db);
+
+      let createProductSql = `INSERT INTO products(
+      name,
+      owner,
+      price,
+      owner_phoneNumber,
+      description,
+      condition,
+      date_added,
+      category) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`;
+
+      db.run(
+        createProductSql,
+        [
+          product.name,
+          product.owner,
+          product.price,
+          product.owner_phoneNumber,
+          product.description,
+          product.condition,
+          product.date_added,
+          product.category,
+        ],
+        function (err) {
+          if (err) {
+            return console.log(err.message);
+          }
+
+          console.log(
+            `one row has been inserted with the row id ${this.lastID}`
+          );
+        }
+      );
+
+      closeTheDatabaseConnection(db);
     });
 
-    //create table if not exists
+    //TODO: validate product property values.
 
+    if (typeof callback === 'function') {
+      callback(result);
+    }
+  }
+
+  createTable(db) {
     let createTableSql = `CREATE TABLE IF NOT EXISTS products (
-      product_id INTEGER PRIMARY KEY,
+      product_id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       owner TEXT NOT NULL,
       price INTEGER NOT NULL,
@@ -65,86 +142,33 @@ class Product {
       category TEXT NOT NULL
     )`;
 
-    db.serialize(() => {
-      // TODO: delete this. I don't want to drop the table.
-      db.run(`DROP TABLE products`, function (err) {
-        if (err) {
-          console.error(err);
-        }
-        console.log('dropped table products.');
-      });
-
-      db.run(createTableSql, function (err) {
-        if (err) {
-          console.error(err);
-        }
-        console.log('table products created.');
-      });
-    });
-
-    let createProductSql = `INSERT INTO products(product_id,
-      name,
-      owner,
-      price,
-      owner_phoneNumber,
-      description,
-      condition,
-      date_added,
-      category) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
-    db.run(
-      createProductSql,
-      [
-        product.product_id,
-        product.name,
-        product.owner,
-        product.price,
-        product.owner_phoneNumber,
-        product.description,
-        product.condition,
-        product.date_added,
-        product.category,
-      ],
-      function (err) {
-        if (err) {
-          return console.log(err.message);
-        }
-        // get the last insert id
-        console.log(`A row has been inserted with rowid ${this.lastID}`);
-      }
-    );
-
-    db.each(
-      `SELECT product_id,
-    name,
-    owner,
-    price,
-    owner_phoneNumber,
-    description,
-    condition,
-    date_added FROM products`,
-      [],
-      (err, row) => {
-        if (err) {
-          console.error(err.message);
-        }
-        console.log(row);
-      }
-    );
-
-    db.close((err) => {
+    db.run(createTableSql, function (err) {
       if (err) {
-        console.error(err.message);
+        console.error(err);
       }
-      console.log('Closed the database connection.');
+      console.log('table products created.');
     });
-
-    //TODO: validate product property values.
-
-    if (typeof callback === 'function') {
-      callback(result);
-    }
   }
+
+  // getOne(product_id, db) {
+  //   let sql = `SELECT product_id,
+  //   name,
+  //   owner,
+  //   price,
+  //   owner_phoneNumber,
+  //   description,
+  //   condition,
+  //   date_added FROM products WHERE product_id = ?`;
+
+  //   db.get(sql, [product_id], (err, row) => {
+  //     if (err) {
+  //       console.error(err.message);
+  //     }
+  //     return row
+  //       ? row
+  //       : console.log(`No product found with the id of ${product_id}`);
+  //   });
+  // }
 }
 
 module.exports = new Product();
@@ -189,3 +213,11 @@ posts.create = (post, user, callback) => {
 };
 
 */
+
+// TODO: delete this. I don't want to drop the table.
+// db.run(`DROP TABLE products`, function (err) {
+//   if (err) {
+//     console.error(err);
+//   }
+//   console.log('dropped table products.');
+// });
