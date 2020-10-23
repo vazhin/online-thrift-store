@@ -23,3 +23,12 @@ exports.getProducts = (req, res, next) => {
     res.status(200).json(data);
   });
 };
+
+exports.getAProduct = (req, res, next) => {
+  Product.getOne(req.params.productId, ({ err, row }) => {
+    if (err) {
+      res.status(404).json({ message: err });
+    }
+    res.status(200).json(row);
+  });
+};

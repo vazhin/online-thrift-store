@@ -98,7 +98,7 @@ class Product {
             return callback({ err: err.message, row: null });
           }
 
-          self.getOne(this.lastID, (row) => {
+          self.getOne(this.lastID, ({ row }) => {
             if (!row) {
               callback({
                 err: `Could not get the row with the row id ${this.lastID}`,
@@ -149,11 +149,17 @@ class Product {
 
     db.get(sql, [product_id], function (err, row) {
       if (err) {
-        console.error(err.message);
+        closeTheDatabaseConnection(db);
+        return callback({
+          err: err.message,
+        });
       }
+      closeTheDatabaseConnection(db);
       return row
-        ? callback(row)
-        : console.log(`No product found with the id of ${product_id}`);
+        ? callback({ row })
+        : callback({
+            err: `No product was found with the id of ${product_id}`,
+          });
     });
   }
 }
