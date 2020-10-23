@@ -10,7 +10,6 @@ const {
 /* 
 
 Q\ do I need to change the price data type to money?
-Note\ the condition property can either be (new with tags, like-new, gently-used, signs of wear) 
 Thought\ should I add "MEASUREMENTS" property or I don't need to I guess.
 
 */
@@ -65,8 +64,6 @@ class Product {
 
   create(product, callback) {
     let self = this;
-
-    // TODO: validate incoming data in the body
 
     const db = connectToTheDatabase();
 
