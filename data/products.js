@@ -1,7 +1,3 @@
-const sqlite = require('sqlite3');
-
-// TODO: get the inserted row. ///////////////
-
 const {
   connectToTheDatabase,
   closeTheDatabaseConnection,
@@ -18,8 +14,6 @@ Note\ the condition property can either be (new with tags, like-new, gently-used
 Thought\ should I add "MEASUREMENTS" property or I don't need to I guess.
 
 */
-
-// TODO: add category field. think about filtering the products.
 
 class Product {
   constructor(
@@ -45,10 +39,6 @@ class Product {
   }
 
   getAll(callback) {
-    let success = true;
-    let error_message = '';
-    let products = [];
-
     const db = connectToTheDatabase();
 
     db.all(
@@ -59,17 +49,18 @@ class Product {
     owner_phoneNumber,
     description,
     condition,
-    date_added FROM products`,
+    date_added,
+    category FROM products`,
       [],
       (err, rows) => {
         if (err) {
-          console.error(err.message);
+          callback({ err: err.message, data: null });
+          closeTheDatabaseConnection(db);
         }
-        products = [...rows];
+        callback({ err: null, data: rows });
+        closeTheDatabaseConnection(db);
       }
     );
-
-    console.log(products);
   }
 
   create(product, callback) {
@@ -106,6 +97,7 @@ class Product {
         ],
         function (err) {
           if (err) {
+            closeTheDatabaseConnection(db);
             return callback({ err: err.message, row: null });
           }
 
