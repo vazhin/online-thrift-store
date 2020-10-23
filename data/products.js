@@ -73,17 +73,21 @@ class Product {
   }
 
   create(product, callback) {
-    let success = true;
-    let error_message = '';
-    let product_id = undefined;
+    let self = this;
+
+    const result = {
+      success: true,
+      error_message: '',
+      data: null,
+    };
 
     // connect to the database
 
     const db = connectToTheDatabase();
 
-    db.serialize(() => {
-      //create table if not exists
+    //create table if not exists
 
+    db.serialize(() => {
       this.createTable(db);
 
       let createProductSql = `INSERT INTO products(
@@ -110,23 +114,23 @@ class Product {
         ],
         function (err) {
           if (err) {
-            return console.log(err.message);
+            return callback({ err: err.message, row: null });
           }
 
-          console.log(
-            `one row has been inserted with the row id ${this.lastID}`
-          );
+          self.getOne(this.lastID, (row) => {
+            if (!row) {
+              callback({
+                err: `Could not get the row with the row id ${this.lastID}`,
+                row: null,
+              });
+              closeTheDatabaseConnection(db);
+            }
+            callback({ err: null, row });
+            closeTheDatabaseConnection(db);
+          });
         }
       );
-
-      closeTheDatabaseConnection(db);
     });
-
-    //TODO: validate product property values.
-
-    if (typeof callback === 'function') {
-      callback(result);
-    }
   }
 
   createTable(db) {
@@ -150,25 +154,27 @@ class Product {
     });
   }
 
-  // getOne(product_id, db) {
-  //   let sql = `SELECT product_id,
-  //   name,
-  //   owner,
-  //   price,
-  //   owner_phoneNumber,
-  //   description,
-  //   condition,
-  //   date_added FROM products WHERE product_id = ?`;
+  getOne(product_id, callback) {
+    const db = connectToTheDatabase();
 
-  //   db.get(sql, [product_id], (err, row) => {
-  //     if (err) {
-  //       console.error(err.message);
-  //     }
-  //     return row
-  //       ? row
-  //       : console.log(`No product found with the id of ${product_id}`);
-  //   });
-  // }
+    let sql = `SELECT product_id,
+  name,
+  owner,
+  price,
+  owner_phoneNumber,
+  description,
+  condition,
+  date_added FROM products WHERE product_id = ?`;
+
+    db.get(sql, [product_id], function (err, row) {
+      if (err) {
+        console.error(err.message);
+      }
+      return row
+        ? callback(row)
+        : console.log(`No product found with the id of ${product_id}`);
+    });
+  }
 }
 
 module.exports = new Product();
@@ -213,11 +219,3 @@ posts.create = (post, user, callback) => {
 };
 
 */
-
-// TODO: delete this. I don't want to drop the table.
-// db.run(`DROP TABLE products`, function (err) {
-//   if (err) {
-//     console.error(err);
-//   }
-//   console.log('dropped table products.');
-// });
