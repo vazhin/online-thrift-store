@@ -10,3 +10,7 @@ exports.createProduct = (req, res, next) => {
 
   res.status(201).send('product created.');
 };
+
+exports.getProducts = (req, res, next) => {
+  // Product.
+};

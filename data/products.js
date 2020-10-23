@@ -75,17 +75,9 @@ class Product {
   create(product, callback) {
     let self = this;
 
-    const result = {
-      success: true,
-      error_message: '',
-      data: null,
-    };
-
-    // connect to the database
+    // TODO: validate incoming data in the body
 
     const db = connectToTheDatabase();
-
-    //create table if not exists
 
     db.serialize(() => {
       this.createTable(db);
@@ -178,44 +170,3 @@ class Product {
 }
 
 module.exports = new Product();
-
-/* 
-
-NOTE: this is an example of a method.
-
-posts.create = (post, user, callback) => {
-  var success = true;
-  var error_message = "";
-
-  if (post.title.trim().length < 10) {
-    error_message = "A post title is required (minimum 10 characters).";
-  } else if (post.message.trim().length < 20) {
-    error_message = "A post message is required (minimum 20 characters).";
-  }
-
-  if (!success) {
-    var result = {
-      success: false,
-      error_message: error_message
-    };
-    return callback(result);
-  }
-
-  var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-  var date = new Date();
-  var sql ='INSERT INTO posts (title, body, date, user_id, timestamp) VALUES (?, ?, ?, ?, ?)'
-  var now = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-  var timestamp = Math.round(new Date().getTime() / 1000);
-  var params =[post.title, post.message, now, user.id, timestamp]
-  db.run(sql, params, function (err, result) {
-    var success = !err;
-    var result = {
-      success: success,
-      error_message: "An unknown error occurred.",
-      post_id: this.lastID,
-    };
-    return callback(result);
-  });
-};
-
-*/
