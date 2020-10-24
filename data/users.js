@@ -10,9 +10,29 @@ class User {
 
   signup(credentials, callback) {
     const db = connectToTheDatabase();
+    this.createTable(db);
 
-    createTable(db);
+    // TODO: validate credentials.
 
+    let addUserSql = `INSERT INTO users(
+      username,
+      email,
+      password) VALUES(?, ?, ?)`;
+
+    db.run(
+      addUserSql,
+      [credentials.username, credentials.email, credentials.password],
+      function (err) {
+        if (err) {
+          closeTheDatabaseConnection(db);
+          callback({ err: err.message, data: null });
+          return;
+        }
+
+        // TODO: get the created user.
+        callback({ err: null, data: 'created user.' });
+      }
+    );
     closeTheDatabaseConnection(db);
   }
 
@@ -34,3 +54,5 @@ class User {
     });
   }
 }
+
+module.exports = new User();

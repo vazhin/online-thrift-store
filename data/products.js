@@ -41,7 +41,8 @@ class Product {
         function (err) {
           if (err) {
             closeTheDatabaseConnection(db);
-            return callback({ err: err.message, row: null });
+            callback({ err: err.message, row: null });
+            return;
           }
 
           self.getOne(this.lastID, ({ row }) => {
