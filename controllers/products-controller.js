@@ -24,11 +24,22 @@ exports.getRecentProducts = (req, res, next) => {
   });
 };
 
+// TODO: validate category param.
+
 exports.getAProduct = (req, res, next) => {
   Product.getOne(req.params.productId, ({ err, row }) => {
     if (err) {
       res.status(404).json({ message: err });
     }
     res.status(200).json(row);
+  });
+};
+
+exports.getByCategory = (req, res, next) => {
+  Product.getByCategory(req.params.category, ({ err, data }) => {
+    if (err) {
+      res.status(500).json({ message: err });
+    }
+    res.status(200).json(data);
   });
 };

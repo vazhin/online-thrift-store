@@ -60,30 +60,31 @@ class Product {
     });
   }
 
-  getAll(callback) {
-    const db = connectToTheDatabase();
+  // getAll(callback) {
+  //   const db = connectToTheDatabase();
 
-    db.all(
-      `SELECT product_id,
-    name,
-    owner,
-    price,
-    owner_phoneNumber,
-    description,
-    condition,
-    date_added,
-    category FROM products`,
-      [],
-      (err, rows) => {
-        if (err) {
-          callback({ err: err.message, data: null });
-          closeTheDatabaseConnection(db);
-        }
-        callback({ err: null, data: rows });
-        closeTheDatabaseConnection(db);
-      }
-    );
-  }
+  //   db.all(
+  //     `SELECT product_id,
+  //   name,
+  //   owner,
+  //   price,
+  //   owner_phoneNumber,
+  //   description,
+  //   condition,
+  //   date_added,
+  //   category FROM products`,
+  //     [],
+  //     (err, rows) => {
+  //       if (err) {
+  //         callback({ err: err.message, data: null });
+  //         closeTheDatabaseConnection(db);
+  //         return;
+  //       }
+  //       callback({ err: null, data: rows });
+  //       closeTheDatabaseConnection(db);
+  //     }
+  //   );
+  // }
 
   getOne(product_id, callback) {
     const db = connectToTheDatabase();
@@ -100,9 +101,10 @@ class Product {
     db.get(sql, [product_id], function (err, row) {
       if (err) {
         closeTheDatabaseConnection(db);
-        return callback({
+        callback({
           err: err.message,
         });
+        return;
       }
       closeTheDatabaseConnection(db);
       return row
@@ -131,6 +133,34 @@ class Product {
         if (err) {
           callback({ err: err.message, data: null });
           closeTheDatabaseConnection(db);
+          return;
+        }
+
+        callback({ err: null, data: rows });
+        closeTheDatabaseConnection(db);
+      }
+    );
+  }
+
+  getByCategory(category, callback) {
+    const db = connectToTheDatabase();
+
+    db.all(
+      `SELECT product_id,
+    name,
+    owner,
+    price,
+    owner_phoneNumber,
+    description,
+    condition,
+    date_added,
+    category FROM products WHERE category = ? LIMIT 50`,
+      [category],
+      (err, rows) => {
+        if (err) {
+          callback({ err: err.message, data: null });
+          closeTheDatabaseConnection(db);
+          return;
         }
 
         callback({ err: null, data: rows });
