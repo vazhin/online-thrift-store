@@ -171,7 +171,7 @@ class Product {
 
   createTable(db) {
     let createTableSql = `CREATE TABLE IF NOT EXISTS products (
-      product_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      product_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       name TEXT NOT NULL,
       owner TEXT NOT NULL,
       price INTEGER NOT NULL,
