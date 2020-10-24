@@ -12,7 +12,7 @@ const { validateData } = require('../controllers/validators/product-validator');
 
 router.post('/', validateData, createProduct);
 router.get('/recent', getRecentProducts);
-router.get('/:category', getByCategory);
 router.get('/:productId', getAProduct);
+router.get('/category/:category', getByCategory);
 
 module.exports = router;
