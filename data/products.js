@@ -8,31 +8,6 @@ const {
 // TODO: picture of product.
 
 class Product {
-  getAll(callback) {
-    const db = connectToTheDatabase();
-
-    db.all(
-      `SELECT product_id,
-    name,
-    owner,
-    price,
-    owner_phoneNumber,
-    description,
-    condition,
-    date_added,
-    category FROM products`,
-      [],
-      (err, rows) => {
-        if (err) {
-          callback({ err: err.message, data: null });
-          closeTheDatabaseConnection(db);
-        }
-        callback({ err: null, data: rows });
-        closeTheDatabaseConnection(db);
-      }
-    );
-  }
-
   create(product, callback) {
     let self = this;
 
@@ -85,25 +60,29 @@ class Product {
     });
   }
 
-  createTable(db) {
-    let createTableSql = `CREATE TABLE IF NOT EXISTS products (
-      product_id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      owner TEXT NOT NULL,
-      price INTEGER NOT NULL,
-      owner_phoneNumber INTEGER NOT NULL,
-      description TEXT NOT NULL,
-      condition TEXT NOT NULL,
-      date_added TEXT NOT NULL,
-      category TEXT NOT NULL
-    )`;
+  getAll(callback) {
+    const db = connectToTheDatabase();
 
-    db.run(createTableSql, function (err) {
-      if (err) {
-        console.error(err);
+    db.all(
+      `SELECT product_id,
+    name,
+    owner,
+    price,
+    owner_phoneNumber,
+    description,
+    condition,
+    date_added,
+    category FROM products`,
+      [],
+      (err, rows) => {
+        if (err) {
+          callback({ err: err.message, data: null });
+          closeTheDatabaseConnection(db);
+        }
+        callback({ err: null, data: rows });
+        closeTheDatabaseConnection(db);
       }
-      console.log('table products created.');
-    });
+    );
   }
 
   getOne(product_id, callback) {
@@ -131,6 +110,27 @@ class Product {
         : callback({
             err: `No product was found with the id of ${product_id}`,
           });
+    });
+  }
+
+  createTable(db) {
+    let createTableSql = `CREATE TABLE IF NOT EXISTS products (
+      product_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      owner TEXT NOT NULL,
+      price INTEGER NOT NULL,
+      owner_phoneNumber INTEGER NOT NULL,
+      description TEXT NOT NULL,
+      condition TEXT NOT NULL,
+      date_added TEXT NOT NULL,
+      category TEXT NOT NULL
+    )`;
+
+    db.run(createTableSql, function (err) {
+      if (err) {
+        console.error(err);
+      }
+      console.log('table products created.');
     });
   }
 }
