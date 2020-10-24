@@ -50,10 +50,10 @@ class Product {
             return;
           }
 
-          self.getOne(this.lastID, ({ row }) => {
-            if (!row) {
+          self.getOne(this.lastID, product.user_id, ({ err, row }) => {
+            if (err) {
               callback({
-                err: `Could not get the row with the row id ${this.lastID}`,
+                err,
                 row: null,
               });
               closeTheDatabaseConnection(db);
@@ -91,19 +91,20 @@ class Product {
   //   );
   // }
 
-  getOne(product_id, callback) {
+  getOne(product_id, user_id, callback) {
     const db = connectToTheDatabase();
 
-    let sql = `SELECT product_id,
-  name,
-  price,
-  owner_phoneNumber,
-  description,
-  condition,
-  date_added,
-  category,
-  user_id
-  FROM products WHERE product_id = ?`;
+    let sql = `SELECT p.product_id,
+  p.name,
+  p.price,
+  p.owner_phoneNumber,
+  p.description,
+  p.condition,
+  p.date_added,
+  p.category,
+  u.user_id,
+  u.username
+  FROM products p INNER JOIN users u ON p.user_id = u.user_id WHERE p.product_id = ?`;
 
     db.get(sql, [product_id], function (err, row) {
       if (err) {

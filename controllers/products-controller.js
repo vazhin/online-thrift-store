@@ -7,6 +7,8 @@ exports.createProduct = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
+  // TODO: find a way to get the user_id when a user created a post.
+
   Product.create(req.body, ({ err, row }) => {
     if (err) {
       res.status(500).json({ message: err });
