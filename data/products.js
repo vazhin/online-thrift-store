@@ -100,7 +100,10 @@ class Product {
   owner_phoneNumber,
   description,
   condition,
-  date_added FROM products WHERE product_id = ?`;
+  date_added,
+  category,
+  user_id
+  FROM products WHERE product_id = ?`;
 
     db.get(sql, [product_id], function (err, row) {
       if (err) {
