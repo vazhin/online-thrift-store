@@ -7,13 +7,6 @@ const {
 
 // TODO: picture of product.
 
-/* 
-
-Q\ do I need to change the price data type to money?
-Thought\ should I add "MEASUREMENTS" property or I don't need to I guess.
-
-*/
-
 class Product {
   constructor(
     product_id,
