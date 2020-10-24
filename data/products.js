@@ -14,29 +14,34 @@ class Product {
     const db = connectToTheDatabase();
 
     db.serialize(() => {
+      db.run(`DROP TABLE products`, (err) => {
+        if (err) throw err;
+        console.log('table products droped.');
+      });
+
       this.createTable(db);
 
       let createProductSql = `INSERT INTO products(
       name,
-      owner,
       price,
       owner_phoneNumber,
       description,
       condition,
       date_added,
-      category) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`;
+      category,
+      user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`;
 
       db.run(
         createProductSql,
         [
           product.name,
-          product.owner,
           product.price,
           product.owner_phoneNumber,
           product.description,
           product.condition,
           product.date_added,
           product.category,
+          product.user_id,
         ],
         function (err) {
           if (err) {
@@ -67,7 +72,6 @@ class Product {
   //   db.all(
   //     `SELECT product_id,
   //   name,
-  //   owner,
   //   price,
   //   owner_phoneNumber,
   //   description,
@@ -92,7 +96,6 @@ class Product {
 
     let sql = `SELECT product_id,
   name,
-  owner,
   price,
   owner_phoneNumber,
   description,
@@ -122,7 +125,6 @@ class Product {
     db.all(
       `SELECT product_id,
     name,
-    owner,
     price,
     owner_phoneNumber,
     description,
@@ -149,7 +151,6 @@ class Product {
     db.all(
       `SELECT product_id,
     name,
-    owner,
     price,
     owner_phoneNumber,
     description,
@@ -174,7 +175,6 @@ class Product {
     let createTableSql = `CREATE TABLE IF NOT EXISTS products (
       product_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       name TEXT NOT NULL,
-      owner TEXT NOT NULL,
       price INTEGER NOT NULL,
       owner_phoneNumber INTEGER NOT NULL,
       description TEXT NOT NULL,

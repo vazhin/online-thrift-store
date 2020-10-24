@@ -7,7 +7,13 @@ exports.validateData = [
     .withMessage('Must not be empty.')
     .exists()
     .withMessage('Must have a name field.'),
-  body('owner').not().isEmpty().withMessage('Must not be empty.'),
+  body('user_id')
+    .not()
+    .isEmpty()
+    .withMessage('Must not be empty.')
+    .toInt()
+    .isInt()
+    .withMessage('Not a number.'),
   body('price').toInt().isInt().withMessage('Not a number.'),
   body('owner_phoneNumber')
     .isMobilePhone()
