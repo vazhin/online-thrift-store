@@ -180,7 +180,12 @@ class Product {
       description TEXT NOT NULL,
       condition TEXT NOT NULL,
       date_added TEXT NOT NULL,
-      category TEXT NOT NULL
+      category TEXT NOT NULL,
+      user_id INTEGER NOT NULL,
+      FOREIGN KEY (user_id)
+      REFERENCES users (user_id)
+      ON UPDATE SET NULL
+      ON DELETE SET NULL
     )`;
 
     db.run(createTableSql, function (err) {
