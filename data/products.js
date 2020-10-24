@@ -113,6 +113,32 @@ class Product {
     });
   }
 
+  getRecent(callback) {
+    const db = connectToTheDatabase();
+
+    db.all(
+      `SELECT product_id,
+    name,
+    owner,
+    price,
+    owner_phoneNumber,
+    description,
+    condition,
+    date_added,
+    category FROM products ORDER BY product_id DESC LIMIT 50`,
+      [],
+      (err, rows) => {
+        if (err) {
+          callback({ err: err.message, data: null });
+          closeTheDatabaseConnection(db);
+        }
+
+        callback({ err: null, data: rows });
+        closeTheDatabaseConnection(db);
+      }
+    );
+  }
+
   createTable(db) {
     let createTableSql = `CREATE TABLE IF NOT EXISTS products (
       product_id INTEGER PRIMARY KEY AUTOINCREMENT,

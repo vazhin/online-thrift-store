@@ -3,15 +3,18 @@ const router = express.Router();
 
 const {
   createProduct,
-  getProducts,
+  getRecentProducts,
   getAProduct,
+  getByCategory,
 } = require('../controllers/products-controller');
 
 const { validateData } = require('../controllers/validators/product-validator');
 
 router.post('/', validateData, createProduct);
 
-router.get('/', getProducts);
+router.get('/recent', getRecentProducts);
+
+// router.get('/:category', getByCategory);
 
 router.get('/:productId', getAProduct);
 

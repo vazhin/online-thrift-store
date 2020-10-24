@@ -15,8 +15,8 @@ exports.createProduct = (req, res, next) => {
   });
 };
 
-exports.getProducts = (req, res, next) => {
-  Product.getAll(({ err, data }) => {
+exports.getRecentProducts = (req, res, next) => {
+  Product.getRecent(({ err, data }) => {
     if (err) {
       res.status(500).json({ message: err });
     }
