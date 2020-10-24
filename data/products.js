@@ -8,28 +8,6 @@ const {
 // TODO: picture of product.
 
 class Product {
-  constructor(
-    product_id,
-    name,
-    owner,
-    price,
-    owner_phoneNumber,
-    description,
-    condition,
-    date_added,
-    category
-  ) {
-    this.product_id = product_id;
-    this.name = name;
-    this.owner = owner;
-    this.price = price;
-    this.owner_phoneNumber = owner_phoneNumber;
-    this.description = description;
-    this.condition = condition;
-    this.date_added = date_added;
-    this.category = category;
-  }
-
   getAll(callback) {
     const db = connectToTheDatabase();
 
