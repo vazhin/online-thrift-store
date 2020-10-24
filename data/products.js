@@ -50,7 +50,7 @@ class Product {
             return;
           }
 
-          self.getOne(this.lastID, product.user_id, ({ err, row }) => {
+          self.getOne(this.lastID, ({ err, row }) => {
             if (err) {
               callback({
                 err,
@@ -91,7 +91,7 @@ class Product {
   //   );
   // }
 
-  getOne(product_id, user_id, callback) {
+  getOne(product_id, callback) {
     const db = connectToTheDatabase();
 
     let sql = `SELECT p.product_id,
