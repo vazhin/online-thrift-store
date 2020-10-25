@@ -3,6 +3,8 @@ const {
   closeTheDatabaseConnection,
 } = require('./db-common-functions');
 
+// TODO: consistent error messages and responses.
+
 // TODO: picture of product.
 
 class Product {
