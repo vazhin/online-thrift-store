@@ -1,12 +1,12 @@
 const User = require('../data/users');
 
 exports.login = (req, res, next) => {
-  User.login(req.body, ({ err, data }) => {
+  User.login(req.body, ({ err, user }) => {
     // TODO: change these.
     if (err) {
       res.status(403).json(err);
     }
-    res.status(200).json(data);
+    res.status(200).json(user);
   });
 };
 

@@ -17,8 +17,39 @@ class User {
     // to create the user table if not exists.
     this.createTable(db);
 
-    let findUserSql = `SELECT emal,
-    username`;
+    db.get(
+      `SELECT * FROM users WHERE email = ?`,
+      [credentials.email],
+      function (err, row) {
+        if (err) {
+          closeTheDatabaseConnection(db);
+          return callback({ err });
+        }
+
+        if (!row) {
+          closeTheDatabaseConnection(db);
+          return callback({ err: 'The email is incorrect.' });
+        }
+
+        bcrypt.compare(credentials.password, row.password, (err, doesMatch) => {
+          if (err) {
+            closeTheDatabaseConnection(db);
+            return callback({ err: err.message });
+          }
+          if (!doesMatch) {
+            closeTheDatabaseConnection(db);
+            return callback({ err: 'The password is incorrect.' });
+          }
+          closeTheDatabaseConnection(db);
+          return callback({
+            user: {
+              user_id: row.user_id,
+              username: row.username,
+            },
+          });
+        });
+      }
+    );
   }
 
   signup(credentials, callback) {
