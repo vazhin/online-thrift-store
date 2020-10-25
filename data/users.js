@@ -9,9 +9,9 @@ const {
 const saltRounds = 10;
 
 class User {
-  login(credentials, callback) {}
-
   get(userId, callback) {}
+
+  login(credentials, callback) {}
 
   signup(credentials, callback) {
     const db = connectToTheDatabase();
