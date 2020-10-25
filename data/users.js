@@ -1,12 +1,17 @@
 const sqlite = require('sqlite3');
+const bcrypt = require('bcrypt');
 
 const {
   connectToTheDatabase,
   closeTheDatabaseConnection,
 } = require('./db-common-functions');
 
+const saltRounds = 10;
+
 class User {
   login(credentials, callback) {}
+
+  get(userId, callback) {}
 
   signup(credentials, callback) {
     const db = connectToTheDatabase();
@@ -35,8 +40,6 @@ class User {
     );
     closeTheDatabaseConnection(db);
   }
-
-  get(userId, callback) {}
 
   createTable(db) {
     let createTableSql = `CREATE TABLE IF NOT EXISTS users (

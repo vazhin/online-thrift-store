@@ -3,8 +3,6 @@ const {
   closeTheDatabaseConnection,
 } = require('./db-common-functions');
 
-//TODO: CREATE A RELATIONSHIP BETWEEN USERS AND PRODUCTS TABLE. EACH USER HAS MANY PRODUCTS.
-
 // TODO: picture of product.
 
 class Product {
@@ -14,10 +12,10 @@ class Product {
     const db = connectToTheDatabase();
 
     db.serialize(() => {
-      db.run(`DROP TABLE products`, (err) => {
-        if (err) throw err;
-        console.log('table products droped.');
-      });
+      // db.run(`DROP TABLE products`, (err) => {
+      //   if (err) throw err;
+      //   console.log('table products droped.');
+      // });
 
       this.createTable(db);
 
@@ -65,31 +63,6 @@ class Product {
       );
     });
   }
-
-  // getAll(callback) {
-  //   const db = connectToTheDatabase();
-
-  //   db.all(
-  //     `SELECT product_id,
-  //   name,
-  //   price,
-  //   owner_phoneNumber,
-  //   description,
-  //   condition,
-  //   date_added,
-  //   category FROM products`,
-  //     [],
-  //     (err, rows) => {
-  //       if (err) {
-  //         callback({ err: err.message, data: null });
-  //         closeTheDatabaseConnection(db);
-  //         return;
-  //       }
-  //       callback({ err: null, data: rows });
-  //       closeTheDatabaseConnection(db);
-  //     }
-  //   );
-  // }
 
   getOne(product_id, callback) {
     const db = connectToTheDatabase();
