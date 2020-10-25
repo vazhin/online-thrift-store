@@ -11,10 +11,24 @@ const saltRounds = 10;
 class User {
   get(userId, callback) {}
 
-  login(credentials, callback) {}
+  login(credentials, callback) {
+    const db = connectToTheDatabase();
+
+    // to create the user table if not exists.
+    this.createTable(db);
+
+    let findUserSql = `SELECT emal,
+    username`;
+  }
 
   signup(credentials, callback) {
     const db = connectToTheDatabase();
+
+    // db.run(`DROP TABLE users`, (err) => {
+    //   if (err) throw err;
+    //   console.log('table users droped.');
+    // });
+
     this.createTable(db);
 
     // TODO: validate credentials.
@@ -52,7 +66,8 @@ class User {
       user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       username TEXT NOT NULL,
       email TEXT NOT NULL,
-      password TEXT NOT NULL
+      password TEXT NOT NULL,
+      UNIQUE (username, email)
     )`;
 
     db.run(createTableSql, function (err) {
