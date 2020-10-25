@@ -80,8 +80,8 @@ class User {
         [credentials.username, credentials.email, hash],
         function (err) {
           if (err) {
-            closeTheDatabaseConnection(db);
             callback({ err: err.message, data: null });
+            closeTheDatabaseConnection(db);
             return;
           }
 
