@@ -80,7 +80,13 @@ class User {
         [credentials.username, credentials.email, hash],
         function (err) {
           if (err) {
-            callback({ err: err.message, data: null });
+            // TODO: find a better way to customize error messages.
+            if (err.errno === 19) {
+              callback({ err: 'Username and Email Must be unique.' });
+            } else {
+              callback({ err, data: null });
+            }
+
             closeTheDatabaseConnection(db);
             return;
           }
