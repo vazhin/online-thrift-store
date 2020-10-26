@@ -43,7 +43,7 @@ class User {
           closeTheDatabaseConnection(db);
           return callback({
             user: {
-              user_id: row.user_id,
+              email: row.email,
               username: row.username,
             },
           });

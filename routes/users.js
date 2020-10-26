@@ -5,7 +5,7 @@ const { signup, login, getUser } = require('../controllers/users-controller');
 
 const {
   validateUserData,
-} = require('../controllers/validators/user-validator');
+} = require('../middlewares/validators/user-validator');
 
 router.post('/login', login);
 router.post('/signup', validateUserData, signup);

@@ -8,7 +8,7 @@ const {
   getByCategory,
 } = require('../controllers/products-controller');
 
-const { validateData } = require('../controllers/validators/product-validator');
+const { validateData } = require('../middlewares/validators/product-validator');
 
 router.post('/', validateData, createProduct);
 router.get('/recent', getRecentProducts);
