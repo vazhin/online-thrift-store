@@ -18,6 +18,19 @@ var app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    },
+  })
+);
+
+require('./config/passport');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
