@@ -16,7 +16,9 @@ API Design [WIP]
 To do:
 - Login and Signup
 - Consistent error messages
+- profile picture for user
 
 Tech Debt:
 - replace callbacks with promises or async/await
 - use an ORM instead of raw SQL
+- convert JavaScript to TypeScript
