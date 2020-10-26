@@ -9,6 +9,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 
+require('dotenv').config();
+
 var app = express();
 
 // view engine setup
