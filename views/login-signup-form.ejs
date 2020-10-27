@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/login-signup-form.css' />
+</head>
+
+<body>
+  <h1><%= form %></h1>
+  <form class='login-form' autocomplete='off'>
+    <% if (form === "Sign Up") { %>
+    <label for='username'>Username</label>
+    <input type='text' name='username' id='username'>
+    <% } %>
+    <label for='email'>Email</label>
+    <input type='text' name='email' id='email'>
+    <label for='password'>Password</label>
+    <input type='password' name='password' id='password'>
+    <button type='submit'><%= form.toUpperCase() %></button>
+  </form>
+</body>
+
+</html>
