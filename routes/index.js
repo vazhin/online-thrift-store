@@ -7,11 +7,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/login', (req, res) => {
-  res.render('login-signup-form', { form: 'Login' });
+  res.render('login-signup-form', { form: 'Login', action: '/users/login' });
 });
 
 router.get('/signup', (req, res) => {
-  res.render('login-signup-form', { form: 'Sign Up' });
+  res.render('login-signup-form', { form: 'Sign Up', action: '/users/signup' });
 });
 
 module.exports = router;

@@ -9,7 +9,7 @@
 
 <body>
   <h1><%= form %></h1>
-  <form method="post" action="/users/signup" class='login-form' autocomplete='off'>
+  <form method="post" action=<%= action %> class='login-form' autocomplete='off'>
     <% if (form === "Sign Up") { %>
     <label for='username'>Username</label>
     <input type='text' name='username' id='username'>
