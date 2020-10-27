@@ -18,12 +18,15 @@ exports.signup = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  User.signup(req.body, ({ err, data }) => {
+  User.signup(req.body, ({ err, user }) => {
     if (err) {
       // TODO: change the status code maybe.
       return res.status(500).json({ message: err });
     }
-    res.status(200).json(data);
+    // res.status(200).json(data);
+
+    console.log(user);
+    res.redirect('/login');
   });
 };
 

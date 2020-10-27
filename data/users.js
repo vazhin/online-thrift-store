@@ -9,7 +9,26 @@ const {
 const saltRounds = 10;
 
 class User {
-  get(userId, callback) {}
+  get(userId, callback) {
+    const db = connectToTheDatabase();
+
+    db.get(`SELECT * FROM users WHERE user_id = ?`, [userId], function (
+      err,
+      row
+    ) {
+      if (err) {
+        callback(null);
+        return;
+      }
+
+      const user = {
+        id: row.user_id,
+        username: row.username,
+      };
+
+      callback(user);
+    });
+  }
 
   login(credentials, callback) {
     const db = connectToTheDatabase();
@@ -91,7 +110,7 @@ class User {
             return;
           }
 
-          callback({ err: null, data: 'User created.' });
+          callback({ err: null, user: 'User created.' });
           closeTheDatabaseConnection(db);
         }
       );
