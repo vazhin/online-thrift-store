@@ -1,7 +1,7 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 280px;
 }
 
 .login-form label,
