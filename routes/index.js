@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const { isAuthenticated } = require('../middlewares/auth');
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
@@ -14,16 +16,10 @@ router.get('/signup', (req, res) => {
   res.render('login-signup-form', { form: 'Sign Up', action: '/users/signup' });
 });
 
-router.get('/protected-route', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    res.send(
-      '<h1>You are authenticated</h1><p><a href="/logout">Logout and reload</a></p>'
-    );
-  } else {
-    res.send(
-      '<h1>You are not authenticated</h1><p><a href="/login">Login</a></p>'
-    );
-  }
+router.get('/protected-route', isAuthenticated, (req, res, next) => {
+  res.send(
+    '<h1>You are authenticated</h1><p><a href="/logout">Logout and reload</a></p>'
+  );
 });
 
 router.get('/logout', (req, res, next) => {
