@@ -1,4 +1,3 @@
-const sqlite = require('sqlite3');
 const bcrypt = require('bcrypt');
 
 const {
@@ -24,6 +23,8 @@ class User {
       const user = {
         id: row.user_id,
         username: row.username,
+        email: row.email,
+        hash: row.password,
       };
 
       callback(user);
@@ -33,7 +34,6 @@ class User {
   login(credentials, callback) {
     const db = connectToTheDatabase();
 
-    // to create the user table if not exists.
     this.createTable(db);
 
     db.get(
