@@ -72,46 +72,38 @@ class User {
   }
 
   signup(credentials, callback) {
+    const self = this;
+
     const db = connectToTheDatabase();
-
-    // db.run(`DROP TABLE users`, (err) => {
-    //   if (err) throw err;
-    //   console.log('table users droped.');
-    // });
-
     this.createTable(db);
-
-    // TODO: validate credentials.
-
-    let addUserSql = `INSERT INTO users(
-      username,
-      email,
-      password) VALUES(?, ?, ?)`;
 
     bcrypt.hash(credentials.password, saltRounds, (err, hash) => {
       if (err) {
-        callback({ err: err.message });
+        callback(err.message, false);
         return;
       }
 
       db.run(
-        addUserSql,
+        `INSERT INTO users(
+          username,
+          email,
+          password) VALUES(?, ?, ?)`,
         [credentials.username, credentials.email, hash],
         function (err) {
           if (err) {
-            // TODO: find a better way to customize error messages.
             if (err.errno === 19) {
-              callback({ err: 'Username and Email Must be unique.' });
+              callback('Username and Email Must be unique.', false);
             } else {
-              callback({ err, data: null });
+              callback(err, false);
             }
-
             closeTheDatabaseConnection(db);
             return;
           }
 
-          callback({ err: null, user: 'User created.' });
-          closeTheDatabaseConnection(db);
+          self.get(this.lastID, (user) => {
+            callback(null, user);
+            closeTheDatabaseConnection(db);
+          });
         }
       );
     });
