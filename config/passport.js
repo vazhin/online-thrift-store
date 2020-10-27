@@ -9,10 +9,13 @@ const {
 } = require('../data/db-common-functions');
 
 passport.use(
-  new LocalStrategy(function (email, password, done) {
+  new LocalStrategy(function (username, password, done) {
     const db = connectToTheDatabase();
 
-    db.get(`SELECT * FROM users WHERE email = ?`, [email], function (err, row) {
+    db.get(`SELECT * FROM users WHERE username = ?`, [username], function (
+      err,
+      row
+    ) {
       if (err) {
         closeTheDatabaseConnection(db);
         return done(err);
@@ -33,7 +36,12 @@ passport.use(
           return done(null, false, { message: 'Incorrect password.' });
         }
 
-        const user = row;
+        const user = {
+          id: row.user_id,
+          username: row.username,
+          email: row.email,
+          hash: row.password,
+        };
 
         closeTheDatabaseConnection(db);
         return done(null, user);
