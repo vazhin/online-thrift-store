@@ -31,46 +31,6 @@ class User {
     });
   }
 
-  login(credentials, callback) {
-    const db = connectToTheDatabase();
-
-    this.createTable(db);
-
-    db.get(
-      `SELECT * FROM users WHERE email = ?`,
-      [credentials.email],
-      function (err, row) {
-        if (err) {
-          closeTheDatabaseConnection(db);
-          return callback({ err });
-        }
-
-        if (!row) {
-          closeTheDatabaseConnection(db);
-          return callback({ err: 'The email is incorrect.' });
-        }
-
-        bcrypt.compare(credentials.password, row.password, (err, doesMatch) => {
-          if (err) {
-            closeTheDatabaseConnection(db);
-            return callback({ err: err.message });
-          }
-          if (!doesMatch) {
-            closeTheDatabaseConnection(db);
-            return callback({ err: 'The password is incorrect.' });
-          }
-          closeTheDatabaseConnection(db);
-          return callback({
-            user: {
-              email: row.email,
-              username: row.username,
-            },
-          });
-        });
-      }
-    );
-  }
-
   signup(credentials, callback) {
     const self = this;
 

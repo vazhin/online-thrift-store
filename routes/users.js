@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport');
 
-const { signup, login, getUser } = require('../controllers/users-controller');
+const { signup } = require('../controllers/users-controller');
 
 const {
   validateUserData,
@@ -15,7 +15,7 @@ router.post(
     successRedirect: '/login-success',
   })
 );
+
 router.post('/signup', validateUserData, signup);
-// router.get('/:userId', getUser);
 
 module.exports = router;
