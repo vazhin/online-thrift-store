@@ -32,22 +32,19 @@ class Product {
             product.category,
             product.user_id,
           ],
-          (err) => {
+          function (err) {
             if (err) {
               Database.close(db);
-              reject(err.message);
+              return reject(err.message);
             }
 
             db.get(
               `SELECT * FROM products WHERE product_id = ?`,
               [this.lastID],
               (err, row) => {
-                if (err) {
-                  reject(err.message);
-                  Database.close(db);
-                }
-                resolve(row);
                 Database.close(db);
+                if (err) return reject(err.message);
+                resolve(row);
               }
             );
           }
@@ -65,7 +62,7 @@ class Product {
         (err, row) => {
           if (err) {
             Database.close(db);
-            reject(err.message);
+            return reject(err.message);
           }
           Database.close(db);
           return row
@@ -93,7 +90,7 @@ class Product {
         (err, rows) => {
           if (err) {
             Database.close(db);
-            reject(err.message);
+            return reject(err.message);
           }
 
           Database.close(db);
@@ -120,7 +117,7 @@ class Product {
         (err, rows) => {
           if (err) {
             Database.close(db);
-            reject(err.message);
+            return reject(err.message);
           }
 
           Database.close(db);
