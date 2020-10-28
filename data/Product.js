@@ -6,22 +6,18 @@ class Product {
   create(product) {
     return new Promise((resolve, reject) => {
       const db = Database.open();
-
       db.serialize(() => {
         this.createTable(db);
-
-        let createProductSql = `INSERT INTO products(
-        name,
-        price,
-        owner_phoneNumber,
-        description,
-        condition,
-        date_added,
-        category,
-        user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`;
-
         db.run(
-          createProductSql,
+          `INSERT INTO products(
+            name,
+            price,
+            owner_phoneNumber,
+            description,
+            condition,
+            date_added,
+            category,
+            user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             product.name,
             product.price,
@@ -60,11 +56,8 @@ class Product {
         `SELECT * FROM products WHERE product_id = ?`,
         [product_id],
         (err, row) => {
-          if (err) {
-            Database.close(db);
-            return reject(err.message);
-          }
           Database.close(db);
+          if (err) return reject(err.message);
           return row
             ? resolve(row)
             : reject(`No product was found with the id of ${product_id}`);
@@ -76,7 +69,6 @@ class Product {
   getRecent() {
     return new Promise((resolve, reject) => {
       const db = Database.open();
-
       db.all(
         `SELECT product_id,
       name,
@@ -88,12 +80,8 @@ class Product {
       category FROM products ORDER BY product_id DESC LIMIT 50`,
         [],
         (err, rows) => {
-          if (err) {
-            Database.close(db);
-            return reject(err.message);
-          }
-
           Database.close(db);
+          if (err) return reject(err.message);
           resolve(rows);
         }
       );
@@ -103,7 +91,6 @@ class Product {
   getByCategory(category) {
     return new Promise((resolve, reject) => {
       const db = Database.open();
-
       db.all(
         `SELECT product_id,
       name,
@@ -115,12 +102,8 @@ class Product {
       category FROM products WHERE category = ? LIMIT 50`,
         [category],
         (err, rows) => {
-          if (err) {
-            Database.close(db);
-            return reject(err.message);
-          }
-
           Database.close(db);
+          if (err) return reject(err.message);
           resolve(rows);
         }
       );
@@ -145,9 +128,7 @@ class Product {
     )`;
 
     db.run(createTableSql, function (err) {
-      if (err) {
-        console.error(err);
-      }
+      if (err) console.error(err);
       console.log('table products created.');
     });
   }
