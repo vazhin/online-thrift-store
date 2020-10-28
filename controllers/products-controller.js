@@ -33,11 +33,11 @@ exports.getAProduct = (req, res, next) => {
   });
 };
 
-exports.getByCategory = (req, res, next) => {
-  Product.getByCategory(req.params.category, ({ err, data }) => {
-    if (err) {
-      res.status(500).json({ message: err });
-    }
+exports.getByCategory = async (req, res, next) => {
+  try {
+    const data = await Product.getByCategory(req.params.category);
     res.status(200).json(data);
-  });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
 };

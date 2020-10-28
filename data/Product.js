@@ -115,30 +115,31 @@ class Product {
     });
   }
 
-  getByCategory(category, callback) {
-    const db = Database.open();
+  getByCategory(category) {
+    return new Promise((resolve, reject) => {
+      const db = Database.open();
 
-    db.all(
-      `SELECT product_id,
-    name,
-    price,
-    owner_phoneNumber,
-    description,
-    condition,
-    date_added,
-    category FROM products WHERE category = ? LIMIT 50`,
-      [category],
-      (err, rows) => {
-        if (err) {
-          callback({ err: err.message, data: null });
+      db.all(
+        `SELECT product_id,
+      name,
+      price,
+      owner_phoneNumber,
+      description,
+      condition,
+      date_added,
+      category FROM products WHERE category = ? LIMIT 50`,
+        [category],
+        (err, rows) => {
+          if (err) {
+            Database.close(db);
+            reject(err.message);
+          }
+
           Database.close(db);
-          return;
+          resolve(rows);
         }
-
-        callback({ err: null, data: rows });
-        Database.close(db);
-      }
-    );
+      );
+    });
   }
 
   createTable(db) {
