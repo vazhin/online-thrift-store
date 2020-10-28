@@ -5,64 +5,72 @@ const Database = require('./Database');
 const saltRounds = 10;
 
 class User {
-  get(userId, callback) {
-    const db = Database.open();
+  get(userId) {
+    return new Promise((resolve, reject) => {
+      const db = Database.open();
 
-    db.get(`SELECT * FROM users WHERE user_id = ?`, [userId], function (
-      err,
-      row
-    ) {
-      if (err) {
-        callback(null);
-        return;
-      }
+      db.get(`SELECT * FROM users WHERE user_id = ?`, [userId], function (
+        err,
+        row
+      ) {
+        if (err) {
+          reject(err.message);
+        }
 
-      const user = {
-        id: row.user_id,
-        username: row.username,
-        email: row.email,
-        hash: row.password,
-      };
+        if (!row) {
+          reject(`Couldn't find user with id of ${userId}`);
+        }
 
-      callback(user);
+        const user = {
+          id: row.user_id,
+          username: row.username,
+          email: row.email,
+          hash: row.password,
+        };
+
+        resolve(user);
+      });
     });
   }
 
-  signup(credentials, callback) {
-    const self = this;
+  signup(credentials) {
+    return new Promise((resolve, reject) => {
+      const self = this;
 
-    const db = Database.open();
-    this.createTable(db);
+      const db = Database.open();
+      this.createTable(db);
 
-    bcrypt.hash(credentials.password, saltRounds, (err, hash) => {
-      if (err) {
-        callback(err.message, false);
-        return;
-      }
-
-      db.run(
-        `INSERT INTO users(
-          username,
-          email,
-          password) VALUES(?, ?, ?)`,
-        [credentials.username, credentials.email, hash],
-        function (err) {
-          if (err) {
-            if (err.errno === 19) {
-              callback('Username and Email Must be unique.', false);
-            } else {
-              callback(err, false);
-            }
-            Database.close(db);
-            return;
-          }
-
-          self.get(this.lastID, (user) => {
-            callback(null, user);
-            Database.close(db);
-          });
+      bcrypt.hash(credentials.password, saltRounds, (err, hash) => {
+        if (err) {
+          Database.close(db);
+          reject(err.message);
         }
-      );
+
+        db.run(
+          `INSERT INTO users(
+            username,
+            email,
+            password) VALUES(?, ?, ?)`,
+          [credentials.username, credentials.email, hash],
+          async function (err) {
+            if (err) {
+              Database.close(db);
+              if (err.errno === 19) {
+                return reject('Username and Email Must be unique.'); // TODO: find a better way to handle db constraints.
+              } else {
+                return reject(err.message);
+              }
+            }
+
+            try {
+              const user = await self.get(this.lastID);
+              resolve(user);
+            } catch (err) {
+              reject(err);
+            }
+          }
+        );
+      });
     });
   }
 
@@ -75,7 +83,7 @@ class User {
       UNIQUE (username, email)
     )`;
 
-    db.run(createTableSql, function (err) {
+    db.run(createTableSql, (err) => {
       if (err) {
         console.error(err);
       }

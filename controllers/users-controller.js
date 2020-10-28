@@ -2,29 +2,17 @@ const { validationResult } = require('express-validator');
 
 const User = require('../data/User');
 
-exports.login = (req, res, next) => {
-  User.login(req.body, ({ err, user }) => {
-    if (err) {
-      res.status(401).json(err);
-    }
-    res.status(200).json(user);
-  });
-};
-
-exports.signup = (req, res, next) => {
+exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  User.signup(req.body, (err, user) => {
-    if (err) {
-      return res.status(500).json({ err });
-    }
-
+  try {
+    const user = await User.signup(req.body);
     console.log(user);
     res.redirect('/login');
-  });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
 };
-
-exports.getUser = (req, res, next) => {};

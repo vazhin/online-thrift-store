@@ -32,7 +32,7 @@ class Product {
             product.category,
             product.user_id,
           ],
-          function (err) {
+          (err) => {
             if (err) {
               Database.close(db);
               reject(err.message);
