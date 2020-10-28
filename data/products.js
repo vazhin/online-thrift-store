@@ -3,8 +3,6 @@ const {
   closeTheDatabaseConnection,
 } = require('./db-common-functions');
 
-// TODO: consistent error messages and responses.
-
 // TODO: picture of product.
 
 class Product {
@@ -14,11 +12,6 @@ class Product {
     const db = connectToTheDatabase();
 
     db.serialize(() => {
-      // db.run(`DROP TABLE products`, (err) => {
-      //   if (err) throw err;
-      //   console.log('table products droped.');
-      // });
-
       this.createTable(db);
 
       let createProductSql = `INSERT INTO products(

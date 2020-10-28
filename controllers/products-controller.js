@@ -7,8 +7,6 @@ exports.createProduct = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  // TODO: find a way to get the user_id when a user creates a product.
-
   Product.create(req.body, ({ err, row }) => {
     if (err) {
       res.status(500).json({ message: err });
@@ -25,8 +23,6 @@ exports.getRecentProducts = (req, res, next) => {
     res.status(200).json(data);
   });
 };
-
-// TODO: validate category param.
 
 exports.getAProduct = (req, res, next) => {
   Product.getOne(req.params.productId, ({ err, row }) => {
