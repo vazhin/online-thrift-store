@@ -1,33 +1,25 @@
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const Database = require('./Database');
-
-const saltRounds = 10;
 
 class User {
   get(userId) {
     return new Promise((resolve, reject) => {
       const db = Database.open();
-
       db.get(`SELECT * FROM users WHERE user_id = ?`, [userId], function (
         err,
         row
       ) {
-        if (err) {
-          reject(err.message);
-        }
-
-        if (!row) {
-          reject(`Couldn't find user with id of ${userId}`);
-        }
-
+        Database.close(db);
+        if (err) return reject(err.message);
+        if (!row) return reject(`Couldn't find user with id of ${userId}`);
         const user = {
           id: row.user_id,
           username: row.username,
           email: row.email,
           hash: row.password,
         };
-
         resolve(user);
       });
     });
@@ -36,16 +28,13 @@ class User {
   signup(credentials) {
     return new Promise((resolve, reject) => {
       const self = this;
-
       const db = Database.open();
       this.createTable(db);
-
       bcrypt.hash(credentials.password, saltRounds, (err, hash) => {
         if (err) {
           Database.close(db);
-          reject(err.message);
+          return reject(err.message);
         }
-
         db.run(
           `INSERT INTO users(
             username,
@@ -66,7 +55,7 @@ class User {
               const user = await self.get(this.lastID);
               resolve(user);
             } catch (err) {
-              reject(err);
+              return reject(err);
             }
           }
         );

@@ -17,11 +17,11 @@ API Design [WIP]
 To do:
 
 - [x] Login and Signup
+- [x] replace callbacks with promises or async/await
 - [ ] store the sessions in a session storage, [Compatible Session Stores](http://expressjs.com/en/resources/middleware/session.html#compatible-session-stores)
 - [ ] profile picture for user
 
 Tech Debt:
 
-- replace callbacks with promises or async/await
 - use an ORM instead of raw SQL
 - convert JavaScript to TypeScript
