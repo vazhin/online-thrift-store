@@ -56,35 +56,23 @@ class Product {
     });
   }
 
-  getOne(product_id, callback) {
-    const db = Database.open();
-
-    let sql = `SELECT p.product_id,
-  p.name,
-  p.price,
-  p.owner_phoneNumber,
-  p.description,
-  p.condition,
-  p.date_added,
-  p.category,
-  u.user_id,
-  u.username
-  FROM products p INNER JOIN users u ON p.user_id = u.user_id WHERE p.product_id = ?`;
-
-    db.get(sql, [product_id], function (err, row) {
-      if (err) {
-        Database.close(db);
-        callback({
-          err: err.message,
-        });
-        return;
-      }
-      Database.close(db);
-      return row
-        ? callback({ row })
-        : callback({
-            err: `No product was found with the id of ${product_id}`,
-          });
+  getOne(product_id) {
+    return new Promise((resolve, reject) => {
+      const db = Database.open();
+      db.get(
+        `SELECT * FROM products WHERE product_id = ?`,
+        [product_id],
+        (err, row) => {
+          if (err) {
+            Database.close(db);
+            reject(err.message);
+          }
+          Database.close(db);
+          return row
+            ? resolve(row)
+            : reject(`No product was found with the id of ${product_id}`);
+        }
+      );
     });
   }
 

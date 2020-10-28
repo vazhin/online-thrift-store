@@ -24,13 +24,13 @@ exports.getRecentProducts = async (req, res, next) => {
   }
 };
 
-exports.getAProduct = (req, res, next) => {
-  Product.getOne(req.params.productId, ({ err, row }) => {
-    if (err) {
-      res.status(404).json({ message: err });
-    }
-    res.status(200).json(row);
-  });
+exports.getAProduct = async (req, res, next) => {
+  try {
+    const data = await Product.getOne(req.params.productId);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(404).json({ err });
+  }
 };
 
 exports.getByCategory = async (req, res, next) => {
