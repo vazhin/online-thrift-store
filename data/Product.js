@@ -57,7 +57,7 @@ class Product {
   }
 
   getOne(product_id, callback) {
-    const db = connectToTheDatabase();
+    const db = Database.open();
 
     let sql = `SELECT p.product_id,
   p.name,
@@ -73,13 +73,13 @@ class Product {
 
     db.get(sql, [product_id], function (err, row) {
       if (err) {
-        closeTheDatabaseConnection(db);
+        Database.close(db);
         callback({
           err: err.message,
         });
         return;
       }
-      closeTheDatabaseConnection(db);
+      Database.close(db);
       return row
         ? callback({ row })
         : callback({
@@ -90,7 +90,7 @@ class Product {
 
   getRecent() {
     return new Promise((resolve, reject) => {
-      const db = connectToTheDatabase();
+      const db = Database.open();
 
       db.all(
         `SELECT product_id,
@@ -104,19 +104,19 @@ class Product {
         [],
         (err, rows) => {
           if (err) {
+            Database.close(db);
             reject(err.message);
-            closeTheDatabaseConnection(db);
           }
 
+          Database.close(db);
           resolve(rows);
-          closeTheDatabaseConnection(db);
         }
       );
     });
   }
 
   getByCategory(category, callback) {
-    const db = connectToTheDatabase();
+    const db = Database.open();
 
     db.all(
       `SELECT product_id,
@@ -131,12 +131,12 @@ class Product {
       (err, rows) => {
         if (err) {
           callback({ err: err.message, data: null });
-          closeTheDatabaseConnection(db);
+          Database.close(db);
           return;
         }
 
         callback({ err: null, data: rows });
-        closeTheDatabaseConnection(db);
+        Database.close(db);
       }
     );
   }
