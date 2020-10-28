@@ -2,11 +2,11 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-const User = require('../data/users');
+const User = require('../data/User');
 const {
   connectToTheDatabase,
   closeTheDatabaseConnection,
-} = require('../data/db-common-functions');
+} = require('../data/Database');
 
 passport.use(
   new LocalStrategy(function (username, password, done) {

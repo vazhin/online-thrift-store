@@ -1,14 +1,11 @@
-const {
-  connectToTheDatabase,
-  closeTheDatabaseConnection,
-} = require('./db-common-functions');
+const Database = require('./Database');
 
 // TODO: picture of product.
 
 class Product {
   create(product) {
     return new Promise((resolve, reject) => {
-      const db = connectToTheDatabase();
+      const db = Database.open();
 
       db.serialize(() => {
         this.createTable(db);
@@ -37,7 +34,7 @@ class Product {
           ],
           function (err) {
             if (err) {
-              closeTheDatabaseConnection(db);
+              Database.close(db);
               reject(err.message);
             }
 
@@ -47,10 +44,10 @@ class Product {
               (err, row) => {
                 if (err) {
                   reject(err.message);
-                  closeTheDatabaseConnection(db);
+                  Database.close(db);
                 }
                 resolve(row);
-                closeTheDatabaseConnection(db);
+                Database.close(db);
               }
             );
           }

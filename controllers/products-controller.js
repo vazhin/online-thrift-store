@@ -1,4 +1,4 @@
-const Product = require('../data/products');
+const Product = require('../data/Product');
 const { validationResult } = require('express-validator');
 
 exports.createProduct = async (req, res, next) => {

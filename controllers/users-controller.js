@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 
-const User = require('../data/users');
+const User = require('../data/User');
 
 exports.login = (req, res, next) => {
   User.login(req.body, ({ err, user }) => {

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const {
   connectToTheDatabase,
   closeTheDatabaseConnection,
-} = require('./db-common-functions');
+} = require('./Database');
 
 const saltRounds = 10;
 
