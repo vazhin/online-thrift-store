@@ -91,30 +91,31 @@ class Product {
     });
   }
 
-  getRecent(callback) {
-    const db = connectToTheDatabase();
+  getRecent() {
+    return new Promise((resolve, reject) => {
+      const db = connectToTheDatabase();
 
-    db.all(
-      `SELECT product_id,
-    name,
-    price,
-    owner_phoneNumber,
-    description,
-    condition,
-    date_added,
-    category FROM products ORDER BY product_id DESC LIMIT 50`,
-      [],
-      (err, rows) => {
-        if (err) {
-          callback({ err: err.message, data: null });
+      db.all(
+        `SELECT product_id,
+      name,
+      price,
+      owner_phoneNumber,
+      description,
+      condition,
+      date_added,
+      category FROM products ORDER BY product_id DESC LIMIT 50`,
+        [],
+        (err, rows) => {
+          if (err) {
+            reject(err.message);
+            closeTheDatabaseConnection(db);
+          }
+
+          resolve(rows);
           closeTheDatabaseConnection(db);
-          return;
         }
-
-        callback({ err: null, data: rows });
-        closeTheDatabaseConnection(db);
-      }
-    );
+      );
+    });
   }
 
   getByCategory(category, callback) {
