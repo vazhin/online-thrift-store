@@ -6,56 +6,56 @@ const {
 // TODO: picture of product.
 
 class Product {
-  create(product, callback) {
-    let self = this;
+  create(product) {
+    return new Promise((resolve, reject) => {
+      const db = connectToTheDatabase();
 
-    const db = connectToTheDatabase();
+      db.serialize(() => {
+        this.createTable(db);
 
-    db.serialize(() => {
-      this.createTable(db);
+        let createProductSql = `INSERT INTO products(
+        name,
+        price,
+        owner_phoneNumber,
+        description,
+        condition,
+        date_added,
+        category,
+        user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`;
 
-      let createProductSql = `INSERT INTO products(
-      name,
-      price,
-      owner_phoneNumber,
-      description,
-      condition,
-      date_added,
-      category,
-      user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`;
-
-      db.run(
-        createProductSql,
-        [
-          product.name,
-          product.price,
-          product.owner_phoneNumber,
-          product.description,
-          product.condition,
-          product.date_added,
-          product.category,
-          product.user_id,
-        ],
-        function (err) {
-          if (err) {
-            closeTheDatabaseConnection(db);
-            callback({ err: err.message, row: null });
-            return;
-          }
-
-          self.getOne(this.lastID, ({ err, row }) => {
+        db.run(
+          createProductSql,
+          [
+            product.name,
+            product.price,
+            product.owner_phoneNumber,
+            product.description,
+            product.condition,
+            product.date_added,
+            product.category,
+            product.user_id,
+          ],
+          function (err) {
             if (err) {
-              callback({
-                err,
-                row: null,
-              });
               closeTheDatabaseConnection(db);
+              reject(err.message);
             }
-            callback({ err: null, row });
-            closeTheDatabaseConnection(db);
-          });
-        }
-      );
+
+            db.get(
+              `SELECT * FROM products WHERE product_id = ?`,
+              [this.lastID],
+              (err, row) => {
+                if (err) {
+                  reject(err.message);
+                  closeTheDatabaseConnection(db);
+                }
+                resolve(row);
+                closeTheDatabaseConnection(db);
+              }
+            );
+          }
+        );
+      });
     });
   }
 

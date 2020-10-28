@@ -7,12 +7,9 @@ exports.createProduct = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  Product.create(req.body, ({ err, row }) => {
-    if (err) {
-      res.status(500).json({ message: err });
-    }
-    res.status(201).json(row);
-  });
+  Product.create(req.body)
+    .then((data) => res.status(201).json(data))
+    .catch((err) => res.status(500).json({ err }));
 };
 
 exports.getRecentProducts = (req, res, next) => {
