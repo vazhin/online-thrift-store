@@ -1,15 +1,18 @@
 const Product = require('../data/products');
 const { validationResult } = require('express-validator');
 
-exports.createProduct = (req, res, next) => {
+exports.createProduct = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  Product.create(req.body)
-    .then((data) => res.status(201).json(data))
-    .catch((err) => res.status(500).json({ err }));
+  try {
+    const data = await Product.create(req.body);
+    res.status(201).json(data);
+  } catch (err) {
+    res.status(500).json({ err });
+  }
 };
 
 exports.getRecentProducts = (req, res, next) => {
