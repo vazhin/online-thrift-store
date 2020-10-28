@@ -3,36 +3,33 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 const User = require('../data/User');
-const {
-  connectToTheDatabase,
-  closeTheDatabaseConnection,
-} = require('../data/Database');
+const Database = require('../data/Database');
 
 passport.use(
   new LocalStrategy(function (username, password, done) {
-    const db = connectToTheDatabase();
+    const db = Database.open();
 
     db.get(`SELECT * FROM users WHERE username = ?`, [username], function (
       err,
       row
     ) {
       if (err) {
-        closeTheDatabaseConnection(db);
+        Database.close(db);
         return done(err);
       }
 
       if (!row) {
-        closeTheDatabaseConnection(db);
+        Database.close(db);
         return done(null, false, { message: 'Incorrect email.' });
       }
 
       bcrypt.compare(password, row.password, (err, doesMatch) => {
         if (err) {
-          closeTheDatabaseConnection(db);
+          Database.close(db);
           return done(err);
         }
         if (!doesMatch) {
-          closeTheDatabaseConnection(db);
+          Database.close(db);
           return done(null, false, { message: 'Incorrect password.' });
         }
 
@@ -43,7 +40,7 @@ passport.use(
           hash: row.password,
         };
 
-        closeTheDatabaseConnection(db);
+        Database.close(db);
         return done(null, user);
       });
     });

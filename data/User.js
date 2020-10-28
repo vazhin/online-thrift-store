@@ -1,15 +1,12 @@
 const bcrypt = require('bcrypt');
 
-const {
-  connectToTheDatabase,
-  closeTheDatabaseConnection,
-} = require('./Database');
+const Database = require('./Database');
 
 const saltRounds = 10;
 
 class User {
   get(userId, callback) {
-    const db = connectToTheDatabase();
+    const db = Database.open();
 
     db.get(`SELECT * FROM users WHERE user_id = ?`, [userId], function (
       err,
@@ -34,7 +31,7 @@ class User {
   signup(credentials, callback) {
     const self = this;
 
-    const db = connectToTheDatabase();
+    const db = Database.open();
     this.createTable(db);
 
     bcrypt.hash(credentials.password, saltRounds, (err, hash) => {
@@ -56,13 +53,13 @@ class User {
             } else {
               callback(err, false);
             }
-            closeTheDatabaseConnection(db);
+            Database.close(db);
             return;
           }
 
           self.get(this.lastID, (user) => {
             callback(null, user);
-            closeTheDatabaseConnection(db);
+            Database.close(db);
           });
         }
       );
