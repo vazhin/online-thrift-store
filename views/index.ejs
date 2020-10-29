@@ -9,14 +9,15 @@
       <h1><%= title %></h1>
 
       <% if (!user) { %>
-      <p>Please <a href="/signup">Sign Up</a></p>
-      <p>If you already have an account <a href="/login">Login</a></p>
+      <p>Please <a class="btn btn-info btn-sm" href="/signup" role="button">Sign Up</a></p>
+      <p>If you already have an account <a class="btn btn-info btn-sm" href="/login" role="button">Login</a></p>
       <% } %>
     </div>
     <% if (user) { %>
     <div class="d-flex flex-column justify-content-start align-items-end">
       <h4><span class="badge badge-light"><%= user.username %></span></h4>
       <a href="/product/create"><button type="button" class="btn btn-primary">Sell your products</button></a>
+      <a href="/logout"><button type="button" class="btn btn-dark mt-2 btn-sm">Log Out</button></a>
     </div>
     <% } %>
   </div>
