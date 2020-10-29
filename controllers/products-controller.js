@@ -18,7 +18,8 @@ exports.createProduct = async (req, res, next) => {
 exports.getRecentProducts = async (req, res, next) => {
   try {
     const data = await Product.getRecent();
-    res.status(200).json(data);
+    res.locals.data = data;
+    next();
   } catch (err) {
     res.status(500).json({ err });
   }

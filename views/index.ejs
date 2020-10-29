@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
+<%- include('head'); %>
 
 <body>
   <h1><%= title %></h1>
   <p>Welcome to <%= title %></p>
   <p>Please <a href="/signup">Sign Up</a></p>
   <p>If you already have an account <a href="/login">Login</a></p>
+
+  <div class="d-flex flex-wrap">
+    <% products.forEach(function(product){ %>
+    <%- include('product', {product: product}); %>
+    <% }); %>
+  </div>
+
+
+  <%- include('scripts'); %>
+
 </body>
 
 </html>
