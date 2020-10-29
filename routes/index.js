@@ -5,7 +5,11 @@ const { isAuthenticated } = require('../middlewares/auth');
 const { getRecentProducts } = require('../controllers/products-controller');
 
 router.get('/', getRecentProducts, function (req, res, next) {
-  res.render('index', { title: 'Thrift Store', products: res.locals.data });
+  res.render('index', {
+    title: 'Thrift Store',
+    products: res.locals.data,
+    user: req.user,
+  });
 });
 
 router.get('/login', (req, res) => {
@@ -14,6 +18,10 @@ router.get('/login', (req, res) => {
 
 router.get('/signup', (req, res) => {
   res.render('login-signup-form', { form: 'Sign Up', action: '/users/signup' });
+});
+
+router.get('/login', (req, res) => {
+  res.render('login-signup-form', { form: 'Login', action: '/users/login' });
 });
 
 router.get('/protected-route', isAuthenticated, (req, res, next) => {
@@ -27,11 +35,11 @@ router.get('/logout', (req, res, next) => {
   res.redirect('/protected-route');
 });
 
-router.get('/login-success', (req, res, next) => {
-  res.send(
-    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
-  );
-});
+// router.get('/login-success', (req, res, next) => {
+//   res.send(
+//     '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
+//   );
+// });
 
 router.get('/login-failure', (req, res, next) => {
   res.send('You entered the wrong password.');
