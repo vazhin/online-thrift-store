@@ -26,7 +26,7 @@ exports.validateData = [
     .isLength({ min: 10 })
     .withMessage('Must be at least 10 characters.'),
   body('condition')
-    .isIn(['new with tags', 'like-new', 'gently-used', 'signs of wear'])
+    .isIn(['new with tags', 'like-new', 'gently-used', 'signs of use'])
     .withMessage(
       'Must be any of these conditions (new with tags, like-new, gently-used, signs of wear)'
     ),

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('head'); %>
+
+<body>
+
+
+  <div class="container w-50">
+    <h2 class="text-center mb-3">Tell Us About Your Product</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" aria-describedby="nameOfProduct" placeholder="Enter name">
+        <small id="nameOfProduct" class="form-text text-muted">Keep the name descriptive.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" placeholder="Describe the product" rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" class="form-control" id="price" placeholder="9000">
+      </div>
+
+      <div class="form-group">
+        <label for="phonenumber">Your phone number</label>
+        <input type="text" class="form-control" id="phonenumber" placeholder="0750 XXX XX XX">
+      </div>
+
+      <div class="form-group">
+        <label>Condition</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="condition" id="new-with-tags" value="new with tags"
+            checked>
+          <label class="form-check-label" for="new-with-tags">
+            new with tags
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="condition" id="like-new" value="like-new">
+          <label class="form-check-label" for="like-new">
+            like-new
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="condition" id="gently-used" value="gently-used">
+          <label class="form-check-label" for="gently-used">
+            gently-used
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="condition" id="signs-of-use" value="signs of use">
+          <label class="form-check-label" for="signs-of-use">
+            signs of use
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" class="form-control">
+          <option value="clothes" selected>clothes</option>
+          <option value="furniture">furniture</option>
+          <option value="computer">computer</option>
+          <option value="mobile device">mobile device</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+  <%- include('scripts'); %>
+
+</body>
+
+</html>
