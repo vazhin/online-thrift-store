@@ -5,7 +5,7 @@ const { isAuthenticated } = require('../middlewares/auth');
 const { getRecentProducts } = require('../controllers/products-controller');
 
 router.get('/', getRecentProducts, function (req, res, next) {
-  res.render('index', { title: 'Express', products: res.locals.data });
+  res.render('index', { title: 'Thrift Store', products: res.locals.data });
 });
 
 router.get('/login', (req, res) => {
