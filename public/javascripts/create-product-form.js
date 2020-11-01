@@ -3,7 +3,7 @@ let createProductForm = document.getElementById('createProductForm');
 createProductForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  var todayDate = new Date().toJSON().slice(0, 10);
+  const todayDate = new Date().toJSON().slice(0, 10);
 
   const response = await fetch('/products', {
     method: 'POST',
@@ -18,7 +18,7 @@ createProductForm.addEventListener('submit', async (e) => {
       condition: e.target.elements.condition.value,
       date_added: todayDate,
       category: e.target.elements.category.value,
-      user_id: 1,
+      user_id: 1, // TODO: fix this.
     }),
   });
 
