@@ -8,26 +8,28 @@
 
   <div class="container w-50">
     <h2 class="text-center mb-3">Tell Us About Your Product</h2>
-    <form>
+    <form id="createProductForm">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" aria-describedby="nameOfProduct" placeholder="Enter name">
+        <input type="text" class="form-control" id="name" aria-describedby="nameOfProduct" placeholder="Enter name"
+          name="name">
         <small id="nameOfProduct" class="form-text text-muted">Keep the name descriptive.</small>
       </div>
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" placeholder="Describe the product" rows="3"></textarea>
+        <textarea class="form-control" id="description" placeholder="Describe the product" rows="3"
+          name="description"></textarea>
       </div>
 
       <div class="form-group">
         <label for="price">Price</label>
-        <input type="text" class="form-control" id="price" placeholder="9000">
+        <input type="text" class="form-control" id="price" placeholder="9000" name="price">
       </div>
 
       <div class="form-group">
         <label for="phonenumber">Your phone number</label>
-        <input type="text" class="form-control" id="phonenumber" placeholder="0750 XXX XX XX">
+        <input type="text" class="form-control" id="phonenumber" placeholder="0750 XXX XX XX" name="phonenumber">
       </div>
 
       <div class="form-group">
@@ -61,7 +63,7 @@
 
       <div class="form-group">
         <label for="category">Category</label>
-        <select id="category" class="form-control">
+        <select id="category" class="form-control" name="category">
           <option value="clothes" selected>clothes</option>
           <option value="furniture">furniture</option>
           <option value="computer">computer</option>
