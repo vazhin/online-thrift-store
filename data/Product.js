@@ -17,7 +17,8 @@ class Product {
             condition,
             date_added,
             category,
-            user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`,
+            city,
+            user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             product.name,
             product.price,
@@ -26,6 +27,7 @@ class Product {
             product.condition,
             product.date_added,
             product.category,
+            product.city,
             product.user_id,
           ],
           function (err) {
@@ -70,14 +72,7 @@ class Product {
     return new Promise((resolve, reject) => {
       const db = Database.open();
       db.all(
-        `SELECT product_id,
-      name,
-      price,
-      owner_phoneNumber,
-      description,
-      condition,
-      date_added,
-      category FROM products ORDER BY product_id DESC LIMIT 50`,
+        `SELECT * FROM products ORDER BY product_id DESC LIMIT 50`,
         [],
         (err, rows) => {
           Database.close(db);
@@ -92,14 +87,7 @@ class Product {
     return new Promise((resolve, reject) => {
       const db = Database.open();
       db.all(
-        `SELECT product_id,
-      name,
-      price,
-      owner_phoneNumber,
-      description,
-      condition,
-      date_added,
-      category FROM products WHERE category = ? LIMIT 50`,
+        `SELECT * FROM products WHERE category = ? LIMIT 50`,
         [category],
         (err, rows) => {
           Database.close(db);
@@ -120,6 +108,7 @@ class Product {
       condition TEXT NOT NULL,
       date_added TEXT NOT NULL,
       category TEXT NOT NULL,
+      city TEXT NOT NULL,
       user_id INTEGER NOT NULL,
       FOREIGN KEY (user_id)
       REFERENCES users (user_id)

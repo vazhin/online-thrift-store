@@ -18,6 +18,7 @@ createProductForm.addEventListener('submit', async (e) => {
       condition: e.target.elements.condition.value,
       date_added: todayDate,
       category: e.target.elements.category.value,
+      city: e.target.elements.city.value,
       user_id: 1, // TODO: fix this.
     }),
   });
