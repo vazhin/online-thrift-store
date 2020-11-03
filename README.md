@@ -2,6 +2,9 @@
 
 this is supposed to be a website that people can add their second-hand products. And other people can contact them and buy the products. It's supposed to have a filtering functionility to view products based on city and category, etc.
 
+Website Design:
+[Figma file](https://www.figma.com/file/O0aK1iUPN4GSZW4q0DIo3O/online-thrift-store?node-id=0%3A1)
+
 API Design [WIP]
 
 - Routes
