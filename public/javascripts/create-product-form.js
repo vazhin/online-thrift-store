@@ -6,7 +6,6 @@ createProductForm.addEventListener('submit', async (e) => {
 
   let formData = new FormData(createProductForm);
   formData.append('date_added', todayDate);
-  formData.append('user_id', 1); // TODO: fix this.
 
   const response = await fetch('/products', {
     method: 'POST',
