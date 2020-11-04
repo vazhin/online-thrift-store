@@ -18,7 +18,8 @@ class Product {
             date_added,
             category,
             city,
-            user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            image,
+            user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             product.name,
             product.price,
@@ -28,6 +29,7 @@ class Product {
             product.date_added,
             product.category,
             product.city,
+            product.image,
             product.user_id,
           ],
           function (err) {
@@ -109,6 +111,7 @@ class Product {
       date_added TEXT NOT NULL,
       category TEXT NOT NULL,
       city TEXT NOT NULL,
+      image TEXT NOT NULL,
       user_id INTEGER NOT NULL,
       FOREIGN KEY (user_id)
       REFERENCES users (user_id)

@@ -2,11 +2,12 @@ const Product = require('../data/Product');
 const { validationResult } = require('express-validator');
 
 exports.createProduct = async (req, res, next) => {
-  console.log(req.file.path);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+
+  req.body.image = req.file.path;
 
   try {
     const data = await Product.create(req.body);
