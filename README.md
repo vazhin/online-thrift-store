@@ -8,21 +8,23 @@ Website Design:
 API Design [WIP]
 
 - Routes
-  - GET "/" -> product list ordered by most recent
-  - GET "/product/:productId" -> product detail page
+  - [x] GET "/" -> product list ordered by most recent
+  - [x] POST "/login"
+  - [x] POST "/logout"
+  - [x] POST "/signup"
+  - [x] POST "/product/create" -> create a new product
+  - [ ] GET "/product/:productId" -> product detail page
     - if owner is logged in, how will they edit the listing?
-  - POST "/product/" -> create a new product
-  - GET "/user/:userId" -> profile page, see a list of all their products
-  - POST "/login"
-  - POST "/logout"
-  - POST "/signup"
+  - [ ] GET "/user/:userId" -> profile page, see a list of all their products
 
 To do:
 
 - [x] Login and Signup
 - [x] replace callbacks with promises or async/await
+- [x] uploading product image
+- [ ] implement the UI
+- [ ] product list pagination
 - [ ] store the sessions in a session storage, [Compatible Session Stores](http://expressjs.com/en/resources/middleware/session.html#compatible-session-stores)
-- [ ] profile picture for user
 
 Tech Debt:
 
