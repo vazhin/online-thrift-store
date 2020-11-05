@@ -1,0 +1,21 @@
+<div class="card m-2" style="width: 19rem;">
+  <div class="card-body font-poppins">
+
+    <img src="<%= product.image %>" class="card-img-top" style="height: 13rem; object-fit: cover;" alt="product">
+
+    <h6 class="card-title mt-3"><%= product.name %></h6>
+    <p class="card-subtitle mb-2 text-muted font-open-sans"><%= product.description %></p>
+
+    <div class="d-flex align-items-end justify-content-between">
+      <div class="d-flex flex-column">
+        <h5><%= product.price %></h5>
+        <p class="card-subtitle mb-2 text-muted"><%= product.condition %></p>
+      </div>
+
+      <button onclick="openProductDetails(this)" type="button" class="btn btn-primary"
+        id="<%= product.product_id %>">Product Detail</button>
+
+    </div>
+
+  </div>
+</div>
