@@ -31,7 +31,7 @@ exports.getRecentProducts = async (req, res, next) => {
 exports.getAProduct = async (req, res, next) => {
   try {
     const data = await Product.getOne(req.params.productId);
-    res.render('product-detail', { product: data });
+    res.render('product-detail', { product: data, user: req.user });
   } catch (err) {
     res.status(404).json({ err }); // what to return?
   }
