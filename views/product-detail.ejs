@@ -49,13 +49,22 @@
 
       <div class="card my-4">
         <div class="card-body">
-          <h3 class="card-title"><%= product.price %></h3>
+          <h3 class="card-title"><%= format(product.price, product.currency) %></h3>
           <h6 class="card-subtitle mb-2 text-muted">price</h6>
         </div>
       </div>
 
     </div>
   </div>
+
+  <% function format(price, currencyCode){
+    const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currencyCode === 'USD' ? 'USD' : 'IQD',
+  })
+  
+  return formatter.format(price)
+  } %>
 
   <%- include('scripts', {page: 'product-detail'}); %>
 

@@ -8,7 +8,7 @@
 
     <div class="d-flex align-items-end justify-content-between">
       <div class="d-flex flex-column">
-        <h5><%= product.price %></h5>
+        <h5><%= format(product.price, product.currency) %></h5>
         <p class="card-subtitle mb-2 text-muted"><%= product.condition %></p>
       </div>
 
@@ -19,3 +19,12 @@
 
   </div>
 </div>
+
+<% function format(price, currencyCode){
+  const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: currencyCode === 'USD' ? 'USD' : 'IQD',
+})
+
+return formatter.format(price)
+} %>
