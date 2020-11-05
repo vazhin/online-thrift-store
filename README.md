@@ -26,6 +26,7 @@ To do:
 - [ ] implement the UI
 - [ ] make it responsive
 - [ ] product list pagination
+- [ ] filtering
 - [ ] store the sessions in a session storage, [Compatible Session Stores](http://expressjs.com/en/resources/middleware/session.html#compatible-session-stores)
 
 Tech Debt:
