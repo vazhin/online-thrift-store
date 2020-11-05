@@ -4,7 +4,8 @@
 <%- include('head'); %>
 
 <body>
-  <%- include('header', { user: user }); %>
+  <%- include('navbar', { user: user }); %>
+  <%- include('top-filters'); %>
 
   <div class="d-flex flex-wrap container">
     <% products.forEach(function(product){ %>
