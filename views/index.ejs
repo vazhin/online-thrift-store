@@ -7,12 +7,22 @@
   <%- include('navbar', { user: user }); %>
   <%- include('top-filters'); %>
 
-  <div class="d-flex flex-wrap container">
-    <% products.forEach(function(product){ %>
-    <%- include('product', {product: product}); %>
-    <% }); %>
-  </div>
 
+  <div class="container mx-5 px-0 pt-5">
+    <div class="row">
+
+      <div class="col-3">
+        <%- include('side-filters'); %>
+      </div>
+
+      <div class="col-9 justify-content-center d-flex flex-wrap">
+        <% products.forEach(function(product){ %>
+        <%- include('product', {product: product}); %>
+        <% }); %>
+      </div>
+
+    </div>
+  </div>
 
   <%- include('scripts', {page: 'index'}); %>
 
