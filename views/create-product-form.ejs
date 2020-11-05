@@ -22,9 +22,25 @@
           name="description"></textarea>
       </div>
 
-      <div class="form-group">
-        <label for="price">Price</label>
+
+      <label for="price">Price</label>
+
+      <div class="input-group">
         <input type="text" class="form-control" id="price" placeholder="9000" name="price">
+
+        <div class="input-group-append">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input type="radio" name="currency" id="USD" autocomplete="off" value="USD" checked> $
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="currency" id="IQD" autocomplete="off" value="IQD"> IQD
+            </label>
+
+          </div>
+        </div>
+
+
       </div>
 
       <div class="form-group">

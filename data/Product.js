@@ -12,6 +12,7 @@ class Product {
           `INSERT INTO products(
             name,
             price,
+            currency,
             owner_phoneNumber,
             description,
             condition,
@@ -19,10 +20,11 @@ class Product {
             category,
             city,
             image,
-            user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             product.name,
             product.price,
+            product.currency,
             product.owner_phoneNumber,
             product.description,
             product.condition,
@@ -105,6 +107,7 @@ class Product {
       product_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       name TEXT NOT NULL,
       price INTEGER NOT NULL,
+      currency TEXT NOT NULL,
       owner_phoneNumber INTEGER NOT NULL,
       description TEXT NOT NULL,
       condition TEXT NOT NULL,
