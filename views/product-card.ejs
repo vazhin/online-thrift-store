@@ -12,8 +12,8 @@
         <p class="card-subtitle mb-2 text-muted"><%= product.condition %></p>
       </div>
 
-      <button onclick="openProductDetails(this)" type="button" class="btn btn-primary"
-        id="<%= product.product_id %>">Product Detail</button>
+      <a href="/products/<%= product.product_id %>" class="btn btn-primary" role="button">Product
+        Detail</a>
 
     </div>
 

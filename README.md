@@ -14,7 +14,7 @@ Routes:
 - [x] POST "/logout"
 - [x] POST "/signup"
 - [x] POST "/product/create" -> create a new product
-- [ ] GET "/product/:productId" -> product detail page
+- [x] GET "/product/:productId" -> product detail page
   - if owner is logged in, how will they edit the listing?
 - [ ] GET "/user/:userId" -> profile page, see a list of all their products
 
