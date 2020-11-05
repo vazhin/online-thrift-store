@@ -24,7 +24,7 @@ router.get('/login', (req, res) => {
   res.render('login-signup-form', { form: 'Login', action: '/users/login' });
 });
 
-router.get('/product/create', isAuthenticated, (req, res, next) => {
+router.get('/product/', isAuthenticated, (req, res, next) => {
   res.render('create-product-form', { userId: req.user.id });
 });
 
