@@ -8,7 +8,8 @@
 
   <div class="d-flex flex-wrap mt-5 justify-content-between font-poppins" style="width:100vw">
     <div class="d-flex justify-content-center px-5" style="flex: 1 0 50%;">
-      <img src="/<%= product.image %>" class="img-fluid" style="object-fit: cover; height: 30rem;" alt="product">
+      <img src="/<%= product.productImage %>" class="img-fluid rounded" style="object-fit: cover; height: 30rem;"
+        alt="product">
     </div>
     <div class="d-flex flex-column px-5" style="flex: 1 0 auto;">
       <h2><%= product.name.charAt(0).toUpperCase() + product.name.slice(1) %></h2>
@@ -22,13 +23,22 @@
         <div class="w-50 px-4 d-flex flex-column">
 
           <% Object.entries(product).forEach(detail => { %>
-          <% if (['owner_phoneNumber', 'category', 'user_id'].includes(detail[0])) { %>
+          <% if (['owner_phoneNumber', 'category'].includes(detail[0])) { %>
           <div class="w-100 d-flex flex-wrap justify-content-between my-1">
             <h6 class="text-primary"><%= detail[0] %></h6>
             <p><%= detail[1] %></p>
           </div>
           <% } %>
           <% }) %>
+
+          <a class="text-reset text-decoration-none my-1" href="/users/<%= product.user_id %>">
+            <div class="w-100 d-flex flex-column">
+              <h6 class="text-primary">Posted By:</h6>
+              <img src="/<%= product.userImage %>" class="img-fluid rounded my-1"
+                style="height: 4rem; width: 4rem; object-fit: cover;" alt="user">
+              <p><%= product.username %></p>
+            </div>
+          </a>
 
         </div>
 
