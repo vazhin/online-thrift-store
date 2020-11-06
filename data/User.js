@@ -19,6 +19,7 @@ class User {
           username: row.username,
           email: row.email,
           hash: row.password,
+          image: row.image,
         };
         resolve(user);
       });
@@ -39,8 +40,9 @@ class User {
           `INSERT INTO users(
             username,
             email,
-            password) VALUES(?, ?, ?)`,
-          [credentials.username, credentials.email, hash],
+            password,
+            image) VALUES(?, ?, ?, ?)`,
+          [credentials.username, credentials.email, hash, credentials.image],
           async function (err) {
             if (err) {
               Database.close(db);
@@ -67,6 +69,7 @@ class User {
     let createTableSql = `CREATE TABLE IF NOT EXISTS users (
       user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       username TEXT NOT NULL,
+      image TEXT NOT NULL,
       email TEXT NOT NULL,
       password TEXT NOT NULL,
       UNIQUE (username, email)

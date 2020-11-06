@@ -47,6 +47,10 @@ app.use(
   '/uploads/products',
   express.static(path.join(__dirname, '/uploads/products'))
 );
+app.use(
+  '/uploads/users',
+  express.static(path.join(__dirname, '/uploads/users'))
+);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

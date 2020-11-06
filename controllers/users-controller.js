@@ -8,6 +8,8 @@ exports.signup = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
+  req.body.image = 'uploads/users/no-profile-image.png';
+
   try {
     const user = await User.signup(req.body);
     res.redirect('/login');

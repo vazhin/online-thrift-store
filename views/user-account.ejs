@@ -10,6 +10,7 @@
 
   <% if (currentUser) { %>
   <p>currentUser: <%= currentUser.username %> </p>
+  <img src="/<%= currentUser.image %>" class="img-fluid" style="height: 13rem; object-fit: cover;" alt="user">
   <% } %>
 
   <%- include('scripts', {page: 'index'}); %>
