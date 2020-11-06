@@ -10,8 +10,16 @@ exports.signup = async (req, res, next) => {
 
   try {
     const user = await User.signup(req.body);
-    console.log(user);
     res.redirect('/login');
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+};
+
+exports.getUser = async (req, res, next) => {
+  try {
+    const user = await User.get(req.params.userId);
+    res.render('user-account', { user: user, currentUser: req.user });
   } catch (err) {
     res.status(500).json({ err });
   }

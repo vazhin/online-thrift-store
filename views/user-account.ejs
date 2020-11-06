@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('head'); %>
+
+<body>
+  <%- include('navbar', { user: currentUser }); %>
+
+  <p>user: <%= user.username %></p>
+
+  <% if (currentUser) { %>
+  <p>currentUser: <%= currentUser.username %> </p>
+  <% } %>
+
+  <%- include('scripts', {page: 'index'}); %>
+
+</body>
+
+</html>

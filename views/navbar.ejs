@@ -14,7 +14,7 @@
       <% if (user) { %>
 
       <a class="nav-item nav-link text-dark" href="/product/">Post A Product</a>
-      <a class="nav-item nav-link text-dark" href="/">Your Account</a>
+      <a class="nav-item nav-link text-dark" href="/users/<%= user.id %> ">Your Account</a>
       <a class="nav-item nav-link text-dark" href="/logout">Log Out</a>
 
       <% } else {%>
