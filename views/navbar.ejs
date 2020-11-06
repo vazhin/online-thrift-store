@@ -11,11 +11,17 @@
           class="badge badge-light text-primary font-poppins">487</span>
         Products</a>
 
-      <% if (user) { %>
+      <% if (typeof user === 'object') { %>
 
       <a class="nav-item nav-link text-dark" href="/product/">Post A Product</a>
       <a class="nav-item nav-link text-dark" href="/users/<%= user.id %> ">Your Account</a>
       <a class="nav-item nav-link text-dark" href="/logout">Log Out</a>
+
+      <% } else if (user === 'inloginPage') { %>
+      <a class="nav-item nav-link text-dark" href="/signup">Signup</a>
+
+      <% } else if (user === 'inSignupPage') { %>
+      <a class="nav-item nav-link text-dark" href="/login">Login</a>
 
       <% } else {%>
 

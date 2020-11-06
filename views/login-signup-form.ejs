@@ -1,26 +1,61 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>Login</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet' href='/stylesheets/login-signup-form.css' />
-</head>
+<%- include('head'); %>
 
-<body>
-  <h1><%= form %></h1>
-  <form method="post" action=<%= action %> class='login-form' autocomplete='off'>
-    <% if (form === "Sign Up") { %>
-    <label for='email'>Email</label>
-    <input type='email' name='email' id='email'>
-    <% } %>
-    <label for='username'>Username</label>
-    <input type='text' name='username' id='username'>
-    <label for='password'>Password</label>
-    <input type='password' name='password' id='password'>
-    <button type='submit'><%= form.toUpperCase() %></button>
-  </form>
-  <p style="margin-top: 45px;">Go back to <a href="/">Homepage</a></p>
+<body style="height: 100vh">
+
+  <% if (form === "Sign Up") { %>
+  <%- include('navbar', { user: 'inSignupPage' }); %>
+  <% } else { %>
+  <%- include('navbar', { user: 'inloginPage' }); %>
+  <% } %>
+
+  <div class="w-100 h-75 d-flex justify-content-center align-items-center">
+    <div class="card p-3 font-poppins" style="width: 24rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= form.charAt(0) + form.slice(1).toLowerCase().split(" ").join("") %></h5>
+
+        <% if (form === "Sign Up") { %>
+        <h6 class="card-subtitle mb-4 text-muted font-open-sans">Please enter your information</h6>
+        <% } else { %>
+        <h6 class="card-subtitle mb-4 text-muted font-open-sans">Please enter your credentials</h6>
+        <% } %>
+
+        <form method="post" action=<%= action %> autocomplete='off'>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name='username' id='username'>
+            <!-- <small id="incorrectUsername" class="form-text text-danger">incorrect username</small> -->
+          </div>
+
+          <% if (form === "Sign Up") { %>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email">
+          </div>
+          <% } %>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name='password' id='password'>
+          </div>
+          <button type="submit"
+            class="btn btn-primary"><%= form.charAt(0) + form.slice(1).toLowerCase().split(" ").join("") %></button>
+        </form>
+
+        <% if (form === "Sign Up") { %>
+        <p class="font-open-sans mt-4">Already have an account? <a href="/login" class="card-link">Login</a></p>
+        <% } else { %>
+        <p class="font-open-sans mt-4">New around here? <a href="/signup" class="card-link">Signup</a></p>
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+
+  <%- include('scripts', {page: 'index'}); %>
+
 </body>
 
 </html>

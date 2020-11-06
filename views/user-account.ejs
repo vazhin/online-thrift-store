@@ -17,15 +17,15 @@
 
       <img src="/<%= user.image %>" class="img-fluid my-4" style="height: 13rem; object-fit: cover;" alt="user">
 
-      <div class="w-50 d-flex flex-wrap justify-content-between my-1">
+      <div class="w-50 d-flex flex-wrap justify-content-between my-1 font-open-sans">
         <h6 class="text-primary">Email Address:</h6>
         <p><%= user.email %></p>
       </div>
 
       <% if (currentUser && user.id === currentUser.id) { %>
       <div class="d-flex">
-        <a href="/product/" class="btn btn-primary font-weight-bold" role="button">Post A Product</a>
-        <a href="#" class="btn btn-light text-dark ml-4 font-weight-bold" role="button">Edit Info</a>
+        <a href="/product/" class="btn btn-primary font-semi-bold" role="button">Post A Product</a>
+        <a href="#" class="btn btn-light text-dark ml-4 font-semi-bold" role="button">Edit Info</a>
       </div>
       <% } %>
 
