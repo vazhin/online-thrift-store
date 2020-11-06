@@ -72,6 +72,21 @@ class Product {
     });
   }
 
+  getByUser(userId) {
+    return new Promise((resolve, reject) => {
+      const db = Database.open();
+      db.all(
+        `SELECT * FROM products WHERE user_id = ?`,
+        [userId],
+        (err, rows) => {
+          Database.close(db);
+          if (err) return reject(err.message);
+          resolve(rows);
+        }
+      );
+    });
+  }
+
   getRecent() {
     return new Promise((resolve, reject) => {
       const db = Database.open();

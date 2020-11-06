@@ -6,8 +6,6 @@
 <body>
   <%- include('navbar', { user: currentUser }); %>
 
-
-
   <div class="w-100 row mt-5">
     <div class="col-6 d-flex flex-column align-items-start px-5 font-poppins">
 
@@ -38,6 +36,11 @@
       <% } else { %>
       <h4><%= user.username.charAt(0).toUpperCase() + user.username.slice(1) %>'s products</h4>
       <% } %>
+
+      <% products.forEach(function(product){ %>
+      <%- include('product-card', {product: product}); %>
+      <% }); %>
+
     </div>
   </div>
 

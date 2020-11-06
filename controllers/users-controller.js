@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 
 const User = require('../data/User');
+const Product = require('../data/Product');
 
 exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -21,7 +22,12 @@ exports.signup = async (req, res, next) => {
 exports.getUser = async (req, res, next) => {
   try {
     const user = await User.get(req.params.userId);
-    res.render('user-account', { user: user, currentUser: req.user });
+    const products = await Product.getByUser(req.params.userId);
+    res.render('user-account', {
+      user: user,
+      currentUser: req.user,
+      products: products,
+    });
   } catch (err) {
     res.status(500).json({ err });
   }
