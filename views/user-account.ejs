@@ -37,9 +37,14 @@
       <h4><%= user.username.charAt(0).toUpperCase() + user.username.slice(1) %>'s products</h4>
       <% } %>
 
+      <% if (products.length !== 0) { %>
       <% products.forEach(function(product){ %>
       <%- include('product-card', {product: product}); %>
       <% }); %>
+      <% } else { %>
+      <img src="/images/empty.svg" class="img-fluid my-5" style="height: 13rem; object-fit: cover;" alt="no products">
+      <h5>No Products Yet.</h5>
+      <% } %>
 
     </div>
   </div>
