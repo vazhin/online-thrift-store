@@ -16,7 +16,7 @@ Routes:
 - [x] POST "/products" -> create a new product
 - [x] GET "/product/:productId" -> product detail page
   - if owner is logged in, how will they edit the listing?
-- [ ] GET "/user/:userId" -> profile page, see a list of all their products
+- [x] GET "/user/:userId" -> profile page, see a list of all their products
 
 To do:
 
