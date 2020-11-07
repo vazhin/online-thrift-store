@@ -7,6 +7,7 @@ const { getAllProducts } = require('../controllers/products-controller');
 router.get('/', getAllProducts, function (req, res, next) {
   res.render('index', {
     products: res.locals.data,
+    numOfPages: res.locals.numOfPages,
     user: req.user,
   });
 });

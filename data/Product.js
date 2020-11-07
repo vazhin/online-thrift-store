@@ -105,6 +105,20 @@ class Product {
     });
   }
 
+  getNumOfPages() {
+    const limit = 6;
+    let numOfPages;
+    return new Promise((resolve, reject) => {
+      const db = Database.open();
+      db.all(`SELECT COUNT(product_id) FROM products`, [], (err, rows) => {
+        Database.close(db);
+        if (err) return reject(err.message);
+        numOfPages = Math.ceil(rows[0]['COUNT(product_id)'] / limit);
+        resolve(numOfPages);
+      });
+    });
+  }
+
   getByCategory(category) {
     return new Promise((resolve, reject) => {
       const db = Database.open();

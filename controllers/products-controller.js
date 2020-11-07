@@ -20,7 +20,9 @@ exports.createProduct = async (req, res, next) => {
 exports.getAllProducts = async (req, res, next) => {
   try {
     const data = await Product.getAll(req.query.page);
+    const numOfPages = await Product.getNumOfPages();
     res.locals.data = data;
+    res.locals.numOfPages = numOfPages;
     next();
   } catch (err) {
     res.status(500).json({ err });
