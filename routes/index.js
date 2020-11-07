@@ -25,7 +25,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/product/', isAuthenticated, (req, res, next) => {
-  res.render('create-product-form', { userId: req.user.id });
+  res.render('create-product-form', { user: req.user });
 });
 
 router.get('/logout', (req, res, next) => {
