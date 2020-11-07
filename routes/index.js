@@ -6,7 +6,6 @@ const { getRecentProducts } = require('../controllers/products-controller');
 
 router.get('/', getRecentProducts, function (req, res, next) {
   res.render('index', {
-    title: 'Thrift Store',
     products: res.locals.data,
     user: req.user,
   });
