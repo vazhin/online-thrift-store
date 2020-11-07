@@ -23,10 +23,11 @@ To do:
 - [x] Login and Signup
 - [x] replace callbacks with promises or async/await
 - [x] uploading product image
-- [ ] implement the UI
+- [x] implement the UI
 - [ ] make it responsive
 - [ ] product list pagination
 - [ ] filtering
+- [ ] validation & error handling
 - [ ] store the sessions in a session storage, [Compatible Session Stores](http://expressjs.com/en/resources/middleware/session.html#compatible-session-stores)
 
 Tech Debt:
