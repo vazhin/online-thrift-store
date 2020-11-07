@@ -19,7 +19,7 @@ exports.createProduct = async (req, res, next) => {
 
 exports.getAllProducts = async (req, res, next) => {
   try {
-    const data = await Product.getAll();
+    const data = await Product.getAll(req.query.page);
     res.locals.data = data;
     next();
   } catch (err) {

@@ -87,12 +87,15 @@ class Product {
     });
   }
 
-  getAll() {
+  getAll(page = 1) {
+    const limit = 6;
+    const offset = (page - 1) * limit;
+
     return new Promise((resolve, reject) => {
       const db = Database.open();
       db.all(
-        `SELECT * FROM products ORDER BY product_id DESC LIMIT 6`,
-        [],
+        `SELECT * FROM products ORDER BY product_id DESC LIMIT ? OFFSET ?`,
+        [limit, offset],
         (err, rows) => {
           Database.close(db);
           if (err) return reject(err.message);
