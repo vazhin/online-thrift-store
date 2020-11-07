@@ -24,7 +24,7 @@ To do:
 - [x] replace callbacks with promises or async/await
 - [x] uploading product image
 - [x] implement the UI
-- [ ] make it responsive
+- [x] make it responsive
 - [ ] product list pagination
 - [ ] filtering
 - [ ] validation & error handling
