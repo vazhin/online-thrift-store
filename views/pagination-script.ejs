@@ -1,6 +1,8 @@
 <script>
   const ul = document.getElementById('pagination-list')
-  const pageNum = parseInt(getParam('page'));
+  let pageNum = parseInt(getParam('page'));
+
+  if (!pageNum) pageNum = 1;
 
   const numOfPages = <%= numOfPages %>;
   let paginationItems = ''
@@ -14,6 +16,7 @@
 
   ul.innerHTML = `
     ${prev ? `<li class="page-item"><a class="page-link" href="/?page=${prev}">Previous</a></li>` : `<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>`}
+    ${prev && prev > 1 ? `<li class="page-item"><a class="page-link" href="/?page=1">1</a></li><li class="page-item disabled"><a class="page-link" href="#">...</a></li>` : ''}
     ${paginationItems}
     ${numOfPages > next ? `<li class="page-item disabled"><a class="page-link" href="#">...</a></li><li class="page-item"><a class="page-link" href="/?page=${numOfPages}">${numOfPages}</a></li>` : ''}
     ${pageNum < numOfPages ? `<li class="page-item"><a class="page-link" href="/?page=${next}">Next</a></li>` : `<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>`}
