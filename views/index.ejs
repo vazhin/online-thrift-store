@@ -8,7 +8,7 @@
   <%- include('top-filters'); %>
 
 
-  <div class="row mt-5 px-5">
+  <div class="row mt-5 px-sm-5 px-4 w-100 m-0">
 
     <div class="col-md-3 col-12">
       <%- include('side-filters'); %>
@@ -18,7 +18,7 @@
 
       <div class="row row-cols-1 row-cols-md-3" style="flex: 0 0 auto;">
         <% products.forEach(function(product){ %>
-        <div class="col d-flex justify-content-center mb-4">
+        <div class="col d-flex justify-content-center mb-4 p-0">
           <%- include('product-card', {product: product}); %>
         </div>
         <% }); %>
