@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 const { isAuthenticated } = require('../middlewares/auth');
-const { getRecentProducts } = require('../controllers/products-controller');
+const { getAllProducts } = require('../controllers/products-controller');
 
-router.get('/', getRecentProducts, function (req, res, next) {
+router.get('/', getAllProducts, function (req, res, next) {
   res.render('index', {
     products: res.locals.data,
     user: req.user,

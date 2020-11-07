@@ -14,7 +14,7 @@
       <%- include('side-filters'); %>
     </div>
 
-    <div class="col-md-9 col-12">
+    <div class="col-md-9 col-12 d-flex flex-column align-items-center">
 
       <div class="row row-cols-1 row-cols-md-3" style="flex: 0 0 auto;">
         <% products.forEach(function(product){ %>
@@ -23,6 +23,16 @@
         </div>
         <% }); %>
       </div>
+
+      <nav aria-label="Products pages">
+        <ul class="pagination mb-5 mt-3">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
 
     </div>
 

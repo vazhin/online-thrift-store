@@ -87,11 +87,11 @@ class Product {
     });
   }
 
-  getRecent() {
+  getAll() {
     return new Promise((resolve, reject) => {
       const db = Database.open();
       db.all(
-        `SELECT * FROM products ORDER BY product_id DESC LIMIT 50`,
+        `SELECT * FROM products ORDER BY product_id DESC LIMIT 6`,
         [],
         (err, rows) => {
           Database.close(db);

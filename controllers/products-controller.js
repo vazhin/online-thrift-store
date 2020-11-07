@@ -17,9 +17,9 @@ exports.createProduct = async (req, res, next) => {
   }
 };
 
-exports.getRecentProducts = async (req, res, next) => {
+exports.getAllProducts = async (req, res, next) => {
   try {
-    const data = await Product.getRecent();
+    const data = await Product.getAll();
     res.locals.data = data;
     next();
   } catch (err) {
