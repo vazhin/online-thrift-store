@@ -16,7 +16,19 @@
   font-size: 2rem;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 300px) {
   .navbar-brand {
     font-size: 1.1rem;
   }
