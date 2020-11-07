@@ -8,8 +8,8 @@
   <%- include('navbar', { user: user }); %>
 
   <div class="container my-5">
-    <div class="card">
-      <div class="card-body font-poppins">
+    <div class="card border-0">
+      <div class="card-body font-poppins jumbotron mb-0">
 
         <h2>Product info</h2>
         <h6 class="mb-4 mt-1 text-muted font-open-sans">Please enter your product’s info</h6>
@@ -32,10 +32,10 @@
                   name="price">
                 <div class="input-group-append">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-primary active">
+                    <label class="btn btn-primary active" style="cursor: pointer;">
                       <input type="radio" name="currency" id="USD" autocomplete="off" value="USD" checked> $
                     </label>
-                    <label class="btn btn-primary">
+                    <label class="btn btn-primary" style="cursor: pointer;">
                       <input type="radio" name="currency" id="IQD" autocomplete="off" value="IQD"> IQD
                     </label>
                   </div>
@@ -65,7 +65,7 @@
 
             <div class="form-group col-md-4">
               <label for="category">Category</label>
-              <select id="category" class="form-control font-open-sans" name="category">
+              <select id="category" class="form-control font-open-sans" name="category" style="cursor: pointer;">
                 <option value="" disabled selected hidden>Choose a category</option>
                 <option value="clothes">clothes</option>
                 <option value="furniture">furniture</option>
@@ -80,25 +80,25 @@
             <div class="form-check font-open-sans">
               <input class="form-check-input" type="radio" name="condition" id="new-with-tags" value="new with tags"
                 checked>
-              <label class="form-check-label" for="new-with-tags">
+              <label class="form-check-label" for="new-with-tags" style="cursor: pointer;">
                 new with tags
               </label>
             </div>
             <div class="form-check font-open-sans">
               <input class="form-check-input" type="radio" name="condition" id="like-new" value="like-new">
-              <label class="form-check-label" for="like-new">
+              <label class="form-check-label" for="like-new" style="cursor: pointer;">
                 like-new
               </label>
             </div>
             <div class="form-check font-open-sans">
               <input class="form-check-input" type="radio" name="condition" id="gently-used" value="gently-used">
-              <label class="form-check-label" for="gently-used">
+              <label class="form-check-label" for="gently-used" style="cursor: pointer;">
                 gently-used
               </label>
             </div>
             <div class="form-check font-open-sans">
               <input class="form-check-input" type="radio" name="condition" id="signs-of-use" value="signs of use">
-              <label class="form-check-label" for="signs-of-use">
+              <label class="form-check-label" for="signs-of-use" style="cursor: pointer;">
                 signs of use
               </label>
             </div>
