@@ -8,15 +8,25 @@
   <%- include('top-filters'); %>
 
 
-  <div class="d-flex mx-5 mt-5 justify-content-between">
+  <div class="row mt-5 px-5">
 
-    <%- include('side-filters'); %>
-
-    <div class="d-flex justify-content-center flex-wrap w-100">
-      <% products.forEach(function(product){ %>
-      <%- include('product-card', {product: product}); %>
-      <% }); %>
+    <div class="col-3">
+      <%- include('side-filters'); %>
     </div>
+
+    <div class="col-9">
+
+      <div class="row row-cols-1 row-cols-md-3" style="flex: 0 0 auto;">
+        <% products.forEach(function(product){ %>
+        <div class="col d-flex justify-content-center mb-4">
+          <%- include('product-card', {product: product}); %>
+        </div>
+        <% }); %>
+      </div>
+
+    </div>
+
+
   </div>
 
   <%- include('scripts', {page: 'index'}); %>
