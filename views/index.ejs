@@ -42,17 +42,19 @@
     const ul = document.getElementById('pagination-list')
     const pageNum = parseInt(getParam('page'));
 
+    const numOfPages = <%= numOfPages %>;
     let paginationItems = ''
     let prev = pageNum === 1 ? null : pageNum - 1;
     let next = pageNum + 1;
 
     for (let i = prev ? prev : pageNum; i <= next; i++) {
       paginationItems += `<li class="page-item" id="${i}"><a class="page-link" href="/?page=${i}">${i}</a></li>`
+      if (pageNum === numOfPages && i === pageNum) break;
     }
 
     ul.innerHTML = `${prev ? `<li class="page-item"><a class="page-link" href="/?page=${prev}">Previous</a></li>` : `<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>`}
-           ${paginationItems}
-    <li class="page-item"><a class="page-link" href="/?page=${next}">Next</a></li>`
+           ${paginationItems}${numOfPages > next ? `<li class="page-item disabled"><a class="page-link" href="#">...</a></li><li class="page-item"><a class="page-link" href="/?page=${numOfPages}">${numOfPages}</a></li>` : ''}
+    ${pageNum < numOfPages ? `<li class="page-item"><a class="page-link" href="/?page=${next}">Next</a></li>` : `<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>`}`
 
     document.getElementById(pageNum).classList.add('active')
 
