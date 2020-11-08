@@ -17,6 +17,8 @@ Routes:
 - [x] GET "/product/:productId" -> product detail page
   - if owner is logged in, how will they edit the listing?
 - [x] GET "/user/:userId" -> profile page, see a list of all their products
+- [ ] DELETE "/product/:productId" -> delete product
+- [ ] PUT "/user/:userId" -> update user info (maybe just profile pic)
 
 To do:
 
@@ -25,8 +27,9 @@ To do:
 - [x] uploading product image
 - [x] implement the UI
 - [x] make it responsive
-- [ ] product list pagination
+- [x] product list pagination
 - [ ] filtering
+- [ ] profile picture changing & product deletion
 - [ ] validation & error handling
 - [ ] store the sessions in a session storage, [Compatible Session Stores](http://expressjs.com/en/resources/middleware/session.html#compatible-session-stores)
 
