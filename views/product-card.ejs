@@ -4,7 +4,8 @@
     <img src="/<%= product.image %>" class="card-img-top" style="height: 13rem; object-fit: cover;" alt="product">
 
     <h6 class="card-title mt-3"><%= product.name %></h6>
-    <p class="card-subtitle mb-2 text-muted font-open-sans"><%= product.description %></p>
+    <p class="card-subtitle mb-2 text-muted font-open-sans">
+      <%= product.description.length <= 60 ? product.description : product.description.slice(0, 60) + '...' %></p>
 
     <div class="d-flex flex-sm-row flex-column align-items-sm-end align-items-start justify-content-between">
       <div class="d-flex flex-column">
