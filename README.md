@@ -29,11 +29,16 @@ To do:
 - [x] make it responsive
 - [x] product list pagination
 - [ ] filtering
-- [ ] profile picture changing & product deletion
+- [ ] update counts for product list and categories
+- [ ] profile picture changing 
+- [ ] product editing / deletion
 - [ ] validation & error handling
 - [ ] store the sessions in a session storage, [Compatible Session Stores](http://expressjs.com/en/resources/middleware/session.html#compatible-session-stores)
+- [ ] localization
 
 Tech Debt:
-
 - use an ORM instead of raw SQL
+- logging errors in server logs
+- propagating errors to the client (catching and displaying them)
+- Unique constraint on user table should apply to both username and email
 - convert JavaScript to TypeScript
