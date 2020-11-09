@@ -1,4 +1,6 @@
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const { User } = require('../models');
 const Product = require('../data/Product');
@@ -12,12 +14,23 @@ exports.signup = async (req, res, next) => {
   const { username, email, password } = req.body;
   image = 'uploads/users/no-profile-image.png';
 
-  try {
-    const user = await User.create({ username, email, password, image });
-    res.redirect('/login');
-  } catch (err) {
-    console.log(err);
-  }
+  bcrypt.hash(password, saltRounds, async (err, hash) => {
+    if (err) {
+      console.log(err.message);
+    }
+
+    try {
+      const user = await User.create({
+        username,
+        email,
+        password: hash,
+        image,
+      });
+      res.redirect('/login');
+    } catch (err) {
+      console.log(err);
+    }
+  });
 };
 
 exports.getUser = async (req, res, next) => {
