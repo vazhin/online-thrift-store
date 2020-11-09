@@ -1,23 +1,14 @@
 {
   "development": {
-    "username": null,
-    "password": null,
-    "host": "localhost",
     "dialect": "sqlite",
-    "storage": "../data/database.db"
+    "storage": "./database.sqlite3"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "sqlite"
+    "dialect": "sqlite",
+    "storage": ":memory"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "sqlite"
+    "dialect": "sqlite",
+    "storage": "./database.sqlite3"
   }
 }

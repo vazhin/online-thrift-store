@@ -10,6 +10,13 @@ const session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
+const { sequelize } = require('./models');
+
+async function syncDatabase() {
+  await sequelize.sync();
+  console.log('Database synced!');
+}
+syncDatabase();
 
 require('dotenv').config();
 
