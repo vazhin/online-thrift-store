@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 
-const User = require('../data/User');
+const { User } = require('../models');
 const Product = require('../data/Product');
 
 exports.signup = async (req, res, next) => {
@@ -9,13 +9,14 @@ exports.signup = async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  req.body.image = 'uploads/users/no-profile-image.png';
+  const { username, email, password } = req.body;
+  image = 'uploads/users/no-profile-image.png';
 
   try {
-    const user = await User.signup(req.body);
+    const user = await User.create({ username, email, password, image });
     res.redirect('/login');
   } catch (err) {
-    res.status(500).json({ err });
+    console.log(err);
   }
 };
 
