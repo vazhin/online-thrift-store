@@ -12,11 +12,11 @@ var usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 const { sequelize } = require('./models');
 
-async function syncDatabase() {
-  await sequelize.sync();
-  console.log('Database synced!');
+async function authenticateDatabase() {
+  await sequelize.authenticate();
+  console.log('Database connected!');
 }
-syncDatabase();
+authenticateDatabase();
 
 require('dotenv').config();
 
