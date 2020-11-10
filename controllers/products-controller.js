@@ -1,5 +1,6 @@
-const { Product } = require('../models');
+const { Product, User } = require('../models');
 const { validationResult } = require('express-validator');
+const { use } = require('passport');
 
 exports.createProduct = async (req, res, next) => {
   const errors = validationResult(req);
@@ -19,7 +20,7 @@ exports.createProduct = async (req, res, next) => {
     phoneNumber,
   } = req.body;
   const image = req.file.path;
-  const userId = req.user.userId;
+  const userId = req.user.id;
 
   try {
     const product = await Product.create({
@@ -60,12 +61,20 @@ exports.getAllProducts = async (req, res, next) => {
 };
 
 exports.getAProduct = async (req, res, next) => {
-  // try {
-  //   const data = await Product.getOne(req.params.productId);
-  //   res.render('product-detail', { product: data, user: req.user });
-  // } catch (err) {
-  //   res.status(404).json({ err }); // what to return?
-  // }
+  try {
+    const product = await Product.findOne({
+      where: { productId: req.params.productId },
+      include: [
+        {
+          model: User,
+          attributes: ['username', ['image', 'userImage'], 'userId'],
+        },
+      ],
+    });
+    res.render('product-detail', { product, user: req.user });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 exports.getByCategory = async (req, res, next) => {

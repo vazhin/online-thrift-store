@@ -27,7 +27,7 @@ passport.deserializeUser(async (userId, done) => {
   try {
     const user = await User.findOne({
       where: { userId },
-      attributes: ['username', 'email', 'image', 'userId'],
+      attributes: ['username', 'email', 'image', 'userId', 'id'],
     });
     done(null, user.toJSON()); // this will be restored to req.user
   } catch (err) {

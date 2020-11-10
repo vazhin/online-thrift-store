@@ -36,10 +36,10 @@ exports.getUser = async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: { userId: req.params.userId },
-      attributes: ['username', 'email', 'image', 'userId'],
+      attributes: ['username', 'email', 'image', 'userId', 'id'],
     });
     const products = await Product.findAll({
-      where: { userId: req.params.userId },
+      where: { userId: user.id },
     });
     res.render('user-account', {
       user: user,
