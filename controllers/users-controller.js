@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const { User } = require('../models');
-const Product = require('../data/Product');
+// const Product = require('../data/Product');
 
 exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -35,14 +35,17 @@ exports.signup = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
   try {
-    const user = await User.get(req.params.userId);
-    const products = await Product.getByUser(req.params.userId);
+    const user = await User.findOne({
+      where: { userId: req.params.userId },
+      attributes: ['username', 'email', 'image', 'userId'],
+    });
+    // const products = await Product.getByUser(req.params.userId);
     res.render('user-account', {
       user: user,
       currentUser: req.user,
-      products: products,
+      // products: products,
     });
   } catch (err) {
-    res.status(500).json({ err });
+    console.log(err);
   }
 };

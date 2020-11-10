@@ -9,7 +9,7 @@
   <div class="w-100 row mt-5 m-0">
     <div class="col-xl-3 col-12 d-flex flex-column align-items-start px-5 font-poppins">
 
-      <% if (currentUser && user.id === currentUser.id) { %>
+      <% if (currentUser && user.userId === currentUser.userId) { %>
       <h3>Your Account</h3>
       <% } else { %>
       <h3><%= user.username.charAt(0).toUpperCase() + user.username.slice(1) %>'s Account</h3>
@@ -22,7 +22,7 @@
         <p><%= user.email %></p>
       </div>
 
-      <% if (currentUser && user.id === currentUser.id) { %>
+      <% if (currentUser && user.userId === currentUser.userId) { %>
       <div class="d-flex flex-xl-column flex-sm-row flex-column align-items-start">
         <a href="/product/" class="btn btn-primary font-semi-bold" role="button">Post A Product</a>
         <a href="#" class="btn btn-light text-dark ml-xl-0 ml-sm-4 font-semi-bold my-xl-3 my-sm-0 my-3"
@@ -33,24 +33,24 @@
 
     </div>
     <div class="col-xl-9 col-12 d-flex flex-column align-items-xl-start align-items-center px-sm-5 px-4 font-poppins">
-      <% if (currentUser && user.id === currentUser.id) { %>
+      <% if (currentUser && user.userId === currentUser.userId) { %>
       <h4 class="mt-xl-0 mt-5">Your products</h4>
       <% } else { %>
       <h4><%= user.username.charAt(0).toUpperCase() + user.username.slice(1) %>'s products</h4>
       <% } %>
 
-      <% if (products.length !== 0) { %>
+      <!-- <% // if (products.length !== 0) { %>
       <div class="row row-cols-1 row-cols-md-3 mt-4 w-100" style="flex: 0 0 auto;">
-        <% products.forEach(function(product){ %>
+        <% // products.forEach(function(product){ %>
         <div class="col d-flex justify-content-center mb-4 p-0">
-          <%- include('product-card', {product: product}); %>
+          <%- // include('product-card', {product: product}); %>
         </div>
-        <% }); %>
+        <% // }); %>
       </div>
-      <% } else { %>
+      <% // } else { %>
       <img src="/images/empty.svg" class="img-fluid my-5" style="height: 13rem; object-fit: cover;" alt="no products">
       <h5>No Products Yet.</h5>
-      <% } %>
+      <% // } %> -->
 
     </div>
   </div>
