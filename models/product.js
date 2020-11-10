@@ -13,20 +13,51 @@ module.exports = (sequelize, DataTypes) => {
   }
   Product.init(
     {
-      name: DataTypes.TEXT,
-      price: DataTypes.INTEGER,
-      currency: DataTypes.TEXT,
-      phoneNumber: DataTypes.TEXT,
-      description: DataTypes.TEXT,
-      condition: DataTypes.TEXT,
-      category: DataTypes.TEXT,
-      city: DataTypes.TEXT,
-      image: DataTypes.TEXT,
-      userId: DataTypes.TEXT,
+      name: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      currency: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      phoneNumber: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      condition: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      category: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      city: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
     },
     {
       sequelize,
       modelName: 'Product',
+      tableName: 'products',
     }
   );
   return Product;
