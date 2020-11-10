@@ -10,33 +10,43 @@ module.exports = {
       },
       name: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       price: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       currency: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       phoneNumber: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       description: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       condition: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       category: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       city: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       image: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       userId: {
-        type: Sequelize.TEXT,
+        type: Sequelize.UUID,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
