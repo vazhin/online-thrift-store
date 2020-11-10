@@ -60,7 +60,7 @@
             <div class="form-group col-md-4">
               <label for="phonenumber">Phone number</label>
               <input type="text" class="form-control font-open-sans" id="phonenumber" placeholder="Your phone number"
-                name="owner_phoneNumber">
+                name="phoneNumber">
             </div>
 
             <div class="form-group col-md-4">
@@ -108,8 +108,6 @@
             <label for="image">Upload Image</label>
             <input type="file" class="form-control-file font-open-sans" id="image" name="image" accept="image/*">
           </div>
-
-          <input type="hidden" name="user_id" value="<%= user.id %>" />
 
           <div class="d-flex">
             <button type="submit" class="btn btn-primary font-semi-bold">Post Product</button>
