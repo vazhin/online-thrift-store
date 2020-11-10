@@ -49,7 +49,7 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
       },
       userId: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       createdAt: {
