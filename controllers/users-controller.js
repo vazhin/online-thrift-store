@@ -2,8 +2,7 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-const { User } = require('../models');
-// const Product = require('../data/Product');
+const { User, Product } = require('../models');
 
 exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -39,11 +38,13 @@ exports.getUser = async (req, res, next) => {
       where: { userId: req.params.userId },
       attributes: ['username', 'email', 'image', 'userId'],
     });
-    // const products = await Product.getByUser(req.params.userId);
+    const products = await Product.findAll({
+      where: { userId: req.params.userId },
+    });
     res.render('user-account', {
       user: user,
       currentUser: req.user,
-      // products: products,
+      products,
     });
   } catch (err) {
     console.log(err);
