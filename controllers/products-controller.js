@@ -42,16 +42,21 @@ exports.createProduct = async (req, res, next) => {
 };
 
 exports.getAllProducts = async (req, res, next) => {
-  // try {
-  //   const data = await Product.getAll(req.query.page);
-  //   const numOfPages = await Product.getNumOfPages();
-  //   res.locals.data = data;
-  //   res.locals.numOfPages = numOfPages;
-  //   next();
-  // } catch (err) {
-  //   res.status(500).json({ err });
-  //   // TODO: fix this.
-  // }
+  let page = req.query.page;
+  if (!page) page = 1;
+  try {
+    const products = await Product.findAll({
+      offset: (page - 1) * 6,
+      limit: 6,
+    });
+    const numOfProducts = await Product.count();
+    const numOfPages = Math.ceil(numOfProducts / 6);
+
+    res.locals = { ...res.locals, products, numOfPages, numOfProducts };
+    next();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 exports.getAProduct = async (req, res, next) => {
