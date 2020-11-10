@@ -1,5 +1,5 @@
 'use strict';
-const { Model } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -48,6 +48,10 @@ module.exports = (sequelize, DataTypes) => {
       image: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      productId: {
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       userId: {
         type: DataTypes.UUID,
