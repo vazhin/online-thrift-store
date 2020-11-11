@@ -62,15 +62,17 @@ exports.getAllProducts = async (req, res, next) => {
 
 exports.getAProduct = async (req, res, next) => {
   try {
-    const product = await Product.findOne({
+    let product = await Product.findOne({
       where: { productId: req.params.productId },
       include: [
         {
           model: User,
           attributes: ['username', ['image', 'userImage'], 'userId'],
+          as: 'user',
         },
       ],
     });
+    product = product.toJSON();
     res.render('product-detail', { product, user: req.user });
   } catch (err) {
     console.log(err);

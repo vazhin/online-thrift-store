@@ -40,12 +40,12 @@
           <p class="font-open-sans ml-sm-2"><%= new Date(product.createdAt).toDateString() %></p>
         </div>
 
-        <a class="text-reset text-decoration-none mt-1" href="/users/<%= product.User.userId %>">
+        <a class="text-reset text-decoration-none mt-1" href="/users/<%= product.user.userId %>">
           <div class="w-100 d-flex flex-column">
             <h6 class="text-primary">Posted By:</h6>
-            <img src="/<%= product.User.userImage %>" class="img-fluid rounded my-1"
+            <img src="/<%= product.user.userImage %>" class="img-fluid rounded my-1"
               style="height: 4rem; width: 4rem; object-fit: cover;" alt="user">
-            <p><%= product.User.username %></p>
+            <p><%= product.user.username %></p>
           </div>
         </a>
 
