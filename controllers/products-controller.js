@@ -40,6 +40,9 @@ exports.getAllProducts = async (req, res, next) => {
   const limit = 6;
   let category = req.query.category;
   let condition = req.query.condition;
+  let query = req.query.q;
+
+  if (query) query = { name: { [Op.substring]: query.trim() } };
   if (category) category = { category };
   if (condition)
     condition = Array.isArray(condition)
@@ -57,10 +60,19 @@ exports.getAllProducts = async (req, res, next) => {
     const products = await Product.findAll({
       offset: (page - 1) * limit,
       limit,
-      where: (category && category) || (condition && condition) || [],
+      order: [['createdAt', 'DESC']],
+      where:
+        (category && category) ||
+        (condition && condition) ||
+        (query && query) ||
+        [],
     });
     const numOfProducts = await Product.count({
-      where: (category && category) || (condition && condition) || [],
+      where:
+        (category && category) ||
+        (condition && condition) ||
+        (query && query) ||
+        [],
     });
     const numOfPages = Math.ceil(numOfProducts / limit);
 

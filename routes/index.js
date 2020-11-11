@@ -3,17 +3,10 @@ var router = express.Router();
 
 const { isAuthenticated } = require('../middlewares/auth');
 const { getAllProducts } = require('../controllers/products-controller');
+const { renderHomepage } = require('../controllers');
 
-router.get('/', getAllProducts, function (req, res, next) {
-  const { products, numOfPages, numOfProducts, count } = res.locals;
-  res.render('index', {
-    products,
-    numOfPages,
-    numOfProducts,
-    user: req.user,
-    count,
-  });
-});
+router.get('/', getAllProducts, renderHomepage);
+router.get('/search', getAllProducts, renderHomepage);
 
 router.get('/login', (req, res) => {
   res.render('login-signup-form', { form: 'Login', action: '/users/login' });
