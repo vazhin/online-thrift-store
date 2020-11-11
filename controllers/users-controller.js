@@ -34,17 +34,15 @@ exports.signup = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
   try {
-    const user = await User.findOne({
+    let user = await User.findOne({
       where: { userId: req.params.userId },
       attributes: ['username', 'email', 'image', 'userId', 'id'],
+      include: 'products',
     });
-    const products = await Product.findAll({
-      where: { userId: user.id },
-    });
+    user = user.toJSON();
     res.render('user-account', {
       user: user,
       currentUser: req.user,
-      products,
     });
   } catch (err) {
     console.log(err);

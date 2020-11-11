@@ -39,9 +39,9 @@
       <h4><%= user.username.charAt(0).toUpperCase() + user.username.slice(1) %>'s products</h4>
       <% } %>
 
-      <% if (products.length !== 0) { %>
+      <% if (user.products.length !== 0) { %>
       <div class="row row-cols-1 row-cols-md-3 mt-4 w-100" style="flex: 0 0 auto;">
-        <% products.forEach(function(product){ %>
+        <% user.products.forEach(function(product){ %>
         <div class="col d-flex justify-content-center mb-4 p-0">
           <%- include('product-card', {product: product}); %>
         </div>
