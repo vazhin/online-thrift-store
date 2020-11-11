@@ -11,7 +11,7 @@ exports.createProduct = async (req, res, next) => {
     city,
     phoneNumber,
   } = req.body;
-  const image = req.file.path;
+  const image = req.file ? req.file.path : '';
   const userId = req.user.id;
 
   try {

@@ -2,11 +2,6 @@
 const { Model, Sequelize } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate({ User }) {
       this.belongsTo(User, { foreignKey: 'userId', as: 'user' });
     }
@@ -16,10 +11,16 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.TEXT,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: 'Name must not be empty' },
+        },
       },
       price: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: 'Price must not be empty' },
+        },
       },
       currency: {
         type: DataTypes.TEXT,
@@ -28,10 +29,16 @@ module.exports = (sequelize, DataTypes) => {
       phoneNumber: {
         type: DataTypes.TEXT,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: 'Phone number must not be empty' },
+        },
       },
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: 'Description must not be empty' },
+        },
       },
       condition: {
         type: DataTypes.TEXT,
@@ -40,14 +47,23 @@ module.exports = (sequelize, DataTypes) => {
       category: {
         type: DataTypes.TEXT,
         allowNull: false,
+        validate: {
+          notNull: { msg: 'Please choose a category' },
+        },
       },
       city: {
         type: DataTypes.TEXT,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: 'Please enter your location' },
+        },
       },
       image: {
         type: DataTypes.TEXT,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: 'Please upload an image' },
+        },
       },
       productId: {
         type: DataTypes.UUID,
