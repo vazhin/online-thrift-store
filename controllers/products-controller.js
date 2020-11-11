@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { Product, User } = require('../models');
 
 exports.createProduct = async (req, res, next) => {
@@ -36,18 +37,30 @@ exports.createProduct = async (req, res, next) => {
 
 exports.getAllProducts = async (req, res, next) => {
   let page = req.query.page;
-  let limit = 6;
+  const limit = 6;
   let category = req.query.category;
+  let condition = req.query.condition;
+  if (category) category = { category };
+  if (condition)
+    condition = Array.isArray(condition)
+      ? {
+          condition: {
+            [Op.or]: [...condition],
+          },
+        }
+      : {
+          condition,
+        };
 
   if (!page) page = 1;
   try {
     const products = await Product.findAll({
       offset: (page - 1) * limit,
       limit,
-      ...(category && { where: { category } }),
+      where: (category && category) || (condition && condition) || [],
     });
     const numOfProducts = await Product.count({
-      ...(category && { where: { category } }),
+      where: (category && category) || (condition && condition) || [],
     });
     const numOfPages = Math.ceil(numOfProducts / limit);
 
