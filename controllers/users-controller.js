@@ -1,15 +1,9 @@
-const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-const { User, Product } = require('../models');
+const { User } = require('../models');
 
 exports.signup = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
   const { username, email, password } = req.body;
   image = 'uploads/users/no-profile-image.png';
 

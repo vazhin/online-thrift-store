@@ -1,14 +1,6 @@
 const { Product, User } = require('../models');
-const { validationResult } = require('express-validator');
-const { use } = require('passport');
 
 exports.createProduct = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    console.log(errors.array());
-    return;
-  }
-
   const {
     name,
     price,

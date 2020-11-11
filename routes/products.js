@@ -19,15 +19,8 @@ const {
   getByCategory,
 } = require('../controllers/products-controller');
 const { isAuthenticated } = require('../middlewares/auth');
-const { validateData } = require('../middlewares/validators/product-validator');
 
-router.post(
-  '/',
-  isAuthenticated,
-  upload.single('image'),
-  validateData,
-  createProduct
-);
+router.post('/', isAuthenticated, upload.single('image'), createProduct);
 router.get('/:productId', getAProduct);
 // router.get('/category/:category', getByCategory);
 
