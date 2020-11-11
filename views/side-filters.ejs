@@ -4,22 +4,22 @@
     <h5 class="font-poppins">Categories</h5>
     <div class="d-flex flex-column font-open-sans">
       <div class="d-flex justify-content-between mt-2">
-        <a href="/" class="text-dark">Clothes</a>
+        <a href="/?category=clothes" class="text-dark">Clothes</a>
         <span class="badge badge-light text-primary font-poppins"><%= count.clothes %> </span>
       </div>
 
       <div class="d-flex justify-content-between mt-2">
-        <a href="/" class="text-dark">Computers</a>
+        <a href="/?category=computer" class="text-dark">Computers</a>
         <span class="badge badge-light text-primary font-poppins"><%= count.computers %> </span>
       </div>
 
       <div class="d-flex justify-content-between mt-2">
-        <a href="/" class="text-dark">Furniture</a>
+        <a href="/?category=furniture" class="text-dark">Furniture</a>
         <span class="badge badge-light text-primary font-poppins"><%= count.furniture %> </span>
       </div>
 
       <div class="d-flex justify-content-between mt-2">
-        <a href="/" class="text-dark">Mobile Phones</a>
+        <a href="/?category=mobile device" class="text-dark">Mobile Phones</a>
         <span class="badge badge-light text-primary font-poppins"><%= count.phones %> </span>
       </div>
 
@@ -56,7 +56,7 @@
 
       <div class="d-flex mt-4 font-poppins">
         <input class="btn btn-primary" type="submit" value="Apply">
-        <input class="btn btn-secondary ml-3" type="reset" value="Reset">
+        <input onclick="undoFilters()" class="btn btn-secondary ml-3" type="reset" value="Reset">
       </div>
 
     </form>
@@ -64,3 +64,9 @@
   </div>
 
 </div>
+
+<script>
+  function undoFilters() {
+    document.location.href = '/'
+  }
+</script>
