@@ -36,19 +36,20 @@ exports.createProduct = async (req, res, next) => {
 
 exports.getAllProducts = async (req, res, next) => {
   let page = req.query.page;
+  let limit = 6;
   let category = req.query.category;
 
   if (!page) page = 1;
   try {
     const products = await Product.findAll({
-      offset: (page - 1) * 6,
-      limit: 6,
+      offset: (page - 1) * limit,
+      limit,
       ...(category && { where: { category } }),
     });
     const numOfProducts = await Product.count({
       ...(category && { where: { category } }),
     });
-    const numOfPages = Math.ceil(numOfProducts / 6);
+    const numOfPages = Math.ceil(numOfProducts / limit);
 
     const clothes = await Product.count({
       where: { category: 'clothes' },
