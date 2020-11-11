@@ -31,8 +31,8 @@ To do:
 - [x] use an ORM instead of raw SQL
 - [x] logging errors in server logs
 - [x] Unique constraint on user table should apply to both username and email
+- [x] update counts for product list and categories
 - [ ] filtering
-- [ ] update counts for product list and categories
 - [ ] profile picture changing
 - [ ] product editing / deletion
 - [ ] validation & error handling

@@ -5,11 +5,13 @@ const { isAuthenticated } = require('../middlewares/auth');
 const { getAllProducts } = require('../controllers/products-controller');
 
 router.get('/', getAllProducts, function (req, res, next) {
+  const { products, numOfPages, numOfProducts, count } = res.locals;
   res.render('index', {
-    products: res.locals.products,
-    numOfPages: res.locals.numOfPages,
-    numOfProducts: res.locals.numOfProducts,
+    products,
+    numOfPages,
+    numOfProducts,
     user: req.user,
+    count,
   });
 });
 

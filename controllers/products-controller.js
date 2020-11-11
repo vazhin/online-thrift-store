@@ -45,7 +45,33 @@ exports.getAllProducts = async (req, res, next) => {
     const numOfProducts = await Product.count();
     const numOfPages = Math.ceil(numOfProducts / 6);
 
-    res.locals = { ...res.locals, products, numOfPages, numOfProducts };
+    const clothes = await Product.count({
+      where: { category: 'clothes' },
+    });
+    const computers = await Product.count({
+      where: { category: 'computer' },
+    });
+    const furniture = await Product.count({
+      where: { category: 'furniture' },
+    });
+    const phones = await Product.count({
+      where: { category: 'mobile device' },
+    });
+
+    const count = {
+      clothes,
+      computers,
+      furniture,
+      phones,
+    };
+
+    res.locals = {
+      ...res.locals,
+      products,
+      numOfPages,
+      numOfProducts,
+      count,
+    };
     next();
   } catch (err) {
     console.log(err);
