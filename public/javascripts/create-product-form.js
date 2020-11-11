@@ -5,8 +5,10 @@ createProductForm.addEventListener('submit', async (e) => {
 
   let formData = new FormData(createProductForm);
 
-  await fetch('/products', {
+  const response = await fetch('/products', {
     method: 'POST',
     body: formData,
   });
+
+  window.location.assign('/');
 });

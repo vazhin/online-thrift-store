@@ -7,9 +7,11 @@
   <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
     <div class="navbar-nav font-open-sans">
 
+      <% if(locals.page === 'index'){ %>
       <a class="nav-item nav-link disabled text-muted" href="/"><span
-          class="badge badge-light text-primary font-poppins"><%= // numOfProducts %> </span>
+          class="badge badge-light text-primary font-poppins"><%=  locals.numOfProducts %> </span>
         Products</a>
+      <% } %>
 
       <% if (typeof user === 'object') { %>
 
