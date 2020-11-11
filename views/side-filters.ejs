@@ -1,6 +1,28 @@
 <div class="row mb-md-0 mb-5">
 
+
   <div class="col-md-12 col-sm-6 col-12 d-flex flex-column">
+    <form method="GET" action="/search" class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search Products" aria-label="Search" name="q"
+        id="searchInput">
+
+      <div class="btn-group my-2 my-sm-0 font-poppins">
+        <button type="button" class="btn btn-outline-primary font-poppins dropdown-toggle" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Search
+        </button>
+        <div class="dropdown-menu">
+          <button class="dropdown-item" type="submit">Names</button>
+          <button class="dropdown-item" type="button" onclick="searchForLocation()">Locations</button>
+        </div>
+      </div>
+
+      <!-- <button class="btn btn-outline-primary font-poppins my-2 my-sm-0" type="submit">Search</button> -->
+    </form>
+  </div>
+
+
+  <div class="col-md-12 col-sm-6 col-12 d-flex flex-column mt-md-5 mt-sm-0 mt-5">
     <h5 class="font-poppins">Categories</h5>
     <div class="d-flex flex-column font-open-sans">
       <div class="d-flex justify-content-between mt-2">
@@ -68,5 +90,9 @@
 <script>
   function undoFilters() {
     document.location.href = '/'
+  }
+  function searchForLocation() {
+    const query = document.getElementById('searchInput').value
+    document.location.href = `/search?location=${query}`
   }
 </script>

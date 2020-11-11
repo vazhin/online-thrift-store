@@ -41,8 +41,10 @@ exports.getAllProducts = async (req, res, next) => {
   let category = req.query.category;
   let condition = req.query.condition;
   let query = req.query.q;
+  let location = req.query.location;
 
   if (query) query = { name: { [Op.substring]: query.trim() } };
+  if (location) location = { city: { [Op.substring]: location.trim() } };
   if (category) category = { category };
   if (condition)
     condition = Array.isArray(condition)
@@ -65,6 +67,7 @@ exports.getAllProducts = async (req, res, next) => {
         (category && category) ||
         (condition && condition) ||
         (query && query) ||
+        (location && location) ||
         [],
     });
     const numOfProducts = await Product.count({
@@ -72,6 +75,7 @@ exports.getAllProducts = async (req, res, next) => {
         (category && category) ||
         (condition && condition) ||
         (query && query) ||
+        (location && location) ||
         [],
     });
     const numOfPages = Math.ceil(numOfProducts / limit);
