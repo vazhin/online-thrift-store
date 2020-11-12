@@ -37,46 +37,45 @@ exports.createProduct = async (req, res, next) => {
 
 exports.getAllProducts = async (req, res, next) => {
   let page = req.query.page;
+  if (!page) page = 1;
   const limit = 6;
   let category = req.query.category;
   let condition = req.query.condition;
   let query = req.query.q;
   let location = req.query.location;
 
-  if (query) query = { name: { [Op.substring]: query.trim() } };
-  if (location) location = { city: { [Op.substring]: location.trim() } };
-  if (category) category = { category };
-  if (condition)
-    condition = Array.isArray(condition)
-      ? {
-          condition: {
-            [Op.or]: [...condition],
-          },
-        }
-      : {
-          condition,
-        };
+  const queryArr = [];
 
-  if (!page) page = 1;
+  if (query) queryArr.push({ name: { [Op.substring]: query.trim() } });
+  if (location) queryArr.push({ city: { [Op.substring]: location.trim() } });
+  if (category) queryArr.push({ category });
+  if (condition) {
+    queryArr.push(
+      Array.isArray(condition)
+        ? {
+            condition: {
+              [Op.or]: [...condition],
+            },
+          }
+        : {
+            condition,
+          }
+    );
+  }
+
   try {
     const products = await Product.findAll({
       offset: (page - 1) * limit,
       limit,
       order: [['createdAt', 'DESC']],
-      where:
-        (category && category) ||
-        (condition && condition) ||
-        (query && query) ||
-        (location && location) ||
-        [],
+      where: {
+        [Op.and]: queryArr,
+      },
     });
     const numOfProducts = await Product.count({
-      where:
-        (category && category) ||
-        (condition && condition) ||
-        (query && query) ||
-        (location && location) ||
-        [],
+      where: {
+        [Op.and]: queryArr,
+      },
     });
     const numOfPages = Math.ceil(numOfProducts / limit);
 
