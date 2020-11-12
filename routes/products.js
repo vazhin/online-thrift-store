@@ -16,12 +16,10 @@ const upload = multer({ storage: storage });
 const {
   createProduct,
   getAProduct,
-  getByCategory,
 } = require('../controllers/products-controller');
 const { isAuthenticated } = require('../middlewares/auth');
 
 router.post('/', isAuthenticated, upload.single('image'), createProduct);
 router.get('/:productId', getAProduct);
-// router.get('/category/:category', getByCategory);
 
 module.exports = router;

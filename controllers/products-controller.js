@@ -131,12 +131,3 @@ exports.getAProduct = async (req, res, next) => {
     console.log(err);
   }
 };
-
-exports.getByCategory = async (req, res, next) => {
-  // try {
-  //   const data = await Product.getByCategory(req.params.category);
-  //   res.status(200).json(data);
-  // } catch (err) {
-  //   res.status(500).json({ err });
-  // }
-};
