@@ -64,7 +64,7 @@ exports.getAllProducts = async (req, res, next) => {
   }
 
   try {
-    const products = await Product.findAll({
+    const result = await Product.findAndCountAll({
       offset: (page - 1) * limit,
       limit,
       order: [['createdAt', 'DESC']],
@@ -72,11 +72,9 @@ exports.getAllProducts = async (req, res, next) => {
         [Op.and]: queryArr,
       },
     });
-    const numOfProducts = await Product.count({
-      where: {
-        [Op.and]: queryArr,
-      },
-    });
+
+    const products = result.rows;
+    const numOfProducts = result.count;
     const numOfPages = Math.ceil(numOfProducts / limit);
 
     const categoryCounts = await Product.findAll({
