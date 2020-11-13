@@ -16,6 +16,28 @@
   font-size: 2rem;
 }
 
+#no-product-img {
+  width: 80%;
+}
+
+@media (min-width: 576px) {
+  #no-product-img {
+    width: 70%;
+  }
+}
+
+@media (min-width: 768px) {
+  #no-product-img {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #no-product-img {
+    width: 40%;
+  }
+}
+
 @media (max-width: 480px) {
   .navbar-brand {
     font-size: 1.5rem;

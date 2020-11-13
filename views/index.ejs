@@ -6,13 +6,15 @@
 <body>
   <%- include('navbar', { user, numOfProducts, page: 'index' }); %>
 
-  <div class="row mt-5 px-sm-5 px-4 w-100 m-0">
+  <div class="row mt-5 px-sm-5 px-4 w-100 m-0 justify-content-md-between">
 
-    <div class="col-md-3 col-12">
+    <div class="col-lg-3 col-md-4 col-12">
       <%- include('side-filters', { count }); %>
     </div>
 
-    <div class="col-md-9 col-12 d-flex flex-column align-items-center mb-5">
+    <div class="col-lg-9 col-md-8 col-12 d-flex flex-column align-items-center justify-content-center mb-5">
+
+      <% if (products.length !== 0) { %>
 
       <div class="row row-cols-1 row-cols-md-3" style="flex: 0 0 auto;">
         <% products.forEach(function(product){ %>
@@ -22,15 +24,25 @@
         <% }); %>
       </div>
 
+      <% } else { %>
+      <img src="/images/empty.svg" class="img-fluid my-5" style="object-fit: cover;" alt="no products"
+        id="no-product-img">
+      <h4 class="font-weight-normal font-open-sans">No Products Yet.</h4>
+      <% } %>
+
+      <% if (products.length !== 0) { %>
       <nav aria-label="Products pages">
         <ul class="pagination mb-5 mt-4" id="pagination-list"></ul>
       </nav>
+      <% } %>
 
     </div>
   </div>
 
   <%- include('scripts', {page: 'index'}); %>
+  <% if (products.length !== 0) { %>
   <%- include('pagination-script', {numOfPages: numOfPages}); %>
+  <% } %>
 
 </body>
 
