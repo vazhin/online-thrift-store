@@ -59,7 +59,7 @@
   <div class="col-md-12 col-sm-6 col-12 d-flex flex-column mt-md-5 mt-sm-0 mt-5">
     <h5 class="font-poppins">Condition</h5>
 
-    <form method="GET" action='/' class="d-flex flex-column font-open-sans">
+    <form method="GET" id="conditionForm" class="d-flex flex-column font-open-sans">
 
       <div class="custom-control custom-checkbox mt-2">
         <input type="checkbox" class="custom-control-input" id="like-new" name="condition" value="like-new">
@@ -83,7 +83,7 @@
 
       <div class="d-flex mt-4 font-poppins">
         <input class="btn btn-primary" type="submit" value="Apply">
-        <input onclick="undoFilters()" class="btn btn-secondary ml-3" type="reset" value="Reset">
+        <input class="btn btn-secondary ml-3" type="reset" value="Reset">
       </div>
 
     </form>
@@ -93,12 +93,28 @@
 </div>
 
 <script>
-  function undoFilters() {
-    document.location.href = '/'
-  }
+  const conditionForm = document.getElementById('conditionForm')
+
+  conditionForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const form = e.target
+    const formData = new FormData(form)
+
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.delete('condition')
+
+    for (let pair of formData.entries()) {
+      searchParams.append(pair[0], pair[1])
+    }
+    location.replace(`/?${searchParams.toString()}`)
+  })
+
+  conditionForm.addEventListener('reset', () => {
+    location.href = '/'
+  })
   function searchForLocation() {
     const query = document.getElementById('searchInput').value
-    document.location.href = `/search?location=${query}`
+    location.href = `/search?location=${query}`
   }
   function filterByCategory(value) {
     value = value.split('-').join(' ') // because I need "mobile-device" to be "mobile device". I'm passing the value as an (id).
