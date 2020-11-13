@@ -121,3 +121,16 @@ exports.getAProduct = async (req, res, next) => {
     console.log(err);
   }
 };
+
+exports.deleteProduct = async (req, res, next) => {
+  const productId = req.params.productId;
+  try {
+    const product = await Product.findOne({
+      where: { productId },
+    });
+    product.destroy();
+    res.status(200).json({ message: 'Product deleted!' });
+  } catch (err) {
+    console.log(err);
+  }
+};
