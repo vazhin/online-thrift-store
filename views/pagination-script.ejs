@@ -1,28 +1,43 @@
 <script>
-  const ul = document.getElementById('pagination-list')
-  let pageNum = parseInt(getParam('page'));
+  function addPaginationButtons() {
+    const searchParams = new URLSearchParams(location.search)
 
-  if (!pageNum) pageNum = 1;
+    // this function is because if I simply add a href like this "/?page=2", it will overwrite the product filters
+    function appendPageSearchParam(value) {
+      searchParams.delete('page')
+      searchParams.append('page', `${value}`)
+      return searchParams.toString()
+    }
 
-  const numOfPages = <%= numOfPages %>;
-  let paginationItems = ''
-  let prev = pageNum === 1 ? null : pageNum - 1;
-  let next = pageNum + 1;
+    const ul = document.getElementById('pagination-list')
+    let pageNum = parseInt(getParam('page'));
 
-  for (let i = prev ? prev : pageNum; i <= next; i++) {
-    paginationItems += `<li class="page-item" id="${i}"><a class="page-link" href="/?page=${i}">${i}</a></li>`
-    if (pageNum === numOfPages && i === pageNum) break;
-  }
+    if (!pageNum) pageNum = 1;
 
-  ul.innerHTML = `
-    ${prev ? `<li class="page-item"><a class="page-link" href="/?page=${prev}">Previous</a></li>` : `<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>`}
+    let numOfPages = <%= numOfPages %>;
+    if (numOfPages === 0) numOfPages = 1
+    let paginationItems = ''
+    let prev = pageNum === 1 ? null : pageNum - 1;
+    let next = pageNum + 1;
+
+    for (let i = prev ? prev : pageNum; i <= next; i++) {
+
+      paginationItems += `<li class="page-item ${numOfPages === 1 ? 'disabled' : ''}" id="${i}"><a class="page-link" href="/?${appendPageSearchParam(i)}">${i}</a></li>`
+      if (pageNum === numOfPages && i === pageNum) break;
+    }
+
+    ul.innerHTML = `
+    ${prev ? `<li class="page-item"><a class="page-link" href="/?${appendPageSearchParam(prev)}">Previous</a></li>` : `<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>`}
     ${prev && prev > 1 ? `<li class="page-item"><a class="page-link" href="/?page=1">1</a></li><li class="page-item disabled"><a class="page-link" href="#">...</a></li>` : ''}
     ${paginationItems}
-    ${numOfPages > next ? `<li class="page-item disabled"><a class="page-link" href="#">...</a></li><li class="page-item"><a class="page-link" href="/?page=${numOfPages}">${numOfPages}</a></li>` : ''}
-    ${pageNum < numOfPages ? `<li class="page-item"><a class="page-link" href="/?page=${next}">Next</a></li>` : `<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>`}
+    ${numOfPages > next ? `<li class="page-item disabled"><a class="page-link" href="#">...</a></li><li class="page-item"><a class="page-link" href="/?page=${appendPageSearchParam(numOfPages)}">${numOfPages}</a></li>` : ''}
+    ${pageNum < numOfPages ? `<li class="page-item"><a class="page-link" href="/?${appendPageSearchParam(next)}">Next</a></li>` : `<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>`}
   `
 
-  document.getElementById(pageNum).classList.add('active')
+    document.getElementById(pageNum).classList.add('active')
+  }
+
+  addPaginationButtons()
 
   function getParam(paramName) {
     return decodeURIComponent(
