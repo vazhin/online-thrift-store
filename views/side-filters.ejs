@@ -32,25 +32,28 @@
     <h5 class="font-poppins m-0 text-dark">Categories</h5>
     <div class="d-flex flex-column font-open-sans">
       <div class="d-flex align-items-center mt-2">
-        <p onclick="filterByCategory(this.id)" id="clothes" class="text-dark m-0" style="cursor: pointer;">Clothes
+        <p onclick="filterByCategory(this.id)" id="clothes" class="text-dark m-0 filters">
+          Clothes
         </p>
         <span class="badge badge-light text-primary font-poppins ml-2"><%= count.clothes %> </span>
       </div>
 
       <div class="d-flex align-items-center mt-2">
-        <p onclick="filterByCategory(this.id)" id="computer" class="text-dark m-0" style="cursor: pointer;">Computers
+        <p onclick="filterByCategory(this.id)" id="computer" class="text-dark m-0 filters">
+          Computers
         </p>
         <span class="badge badge-light text-primary font-poppins ml-2"><%= count.computer %> </span>
       </div>
 
       <div class="d-flex align-items-center mt-2">
-        <p onclick="filterByCategory(this.id)" id="furniture" class="text-dark m-0" style="cursor: pointer;">Furniture
+        <p onclick="filterByCategory(this.id)" id="furniture" class="text-dark m-0 filters">
+          Furniture
         </p>
         <span class="badge badge-light text-primary font-poppins ml-2"><%= count.furniture %> </span>
       </div>
 
       <div class="d-flex align-items-center mt-2">
-        <p onclick="filterByCategory(this.id)" id="mobile-device" class="text-dark m-0" style="cursor: pointer;">Mobile
+        <p onclick="filterByCategory(this.id)" id="mobile-device" class="text-dark m-0 filters">Mobile
           Phones
         </p>
         <span class="badge badge-light text-primary font-poppins ml-2"><%= count['mobile device'] %> </span>
@@ -67,22 +70,22 @@
 
       <div class="custom-control custom-checkbox mt-2">
         <input type="checkbox" class="custom-control-input" id="like-new" name="condition" value="like-new">
-        <label class="custom-control-label" for="like-new">Like-new</label>
+        <label class="custom-control-label filters" for="like-new">Like-new</label>
       </div>
 
       <div class="custom-control custom-checkbox mt-2">
         <input type="checkbox" class="custom-control-input" id="new-with-tags" name="condition" value="new with tags">
-        <label class="custom-control-label" for="new-with-tags">New with tags</label>
+        <label class="custom-control-label filters" for="new-with-tags">New with tags</label>
       </div>
 
       <div class="custom-control custom-checkbox mt-2">
         <input type="checkbox" class="custom-control-input" id="gently-used" name="condition" value="gently-used">
-        <label class="custom-control-label" for="gently-used">Gently-used</label>
+        <label class="custom-control-label filters" for="gently-used">Gently-used</label>
       </div>
 
       <div class="custom-control custom-checkbox mt-2">
         <input type="checkbox" class="custom-control-input" id="signs-of-use" name="condition" value="signs of use">
-        <label class="custom-control-label" for="signs-of-use">Signs of use</label>
+        <label class="custom-control-label filters" for="signs-of-use">Signs of use</label>
       </div>
 
       <div class="d-flex mt-4 font-poppins">
