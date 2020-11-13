@@ -8,15 +8,15 @@
 
   <div class="row mt-5 px-sm-5 px-4 w-100 m-0 justify-content-md-between">
 
-    <div class="col-lg-3 col-md-4 col-12">
+    <div class="col-lg-3 col-12">
       <%- include('side-filters', { count }); %>
     </div>
 
-    <div class="col-lg-9 col-md-8 col-12 d-flex flex-column align-items-center justify-content-center mb-5">
+    <div class="col-lg-9 col-12 d-flex flex-column align-items-center justify-content-center mb-5 px-xl-5">
 
       <% if (products.length !== 0) { %>
 
-      <div class="row row-cols-1 row-cols-md-3" style="flex: 0 0 auto;">
+      <div class="row row-cols-1 row-cols-md-3 justify-content-center" style="flex: 0 0 auto;">
         <% products.forEach(function(product){ %>
         <div class="col d-flex justify-content-center mb-4 p-0">
           <%- include('product-card', {product: product}); %>
