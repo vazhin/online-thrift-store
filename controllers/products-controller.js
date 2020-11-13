@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Product, User } = require('../models');
+const { Product, User, sequelize } = require('../models');
 
 exports.createProduct = async (req, res, next) => {
   const {
@@ -79,25 +79,18 @@ exports.getAllProducts = async (req, res, next) => {
     });
     const numOfPages = Math.ceil(numOfProducts / limit);
 
-    const clothes = await Product.count({
-      where: { category: 'clothes' },
-    });
-    const computers = await Product.count({
-      where: { category: 'computer' },
-    });
-    const furniture = await Product.count({
-      where: { category: 'furniture' },
-    });
-    const phones = await Product.count({
-      where: { category: 'mobile device' },
+    const categoryCounts = await Product.findAll({
+      group: 'category',
+      attributes: [
+        'category',
+        [sequelize.fn('COUNT', sequelize.col('category')), 'count'],
+      ],
     });
 
-    const count = {
-      clothes,
-      computers,
-      furniture,
-      phones,
-    };
+    const count = {};
+    for (let elem of categoryCounts) {
+      count[elem.category] = elem.get('count');
+    }
 
     res.locals = {
       ...res.locals,
