@@ -32,7 +32,7 @@ To do:
 - [x] logging errors in server logs
 - [x] Unique constraint on user table should apply to both username and email
 - [x] update counts for product list and categories
-- [ ] filtering
+- [x] filtering
 - [ ] profile picture changing
 - [ ] product editing / deletion
 - [ ] validation & error handling
