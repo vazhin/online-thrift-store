@@ -53,8 +53,13 @@
 
             <% if (locals.user && locals.user.userId === product.user.userId) { %>
             <div class="d-flex flex-sm-row flex-column align-items-start mt-3">
-              <button type="button" class="btn btn-primary font-poppins">Edit Product</button>
-              <button onclick="deleteProduct(this.id)" id="<%= product.productId %> " type="button"
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary font-poppins" data-toggle="modal"
+                data-target="#staticBackdrop">
+                Edit Product
+              </button>
+
+              <button onclick="deleteProduct(this.id)" id="<%= product.productId %>" type="button"
                 class="btn btn-danger font-poppins ml-sm-2 mt-2 mt-sm-0">Delete
                 Product</button>
             </div>
@@ -72,7 +77,7 @@
     </div>
   </div>
 
-
+  <%- include('edit-product-modal', { product }); %>
 
   <% function format(price, currencyCode){
     const formatter = new Intl.NumberFormat('en-US', {

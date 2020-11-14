@@ -8,3 +8,11 @@ async function deleteProduct(productId) {
     console.log(err);
   }
 }
+
+async function editProduct(productId) {
+  try {
+    /////
+  } catch (err) {
+    console.log(err);
+  }
+}
