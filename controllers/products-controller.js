@@ -134,3 +134,38 @@ exports.deleteProduct = async (req, res, next) => {
     console.log(err);
   }
 };
+
+exports.editProduct = async (req, res, next) => {
+  const productId = req.params.productId;
+  console.log(req.body);
+  const {
+    name,
+    price,
+    currency,
+    description,
+    city,
+    phoneNumber,
+    category,
+    condition,
+  } = req.body;
+  try {
+    const product = await Product.findOne({
+      where: { productId },
+    });
+
+    product.name = name;
+    product.price = price;
+    product.currency = currency;
+    product.description = description;
+    product.city = city;
+    product.phoneNumber = phoneNumber;
+    product.category = category;
+    product.condition = condition;
+
+    await product.save();
+
+    res.status(200).json({ product });
+  } catch (err) {
+    console.log(err);
+  }
+};

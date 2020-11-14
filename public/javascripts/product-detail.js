@@ -10,8 +10,14 @@ async function deleteProduct(productId) {
 }
 
 async function editProduct(productId) {
+  const form = document.getElementById('editProductForm');
+  let formData = new FormData(form);
   try {
-    /////
+    const response = await fetch(`/products/${productId}`, {
+      method: 'PUT',
+      body: formData,
+    });
+    window.location.assign(`/products/${productId}`);
   } catch (err) {
     console.log(err);
   }

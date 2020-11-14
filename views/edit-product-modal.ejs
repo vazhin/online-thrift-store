@@ -14,7 +14,7 @@
       <div class="modal-body">
 
 
-        <form>
+        <form id="editProductForm">
           <div class="form-row">
 
             <div class="form-group col-md-6">
@@ -118,16 +118,14 @@
             <input type="file" class="form-control-file font-open-sans" id="image" name="image" accept="image/*">
           </div> -->
 
+        </form>
       </div>
-
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button onclick="editProduct(this.id)" id="<%= product.productId %>" type="submit"
-          class="btn btn-primary font-poppins">Edit Product</button>
+        <button type="button" class="btn btn-secondary font-poppins" data-dismiss="modal">Cancel</button>
+        <button onclick="editProduct(this.id)" id="<%= product.productId %>" class="btn btn-primary font-poppins">Edit
+          Product</button>
       </div>
-
-      </form>
 
     </div>
   </div>
