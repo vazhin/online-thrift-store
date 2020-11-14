@@ -137,7 +137,6 @@ exports.deleteProduct = async (req, res, next) => {
 
 exports.editProduct = async (req, res, next) => {
   const productId = req.params.productId;
-  console.log(req.body);
   const {
     name,
     price,

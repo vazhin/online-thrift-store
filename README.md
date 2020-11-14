@@ -17,8 +17,10 @@ Routes:
 - [x] GET "/product/:productId" -> product detail page
   - if owner is logged in, how will they edit the listing?
 - [x] GET "/user/:userId" -> profile page, see a list of all their products
-- [ ] DELETE "/product/:productId" -> delete product
-- [ ] PUT "/user/:userId" -> update user info (maybe just profile pic)
+- [x] DELETE "/products/:productId" -> delete product
+- [x] PUT "/products/:productId" -> edit product
+- [ ] PUT "/products/:productId/image" -> change product image
+- [ ] PUT "/users/:userId/image" -> change user image
 
 To do:
 
@@ -33,8 +35,8 @@ To do:
 - [x] Unique constraint on user table should apply to both username and email
 - [x] update counts for product list and categories
 - [x] filtering
+- [x] product editing / deletion
 - [ ] profile picture changing
-- [ ] product editing / deletion
 - [ ] validation & error handling
 - [ ] store the sessions in a session storage, [Compatible Session Stores](http://expressjs.com/en/resources/middleware/session.html#compatible-session-stores)
 - [ ] localization
