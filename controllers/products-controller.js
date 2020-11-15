@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { Op } = require('sequelize');
 const { Product, User, sequelize } = require('../models');
 
@@ -164,6 +165,31 @@ exports.editProduct = async (req, res, next) => {
     await product.save();
 
     res.status(200).json({ product });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.editImage = async (req, res, next) => {
+  const productId = req.params.productId;
+  const path = req.file ? req.file.path : '';
+
+  try {
+    const product = await Product.findOne({
+      where: { productId },
+    });
+
+    const oldImage = product.image;
+    product.image = path;
+
+    await product.save();
+
+    fs.unlink(oldImage, (err) => {
+      if (err) throw err;
+      console.log(`${oldImage} was deleted`);
+
+      res.status(200).json({ product });
+    });
   } catch (err) {
     console.log(err);
   }

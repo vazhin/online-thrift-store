@@ -19,7 +19,7 @@ Routes:
 - [x] GET "/user/:userId" -> profile page, see a list of all their products
 - [x] DELETE "/products/:productId" -> delete product
 - [x] PUT "/products/:productId" -> edit product
-- [ ] PUT "/products/:productId/image" -> change product image
+- [x] PUT "/products/:productId/image" -> change product image
 - [ ] PUT "/users/:userId/image" -> change user image
 
 To do:

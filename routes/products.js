@@ -18,6 +18,7 @@ const {
   getAProduct,
   deleteProduct,
   editProduct,
+  editImage,
 } = require('../controllers/products-controller');
 const { isAuthenticated } = require('../middlewares/auth');
 
@@ -25,5 +26,6 @@ router.post('/', isAuthenticated, upload.single('image'), createProduct);
 router.get('/:productId', getAProduct);
 router.delete('/:productId', deleteProduct);
 router.put('/:productId', upload.none(), editProduct);
+router.put('/:productId/image', upload.single('image'), editImage);
 
 module.exports = router;
