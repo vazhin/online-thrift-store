@@ -1,3 +1,4 @@
+const fs = require('fs');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -40,6 +41,33 @@ exports.getUser = async (req, res, next) => {
       user: user,
       currentUser: req.user,
     });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.editImage = async (req, res, next) => {
+  const userId = req.params.userId;
+  const path = req.file ? req.file.path : '';
+
+  try {
+    const user = await User.findOne({
+      where: { userId },
+    });
+
+    const oldImage = user.image;
+    user.image = path;
+
+    await user.save();
+
+    if (oldImage !== 'uploads/users/no-profile-image.png') {
+      fs.unlink(oldImage, (err) => {
+        if (err) throw err;
+        console.log(`${oldImage} was deleted`);
+      });
+    }
+
+    res.status(200).json({ message: 'image uploaded!' });
   } catch (err) {
     console.log(err);
   }
