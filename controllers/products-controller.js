@@ -30,7 +30,7 @@ exports.createProduct = async (req, res, next) => {
       userId,
     });
 
-    res.redirect('/');
+    res.redirect(`/products/${product.productId}`);
   } catch (err) {
     console.log(err);
   }
