@@ -25,15 +25,16 @@
 
       <% if (currentUser && user.userId === currentUser.userId) { %>
       <div class="d-flex flex-xl-column flex-sm-row flex-column align-items-start">
-        <a href="/product/" class="btn btn-primary font-poppins" role="button">Post A Product</a>
+        <a href="/product/" class="btn btn-primary btn-sm font-poppins" role="button">Post A Product</a>
 
-        <span class="btn btn-dark font-poppins ml-xl-0 ml-sm-3 mt-xl-2 mt-sm-0 mt-2 btn-file">
+        <span class="btn btn-secondary btn-sm font-poppins ml-xl-0 ml-sm-3 mt-xl-2 mt-sm-0 mt-2 btn-file">
           Change Image <input onchange="changeImage(this)" id="<%= user.userId %>" type="file" name="image"
             accept="image/*">
         </span>
 
-        <a href="#" class="btn btn-secondary font-poppins ml-xl-0 ml-sm-3 my-xl-2 my-sm-0 my-2" role="button">Edit
-          Info</a>
+        <!-- <a href="#" class="btn btn-secondary btn-sm font-poppins ml-xl-0 ml-sm-3 my-xl-2 my-sm-0 my-2"
+          role="button">Edit
+          Info</a> -->
       </div>
       <% } %>
 
