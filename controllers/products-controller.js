@@ -129,6 +129,12 @@ exports.deleteProduct = async (req, res, next) => {
     const product = await Product.findOne({
       where: { productId },
     });
+
+    fs.unlink(product.image, (err) => {
+      if (err) console.log(err);
+      console.log(`${product.image} was deleted`);
+    });
+
     product.destroy();
     res.status(200).json({ message: 'Product deleted!' });
   } catch (err) {
@@ -185,7 +191,7 @@ exports.editImage = async (req, res, next) => {
     await product.save();
 
     fs.unlink(oldImage, (err) => {
-      if (err) throw err;
+      if (err) console.log(err);
       console.log(`${oldImage} was deleted`);
 
       res.status(200).json({ product });
