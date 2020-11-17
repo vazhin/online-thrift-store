@@ -43,12 +43,17 @@ exports.getAllProducts = async (req, res, next) => {
   let category = req.query.category;
   let condition = req.query.condition;
   let query = req.query.q;
-  let location = req.query.location;
 
   const queryArr = [];
 
-  if (query) queryArr.push({ name: { [Op.substring]: query.trim() } });
-  if (location) queryArr.push({ city: { [Op.substring]: location.trim() } });
+  if (query)
+    queryArr.push({
+      [Op.or]: [
+        { name: { [Op.substring]: query.trim() } },
+        { city: { [Op.substring]: query.trim() } },
+        { description: { [Op.substring]: query.trim() } },
+      ],
+    });
   if (category) queryArr.push({ category });
   if (condition) {
     queryArr.push(

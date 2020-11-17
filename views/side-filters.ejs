@@ -4,20 +4,8 @@
   <div class="col-md-12 col-sm-6 col-12 d-flex flex-column">
     <form method="GET" action="/search" class="form-inline">
       <input class="form-control mr-sm-2" type="search" placeholder="Search Products" aria-label="Search" name="q"
-        id="searchInput">
-
-      <div class="btn-group my-2 my-xl-0 font-poppins">
-        <button type="button" class="btn btn-outline-primary font-poppins dropdown-toggle" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Search
-        </button>
-        <div class="dropdown-menu">
-          <button class="dropdown-item" type="submit">Names</button>
-          <button class="dropdown-item" type="button" onclick="searchForLocation()">Locations</button>
-        </div>
-      </div>
-
-      <!-- <button class="btn btn-outline-primary font-poppins my-2 my-sm-0" type="submit">Search</button> -->
+        id="searchInput" required>
+      <button class="btn btn-outline-primary font-poppins my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 
@@ -119,10 +107,7 @@
   conditionForm.addEventListener('reset', () => {
     location.href = '/'
   })
-  function searchForLocation() {
-    const query = document.getElementById('searchInput').value
-    location.href = `/search?location=${query}`
-  }
+
   function filterByCategory(value) {
     value = value.split('-').join(' ') // because I need "mobile-device" to be "mobile device". I'm passing the value as an (id).
     const searchParams = new URLSearchParams(location.search)
@@ -138,6 +123,9 @@
   for (let pair of searchParams.entries()) {
     if (!['q', 'location', 'page'].includes(pair[0])) {
       appliedFiltersContainer.insertAdjacentHTML('beforeend', `<span class="badge badge-secondary m-1">${pair[1]}</span>`);
+    }
+    if (pair[0] === 'q') {
+      document.getElementById('searchInput').value = pair[1]
     }
   }
 
