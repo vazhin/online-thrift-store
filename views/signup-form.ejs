@@ -10,17 +10,18 @@
   <div class="w-100 row justify-content-center align-items-center m-0 my-5">
     <div class="col-xl-4 col-lg-6 col-md-7 col-sm-9 col-12 mt-3">
 
-      <div class="card p-sm-3 font-poppins bg-light border-primary">
-        <div class="card-body">
+      <div class="card p-sm-3 font-poppins bg-info border-0">
+        <div class="card-body text-primary">
           <h5 class="card-title">Signup</h5>
-          <h6 class="card-subtitle mb-4 text-muted font-open-sans">Please enter your information</h6>
+          <h6 class="card-subtitle mb-4 text-secondary font-open-sans">Please enter your information</h6>
 
           <form method="post" action="/users/signup" autocomplete='off' class="needs-validation" novalidate>
             <div class="form-group">
               <label for="username">Username</label>
               <input type="text"
                 class="form-control <%= locals.errors && locals.errors.some((elem)=> elem.path === 'username') ? 'is-invalid' : '' %>"
-                name='username' id='username' minlength="3" aria-describedby="validationServer01Feedback" required>
+                name='username' id='username' minlength="3" aria-describedby="validationServer01Feedback"
+                placeholder="Enter a username" required>
               <div class="invalid-feedback" id="validationServer01Feedback">
                 <%= locals.errors && locals.errors.some((elem)=> elem.path === 'username') ? 'This username is not available, please try another.' : 'The username must be at least 3 characters.' %>
               </div>
@@ -30,7 +31,8 @@
               <label for="email">Email address</label>
               <input type="email"
                 class="form-control <%= locals.errors && locals.errors.some((elem)=> elem.path === 'email') ? 'is-invalid' : '' %>"
-                id="email" name="email" aria-describedby="validationServer02Feedback" required>
+                id="email" name="email" aria-describedby="validationServer02Feedback" placeholder="Your email address"
+                required>
               <div class="invalid-feedback" id="validationServer02Feedback">
                 <%= locals.errors && locals.errors.some((elem)=> elem.path === 'email') ? 'An account already exists with this email address.' : 'Please enter a valid email (example@email.com).' %>
               </div>
@@ -38,7 +40,8 @@
 
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" name='password' id='password' minlength="5" required>
+              <input type="password" class="form-control" name='password' id='password' minlength="5"
+                placeholder="******" required>
               <div class="invalid-feedback">
                 The password must be at least 5 characters.
               </div>
@@ -46,7 +49,8 @@
             <button type="submit" class="btn btn-primary">Signup</button>
           </form>
 
-          <p class="font-open-sans mt-4">Already have an account? <a href="/login" class="card-link">Login</a></p>
+          <p class="font-open-sans mt-4 text-secondary">Already have an account? <a href="/login"
+              class="card-link">Login</a></p>
         </div>
       </div>
 

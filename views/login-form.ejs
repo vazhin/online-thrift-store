@@ -12,17 +12,18 @@
   <div class="w-100 row justify-content-center align-items-center m-0 my-5">
     <div class="col-xl-4 col-lg-6 col-md-7 col-sm-9 col-12 mt-3">
 
-      <div class="card p-sm-3 font-poppins bg-light border-primary">
-        <div class="card-body">
+      <div class="card p-sm-3 font-poppins bg-info border-0">
+        <div class="card-body text-primary">
           <h5 class="card-title">Login</h5>
-          <h6 class="card-subtitle mb-4 text-muted font-open-sans">Please enter your credentials</h6>
+          <h6 class="card-subtitle mb-4 text-secondary font-open-sans">Please enter your credentials</h6>
 
           <form method="post" action="/users/login" autocomplete='off'>
             <div class="form-group">
               <label for="username">Username</label>
               <input type="text"
                 class="form-control <%= locals.errors && locals.errors[0] === 'Incorrect username.' ? 'is-invalid' : '' %>"
-                name='username' id='username' aria-describedby="validationServer01Feedback" required>
+                name='username' id='username' aria-describedby="validationServer01Feedback" placeholder="Your username"
+                required>
               <div id="validationServer01Feedback" class="invalid-feedback">
                 <%= locals.errors[0] %>
               </div>
@@ -32,14 +33,16 @@
               <label for="password">Password</label>
               <input type="password"
                 class="form-control <%= locals.errors && locals.errors[0] === 'Incorrect password.' ? 'is-invalid' : '' %>"
-                name='password' id='password' aria-describedby="validationServer02Feedback" required>
+                name='password' id='password' aria-describedby="validationServer02Feedback" placeholder="Your password"
+                required>
               <div id="validationServer02Feedback" class="invalid-feedback">
                 <%= locals.errors[0] %>
               </div>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
           </form>
-          <p class="font-open-sans mt-4">New around here? <a href="/signup" class="card-link">Signup</a></p>
+          <p class="font-open-sans text-secondary mt-4">New around here? <a href="/signup" class="card-link">Signup</a>
+          </p>
         </div>
       </div>
 
