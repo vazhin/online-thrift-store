@@ -175,7 +175,7 @@ exports.editProduct = async (req, res, next) => {
 
     await product.save();
 
-    res.status(200).json({ product });
+    res.redirect(`/products/${productId}`);
   } catch (err) {
     console.log(err);
   }

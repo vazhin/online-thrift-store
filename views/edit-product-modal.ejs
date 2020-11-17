@@ -13,8 +13,12 @@
       </div>
       <div class="modal-body">
 
+        <span class="btn btn-secondary btn-sm font-poppins btn-file mb-3">
+          Change Image <input onchange="changeImage(this)" id="<%= product.productId %>" type="file" name="image"
+            accept="image/*">
+        </span>
 
-        <form id="editProductForm">
+        <form method="POST" action="/products/<%= product.productId %>/edit">
           <div class="form-row">
 
             <div class="form-group col-md-6">
@@ -113,22 +117,14 @@
             </div>
           </div>
 
-
-        </form>
-
-        <span class="btn btn-secondary btn-sm font-poppins btn-file">
-          Change Image <input onchange="changeImage(this)" id="<%= product.productId %>" type="file" name="image"
-            accept="image/*">
-        </span>
-
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-lg font-poppins" data-dismiss="modal">Cancel</button>
-        <button onclick="editProduct(this.id)" id="<%= product.productId %>"
-          class="btn btn-primary btn-lg font-poppins">Edit
-          Product</button>
+        <button type="submit" class="btn btn-primary btn-lg font-poppins">Edit Product</button>
       </div>
+
+      </form>
 
     </div>
   </div>
