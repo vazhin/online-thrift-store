@@ -21,7 +21,7 @@
             <div class="form-group">
               <label for="username">Username</label>
               <input type="text"
-                class="form-control <%= locals.errors && locals.errors[0] === 'Incorrect username.' ? 'is-invalid' : '' %> "
+                class="form-control <%= locals.errors && locals.errors[0] === 'Incorrect username.' ? 'is-invalid' : '' %>"
                 name='username' id='username' aria-describedby="validationServer01Feedback" required>
               <div id="validationServer01Feedback" class="invalid-feedback">
                 <%= locals.errors[0] %>
@@ -30,7 +30,12 @@
 
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" name='password' id='password' required>
+              <input type="password"
+                class="form-control <%= locals.errors && locals.errors[0] === 'Incorrect password.' ? 'is-invalid' : '' %>"
+                name='password' id='password' aria-describedby="validationServer02Feedback" required>
+              <div id="validationServer02Feedback" class="invalid-feedback">
+                <%= locals.errors[0] %>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
           </form>
