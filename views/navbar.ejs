@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light pt-3 px-sm-5 px-4">
-  <a class="navbar-brand font-poppins font-semi-bold font-size-2 text-dark" href="/">Online Thrift Store</a>
+<nav class="navbar navbar-expand-lg navbar-light pt-3 px-sm-5 px-4 border-bottom border-secondary">
+  <a class="navbar-brand font-poppins font-semi-bold font-size-2" href="/">Online Thrift Store</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,26 +9,26 @@
 
       <% if(locals.page === 'index'){ %>
       <a class="nav-item nav-link disabled text-muted" href="/"><span
-          class="badge badge-light text-primary font-poppins"><%=  locals.numOfProducts %> </span>
+          class="badge badge-light font-poppins"><%=  locals.numOfProducts %> </span>
         <%= locals.numOfProducts !== 1 ? "Products" : "Product" %> </a>
       <% } %>
 
       <% if (typeof user === 'object') { %>
 
-      <a class="nav-item nav-link text-dark" href="/product/">Post A Product</a>
-      <a class="nav-item nav-link text-dark" href="/users/<%= user.userId %> ">Your Account</a>
-      <a class="nav-item nav-link text-dark" href="/logout">Log Out</a>
+      <a class="nav-item nav-link" href="/product/">Post A Product</a>
+      <a class="nav-item nav-link" href="/users/<%= user.userId %> ">Your Account</a>
+      <a class="nav-item nav-link" href="/logout">Log Out</a>
 
       <% } else if (user === 'inloginPage') { %>
-      <a class="nav-item nav-link text-dark" href="/signup">Signup</a>
+      <a class="nav-item nav-link" href="/signup">Signup</a>
 
       <% } else if (user === 'inSignupPage') { %>
-      <a class="nav-item nav-link text-dark" href="/login">Login</a>
+      <a class="nav-item nav-link" href="/login">Login</a>
 
       <% } else {%>
 
-      <a class="nav-item nav-link text-dark" href="/signup">Signup</a>
-      <a class="nav-item nav-link text-dark" href="/login">Login</a>
+      <a class="nav-item nav-link" href="/signup">Signup</a>
+      <a class="nav-item nav-link" href="/login">Login</a>
 
       <% } %>
 

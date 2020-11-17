@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 .filters:hover {
-  color: #007bff !important;
+  color: #d8d8d8 !important;
   cursor: pointer;
 }
 

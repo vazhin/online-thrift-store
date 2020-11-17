@@ -17,34 +17,35 @@
 
 
   <div class="col-md-12 col-sm-6 col-12 d-flex flex-column my-md-4 my-sm-0 my-4">
-    <h5 class="font-poppins m-0 text-dark">Categories</h5>
+    <h5 class="font-poppins m-0">Categories</h5>
     <div class="d-flex flex-column font-open-sans">
       <div class="d-flex align-items-center mt-2">
-        <p onclick="filterByCategory(this.id)" id="clothes" class="text-dark m-0 filters">
+        <p onclick="filterByCategory(this.id)" id="clothes" class="m-0 filters">
           Clothes
         </p>
-        <span class="badge badge-light text-primary font-poppins ml-2"><%= count.clothes %> </span>
+        <span class="badge badge-light font-poppins ml-2"><%= count.clothes ? count.clothes : '0' %> </span>
       </div>
 
       <div class="d-flex align-items-center mt-2">
-        <p onclick="filterByCategory(this.id)" id="computer" class="text-dark m-0 filters">
+        <p onclick="filterByCategory(this.id)" id="computer" class="m-0 filters">
           Computers
         </p>
-        <span class="badge badge-light text-primary font-poppins ml-2"><%= count.computer %> </span>
+        <span class="badge badge-light font-poppins ml-2"><%= count.computer ? count.computer : '0' %> </span>
       </div>
 
       <div class="d-flex align-items-center mt-2">
-        <p onclick="filterByCategory(this.id)" id="furniture" class="text-dark m-0 filters">
+        <p onclick="filterByCategory(this.id)" id="furniture" class="m-0 filters">
           Furniture
         </p>
-        <span class="badge badge-light text-primary font-poppins ml-2"><%= count.furniture %> </span>
+        <span class="badge badge-light font-poppins ml-2"><%= count.furniture ? count.furniture : '0' %> </span>
       </div>
 
       <div class="d-flex align-items-center mt-2">
-        <p onclick="filterByCategory(this.id)" id="mobile-device" class="text-dark m-0 filters">Mobile
+        <p onclick="filterByCategory(this.id)" id="mobile-device" class="m-0 filters">Mobile
           Phones
         </p>
-        <span class="badge badge-light text-primary font-poppins ml-2"><%= count['mobile device'] %> </span>
+        <span class="badge badge-light font-poppins ml-2"><%= count['mobile device'] ? count['mobile device'] : '0' %>
+        </span>
       </div>
 
     </div>
@@ -52,7 +53,7 @@
 
 
   <div class="col-md-12 col-sm-6 col-12 d-flex flex-column my-md-4 my-sm-0 my-4">
-    <h5 class="font-poppins m-0 text-dark">Condition</h5>
+    <h5 class="font-poppins m-0">Condition</h5>
 
     <form id="conditionForm" class="d-flex flex-column font-open-sans">
 
