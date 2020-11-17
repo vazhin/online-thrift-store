@@ -18,7 +18,7 @@ Routes:
   - if owner is logged in, how will they edit the listing?
 - [x] GET "/user/:userId" -> profile page, see a list of all their products
 - [x] DELETE "/products/:productId" -> delete product
-- [x] PUT "/products/:productId" -> edit product
+- [x] POST "/products/:productId/edit" -> edit product
 - [x] PUT "/products/:productId/image" -> change product image
 - [x] PUT "/users/:userId/image" -> change user image
 
@@ -37,11 +37,11 @@ To do:
 - [x] filtering
 - [x] product editing / deletion
 - [x] profile picture changing
-- [ ] validation & error handling
+- [x] validation & error handling
+- [x] propagating errors to the client (catching and displaying them)
 - [ ] store the sessions in a session storage, [Compatible Session Stores](http://expressjs.com/en/resources/middleware/session.html#compatible-session-stores)
 - [ ] localization
 
 Tech Debt:
 
-- propagating errors to the client (catching and displaying them)
 - convert JavaScript to TypeScript
