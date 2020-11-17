@@ -8,16 +8,12 @@ const { renderHomepage } = require('../controllers');
 router.get('/', getAllProducts, renderHomepage);
 router.get('/search', getAllProducts, renderHomepage);
 
-router.get('/login', (req, res) => {
-  res.render('login-signup-form', { form: 'Login', action: '/users/login' });
-});
-
 router.get('/signup', (req, res) => {
-  res.render('login-signup-form', { form: 'Sign Up', action: '/users/signup' });
+  res.render('signup-form');
 });
 
 router.get('/login', (req, res) => {
-  res.render('login-signup-form', { form: 'Login', action: '/users/login' });
+  res.render('login-form', { errors: req.flash('error') });
 });
 
 router.get('/product/', isAuthenticated, (req, res, next) => {
@@ -27,10 +23,6 @@ router.get('/product/', isAuthenticated, (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   req.logout();
   res.redirect('/');
-});
-
-router.get('/login-failure', (req, res, next) => {
-  res.send('You entered the wrong password.');
 });
 
 module.exports = router;

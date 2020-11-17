@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 const passport = require('passport');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -35,6 +36,8 @@ app.use(
     },
   })
 );
+
+app.use(flash());
 
 require('./config/passport');
 
