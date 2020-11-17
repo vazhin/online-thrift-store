@@ -27,4 +27,10 @@ $border-radius: 0.4rem;
 $border-radius-lg: 0.45rem;
 $border-radius-sm: 0.35rem;
 
+$border-width: 2px;
+
+$card-bg: $light;
+$card-color: $dark;
+$card-border-color: $secondary; // note **
+
 @import '../node_modules/bootstrap/scss/bootstrap';
