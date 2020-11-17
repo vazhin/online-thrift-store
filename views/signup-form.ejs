@@ -18,17 +18,21 @@
           <form method="post" action="/users/signup" autocomplete='off' class="needs-validation" novalidate>
             <div class="form-group">
               <label for="username">Username</label>
-              <input type="text" class="form-control" name='username' id='username' minlength="3" required>
-              <div class="invalid-feedback">
-                The username must be at least 3 characters.
+              <input type="text"
+                class="form-control <%= locals.errors && locals.errors.some((elem)=> elem.path === 'username') ? 'is-invalid' : '' %>"
+                name='username' id='username' minlength="3" aria-describedby="validationServer01Feedback" required>
+              <div class="invalid-feedback" id="validationServer01Feedback">
+                <%= locals.errors && locals.errors.some((elem)=> elem.path === 'username') ? 'This username is not available, please try another.' : 'The username must be at least 3 characters.' %>
               </div>
             </div>
 
             <div class="form-group">
               <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" name="email" required>
-              <div class="invalid-feedback">
-                Please enter a valid email (example@email.com).
+              <input type="email"
+                class="form-control <%= locals.errors && locals.errors.some((elem)=> elem.path === 'email') ? 'is-invalid' : '' %>"
+                id="email" name="email" aria-describedby="validationServer02Feedback" required>
+              <div class="invalid-feedback" id="validationServer02Feedback">
+                <%= locals.errors && locals.errors.some((elem)=> elem.path === 'email') ? 'An account already exists with this email address.' : 'Please enter a valid email (example@email.com).' %>
               </div>
             </div>
 

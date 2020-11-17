@@ -25,6 +25,7 @@ exports.signup = async (req, res, next) => {
       res.redirect('/login');
     } catch (err) {
       console.log(err);
+      res.render('signup-form', { errors: err.errors });
     }
   });
 };
