@@ -3,16 +3,16 @@
 
 <%- include('head'); %>
 
-<body>
+<body class="bg-light">
 
   <%- include('navbar', { user: user }); %>
 
   <div class="container my-5">
     <div class="card border-0">
-      <div class="card-body font-poppins jumbotron mb-0 border border-primary bg-light rounded">
+      <div class="card-body font-poppins jumbotron mb-0 border border-secondary bg-dark">
 
         <h2>Product info</h2>
-        <h6 class="mb-4 mt-1 text-muted font-open-sans">Please enter your product’s info</h6>
+        <h6 class="mb-4 mt-1 font-open-sans text-secondary">Please enter your product’s info</h6>
 
         <form method="POST" action="/products" enctype="multipart/form-data" class="needs-validation" novalidate>
 
@@ -93,27 +93,27 @@
             <div class="custom-control custom-radio font-open-sans">
               <input class="custom-control-input" required type="radio" name="condition" id="new-with-tags"
                 value="new with tags">
-              <label class="custom-control-label" for="new-with-tags" style="cursor: pointer;">
+              <label class="custom-control-label" for="new-with-tags">
                 new with tags
               </label>
             </div>
             <div class="custom-control custom-radio font-open-sans">
               <input class="custom-control-input" required type="radio" name="condition" id="like-new" value="like-new">
-              <label class="custom-control-label" for="like-new" style="cursor: pointer;">
+              <label class="custom-control-label" for="like-new">
                 like-new
               </label>
             </div>
             <div class="custom-control custom-radio font-open-sans">
               <input class="custom-control-input" required type="radio" name="condition" id="gently-used"
                 value="gently-used">
-              <label class="custom-control-label" for="gently-used" style="cursor: pointer;">
+              <label class="custom-control-label" for="gently-used">
                 gently-used
               </label>
             </div>
             <div class="custom-control custom-radio font-open-sans">
               <input class="custom-control-input" required type="radio" name="condition" id="signs-of-use"
                 value="signs of use">
-              <label class="custom-control-label" for="signs-of-use" style="cursor: pointer;">
+              <label class="custom-control-label" for="signs-of-use">
                 signs of use
               </label>
               <div class="invalid-feedback">Please select a condition that best describes the state of your product.

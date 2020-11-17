@@ -6,4 +6,25 @@ $secondary: #d8d8d8;
 $body-bg: $dark;
 $body-color: $primary;
 
+$navbar-dark-color: $primary;
+$navbar-dark-hover-color: $light;
+$navbar-dark-active-color: $secondary;
+$navbar-dark-disabled-color: $secondary;
+$navbar-dark-toggler-border-color: $secondary;
+
+$component-active-color: $dark;
+$component-active-bg: $light;
+
+$input-bg: $light !default;
+// $input-disabled-bg: $gray-200;
+$input-color: $dark;
+$input-border-color: $light;
+
+$custom-control-label-color: $light;
+$custom-control-cursor: pointer;
+
+$border-radius: 0.4rem;
+$border-radius-lg: 0.45rem;
+$border-radius-sm: 0.35rem;
+
 @import '../node_modules/bootstrap/scss/bootstrap';

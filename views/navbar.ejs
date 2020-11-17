@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light pt-3 px-sm-5 px-4 border-bottom border-secondary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 px-sm-5 px-4 border-bottom border-secondary">
   <a class="navbar-brand font-poppins font-semi-bold font-size-2" href="/">Online Thrift Store</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,7 +8,7 @@
     <div class="navbar-nav font-open-sans">
 
       <% if(locals.page === 'index'){ %>
-      <a class="nav-item nav-link disabled text-muted" href="/"><span
+      <a class="nav-item nav-link disabled" href="/"><span
           class="badge badge-light font-poppins"><%=  locals.numOfProducts %> </span>
         <%= locals.numOfProducts !== 1 ? "Products" : "Product" %> </a>
       <% } %>
