@@ -9,27 +9,29 @@
 
   <div class="container my-5">
     <div class="card border-0">
-      <div class="card-body font-poppins jumbotron mb-0">
+      <div class="card-body font-poppins jumbotron mb-0 border border-primary bg-light rounded">
 
         <h2>Product info</h2>
         <h6 class="mb-4 mt-1 text-muted font-open-sans">Please enter your product’s info</h6>
 
-        <form method="POST" action="/products" enctype="multipart/form-data">
+        <form method="POST" action="/products" enctype="multipart/form-data" class="needs-validation" novalidate>
 
           <div class="form-row">
 
             <div class="form-group col-md-6">
               <label for="name">Name</label>
               <input type="text" class="form-control font-open-sans" id="name" aria-describedby="nameOfProduct"
-                placeholder="Product name" name="name">
-              <small id="nameOfProduct" class="form-text text-muted">Keep the name descriptive.</small>
+                placeholder="Product name" name="name" required maxlength="25">
+              <div class="invalid-feedback">
+                Please provide a name.
+              </div>
             </div>
 
             <div class="form-group col-md-6">
               <label for="price">Price</label>
               <div class="input-group">
                 <input type="text" class="form-control font-open-sans" id="price" placeholder="Product Price"
-                  name="price">
+                  name="price" required>
                 <div class="input-group-append">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary active" style="cursor: pointer;">
@@ -40,6 +42,9 @@
                     </label>
                   </div>
                 </div>
+                <div class="invalid-feedback">
+                  Please enter price of the product.
+                </div>
               </div>
             </div>
           </div>
@@ -47,69 +52,87 @@
           <div class="form-group">
             <label for="description">Description</label>
             <textarea class="form-control font-open-sans" id="description" placeholder="Describe the product" rows="3"
-              name="description"></textarea>
+              name="description" minlength="30" required></textarea>
+            <div class="invalid-feedback">
+              The description must be at least 30 letters long.
+            </div>
           </div>
 
           <div class="form-row">
 
             <div class="form-group col-md-4">
               <label for="city">Town / City</label>
-              <input type="text" class="form-control font-open-sans" id="city" placeholder="Your location" name="city">
+              <input type="text" class="form-control font-open-sans" id="city" placeholder="Your location" name="city"
+                required>
+              <div class="invalid-feedback">Please enter your address.</div>
             </div>
 
             <div class="form-group col-md-4">
               <label for="phonenumber">Phone number</label>
               <input type="text" class="form-control font-open-sans" id="phonenumber" placeholder="Your phone number"
-                name="phoneNumber">
+                name="phoneNumber" required>
+              <div class="invalid-feedback">Please enter your phone number.</div>
             </div>
 
             <div class="form-group col-md-4">
               <label for="category">Category</label>
-              <select id="category" class="form-control font-open-sans" name="category" style="cursor: pointer;">
+              <select id="category" class="custom-select font-open-sans" name="category" style="cursor: pointer;"
+                required>
                 <option value="" disabled selected hidden>Choose a category</option>
                 <option value="clothes">clothes</option>
                 <option value="furniture">furniture</option>
                 <option value="computer">computer</option>
                 <option value="mobile device">mobile device</option>
               </select>
+              <div class="invalid-feedback">Please choose a category.</div>
             </div>
           </div>
 
           <div class="form-group">
             <label>Condition</label>
-            <div class="form-check font-open-sans">
-              <input class="form-check-input" type="radio" name="condition" id="new-with-tags" value="new with tags"
-                checked>
-              <label class="form-check-label" for="new-with-tags" style="cursor: pointer;">
+            <div class="custom-control custom-radio font-open-sans">
+              <input class="custom-control-input" required type="radio" name="condition" id="new-with-tags"
+                value="new with tags">
+              <label class="custom-control-label" for="new-with-tags" style="cursor: pointer;">
                 new with tags
               </label>
             </div>
-            <div class="form-check font-open-sans">
-              <input class="form-check-input" type="radio" name="condition" id="like-new" value="like-new">
-              <label class="form-check-label" for="like-new" style="cursor: pointer;">
+            <div class="custom-control custom-radio font-open-sans">
+              <input class="custom-control-input" required type="radio" name="condition" id="like-new" value="like-new">
+              <label class="custom-control-label" for="like-new" style="cursor: pointer;">
                 like-new
               </label>
             </div>
-            <div class="form-check font-open-sans">
-              <input class="form-check-input" type="radio" name="condition" id="gently-used" value="gently-used">
-              <label class="form-check-label" for="gently-used" style="cursor: pointer;">
+            <div class="custom-control custom-radio font-open-sans">
+              <input class="custom-control-input" required type="radio" name="condition" id="gently-used"
+                value="gently-used">
+              <label class="custom-control-label" for="gently-used" style="cursor: pointer;">
                 gently-used
               </label>
             </div>
-            <div class="form-check font-open-sans">
-              <input class="form-check-input" type="radio" name="condition" id="signs-of-use" value="signs of use">
-              <label class="form-check-label" for="signs-of-use" style="cursor: pointer;">
+            <div class="custom-control custom-radio font-open-sans">
+              <input class="custom-control-input" required type="radio" name="condition" id="signs-of-use"
+                value="signs of use">
+              <label class="custom-control-label" for="signs-of-use" style="cursor: pointer;">
                 signs of use
               </label>
+              <div class="invalid-feedback">Please select a condition that best describes the state of your product.
+              </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="image">Upload Image</label>
-            <input type="file" class="form-control-file font-open-sans" id="image" name="image" accept="image/*">
+
+          <div class="form-row">
+            <div class="custom-file mb-3 col-md-6">
+              <input type="file" class="custom-file-input font-open-sans" id="image" name="image" accept="image/*"
+                required>
+              <label for="image" class="custom-file-label">Upload Image</label>
+              <div class="invalid-feedback">Please provide a picture of the product.</div>
+            </div>
           </div>
 
-          <div class="d-flex">
+
+          <div class="d-flex mt-4">
             <button type="submit" class="btn btn-primary font-semi-bold">Post Product</button>
             <a href="/" class="btn btn-light text-dark ml-4 font-semi-bold" role="button">Cancel</a>
           </div>
@@ -120,7 +143,7 @@
     </div>
   </div>
 
-  <%- include('scripts'); %>
+  <%- include('scripts', { page: 'product-form' }); %>
 
 </body>
 
