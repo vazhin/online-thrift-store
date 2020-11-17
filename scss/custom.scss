@@ -2,6 +2,7 @@ $dark: #242424;
 $primary: #f3d54f;
 $light: #efefef;
 $secondary: #d8d8d8;
+$info: #393939;
 
 $body-bg: $dark;
 $body-color: $primary;
@@ -29,8 +30,10 @@ $border-radius-sm: 0.35rem;
 
 $border-width: 2px;
 
-$card-bg: $light;
+$card-bg: $primary;
 $card-color: $dark;
-$card-border-color: $secondary; // note **
+$card-border-color: $primary;
+
+$modal-content-color: $dark;
 
 @import '../node_modules/bootstrap/scss/bootstrap';

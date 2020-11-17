@@ -23,9 +23,8 @@
 
             <div class="form-group col-md-6">
               <label for="name">Name</label>
-              <input type="text" class="form-control font-open-sans text-primary" id="name"
-                aria-describedby="nameOfProduct" placeholder="Product name" name="name" value="<%= product.name %>"
-                required maxlength="25">
+              <input type="text" class="form-control font-open-sans" id="name" aria-describedby="nameOfProduct"
+                placeholder="Product name" name="name" value="<%= product.name %>" required maxlength="25">
               <div class="invalid-feedback">
                 Please provide a name.
               </div>
@@ -34,8 +33,8 @@
             <div class="form-group col-md-6">
               <label for="price">Price</label>
               <div class="input-group">
-                <input type="text" class="form-control font-open-sans text-primary" id="price"
-                  placeholder="Product Price" name="price" value="<%= product.price %>" required>
+                <input type="text" class="form-control font-open-sans" id="price" placeholder="Product Price"
+                  name="price" value="<%= product.price %>" required>
                 <div class="input-group-append">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary <%= product.currency === "USD" ? 'active' : '' %>"
@@ -59,9 +58,8 @@
 
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control font-open-sans text-primary" id="description"
-              placeholder="Describe the product" rows="3" name="description" required
-              minlength="30"><%= product.description %></textarea>
+            <textarea class="form-control font-open-sans" id="description" placeholder="Describe the product" rows="3"
+              name="description" required minlength="30"><%= product.description %></textarea>
             <div class="invalid-feedback">
               The description must be at least 30 letters long.
             </div>
@@ -71,22 +69,22 @@
 
             <div class="form-group col-md-4">
               <label for="city">Town / City</label>
-              <input type="text" class="form-control font-open-sans text-primary" id="city" placeholder="Your location"
-                name="city" value="<%= product.city %>" required>
+              <input type="text" class="form-control font-open-sans" id="city" placeholder="Your location" name="city"
+                value="<%= product.city %>" required>
               <div class="invalid-feedback">Please enter your address.</div>
             </div>
 
             <div class="form-group col-md-4">
               <label for="phonenumber">Phone number</label>
-              <input type="text" class="form-control font-open-sans text-primary" id="phonenumber"
-                placeholder="Your phone number" name="phoneNumber" value="<%= product.phoneNumber %>" required>
+              <input type="text" class="form-control font-open-sans" id="phonenumber" placeholder="Your phone number"
+                name="phoneNumber" value="<%= product.phoneNumber %>" required>
               <div class="invalid-feedback">Please enter your phone number.</div>
             </div>
 
             <div class="form-group col-md-4">
               <label for="category">Category</label>
-              <select id="category" class="custom-select font-open-sans text-primary" name="category"
-                style="cursor: pointer;" required>
+              <select id="category" class="custom-select font-open-sans" name="category" style="cursor: pointer;"
+                required>
                 <option value="" disabled hidden>Choose a category</option>
                 <option value="clothes" <%- product.category === "clothes" ? 'selected' : '' %>>clothes</option>
                 <option value="furniture" <%- product.category === "furniture" ? 'selected' : '' %>>furniture</option>
@@ -102,28 +100,28 @@
             <div class="custom-control custom-radio font-open-sans">
               <input class="custom-control-input" required type="radio" name="condition" id="new-with-tags"
                 value="new with tags" <%- product.condition === "new with tags" ? 'checked' : '' %>>
-              <label class="custom-control-label" for="new-with-tags" style="cursor: pointer;">
+              <label class="custom-control-label text-dark" for="new-with-tags" style="cursor: pointer;">
                 new with tags
               </label>
             </div>
             <div class="custom-control custom-radio font-open-sans">
               <input class="custom-control-input" required type="radio" name="condition" id="like-new" value="like-new"
                 <%- product.condition === "like-new" ? 'checked' : '' %>>
-              <label class="custom-control-label" for="like-new" style="cursor: pointer;">
+              <label class="custom-control-label text-dark" for="like-new" style="cursor: pointer;">
                 like-new
               </label>
             </div>
             <div class="custom-control custom-radio font-open-sans">
               <input class="custom-control-input" required type="radio" name="condition" id="gently-used"
                 value="gently-used" <%- product.condition === "gently-used" ? 'checked' : '' %>>
-              <label class="custom-control-label" for="gently-used" style="cursor: pointer;">
+              <label class="custom-control-label text-dark" for="gently-used" style="cursor: pointer;">
                 gently-used
               </label>
             </div>
             <div class="custom-control custom-radio font-open-sans">
               <input class="custom-control-input" required type="radio" name="condition" id="signs-of-use"
                 value="signs of use" <%- product.condition === "signs of use" ? 'checked' : '' %>>
-              <label class="custom-control-label" for="signs-of-use" style="cursor: pointer;">
+              <label class="custom-control-label text-dark" for="signs-of-use" style="cursor: pointer;">
                 signs of use
               </label>
             </div>
