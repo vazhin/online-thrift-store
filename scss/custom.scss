@@ -19,7 +19,6 @@ $component-active-color: $dark;
 $component-active-bg: $light;
 
 $input-bg: $light !default;
-// $input-disabled-bg: $gray-200;
 $input-color: $dark;
 $input-border-color: $light;
 
@@ -37,5 +36,17 @@ $card-color: $dark;
 $card-border-color: $primary;
 
 $modal-content-color: $dark;
+
+$pagination-bg: $info;
+$pagination-border-color: $pagination-bg;
+$pagination-color: $light;
+$pagination-active-color: $dark;
+$pagination-active-bg: $primary;
+$pagination-disabled-color: $pagination-color;
+$pagination-disabled-bg: $pagination-bg;
+$pagination-disabled-border-color: $pagination-bg;
+$pagination-hover-color: $dark;
+$pagination-hover-bg: $secondary;
+$pagination-hover-border-color: $pagination-hover-bg;
 
 @import '../node_modules/bootstrap/scss/bootstrap';

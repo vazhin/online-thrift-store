@@ -4543,16 +4543,16 @@ input[type=button].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -2px;
   line-height: 1.25;
-  color: #f3d54f;
-  background-color: #fff;
-  border: 2px solid #dee2e6;
+  color: #efefef;
+  background-color: #393939;
+  border: 2px solid #393939;
 }
 .page-link:hover {
   z-index: 2;
-  color: #e6bf10;
+  color: #242424;
   text-decoration: none;
-  background-color: #e9ecef;
-  border-color: #dee2e6;
+  background-color: #d8d8d8;
+  border-color: #d8d8d8;
 }
 .page-link:focus {
   z-index: 3;
@@ -4572,15 +4572,15 @@ input[type=button].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #242424;
-  background-color: #efefef;
-  border-color: #efefef;
+  background-color: #f3d54f;
+  border-color: #f3d54f;
 }
 .page-item.disabled .page-link {
-  color: #6c757d;
+  color: #efefef;
   pointer-events: none;
   cursor: auto;
-  background-color: #fff;
-  border-color: #dee2e6;
+  background-color: #393939;
+  border-color: #393939;
 }
 
 .pagination-lg .page-link {
