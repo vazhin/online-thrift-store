@@ -6,8 +6,9 @@
 <body>
   <%- include('navbar', { user: currentUser }); %>
 
-  <div class="w-100 row mt-5 m-0">
-    <div class="col-xl-3 col-12 d-flex flex-column align-items-start px-5 font-poppins">
+  <div class="w-100 row mt-5 m-0 align-items-xl-start px-sm-5 px-3 justify-content-xl-between">
+    <div
+      class="col-xl-3 col-12 d-flex flex-column align-items-start py-5 px-sm-5 px-4 ml-xl-5 font-poppins bg-info rounded">
 
       <% if (currentUser && user.userId === currentUser.userId) { %>
       <h3>Your Account</h3>
@@ -39,7 +40,7 @@
       <% } %>
 
     </div>
-    <div class="col-xl-9 col-12 d-flex flex-column align-items-xl-start align-items-center px-sm-5 px-4 font-poppins">
+    <div class="col-xl-8 col-12 d-flex flex-column align-items-xl-start align-items-center font-poppins">
       <% if (currentUser && user.userId === currentUser.userId) { %>
       <h4 class="mt-xl-0 mt-5">Your products</h4>
       <% } else { %>
