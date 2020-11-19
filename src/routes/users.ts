@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-const passport = require('passport');
-const multer = require('multer');
+import express from 'express';
+import passport from 'passport';
+import multer from 'multer';
+const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
