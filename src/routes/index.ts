@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
 
-const { isAuthenticated } = require('../middlewares/auth');
-const { getAllProducts } = require('../controllers/products-controller');
-const { renderHomepage } = require('../controllers');
+import { isAuthenticated } from '../middlewares/auth';
+import { getAllProducts } from '../controllers/products-controller';
+import { renderHomepage } from '../controllers';
 
 router.get('/', getAllProducts, renderHomepage);
 router.get('/search', getAllProducts, renderHomepage);

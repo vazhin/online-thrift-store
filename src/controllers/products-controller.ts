@@ -1,8 +1,13 @@
-const fs = require('fs');
-const { Op } = require('sequelize');
+import fs from 'fs';
+import { Op } from 'sequelize';
+import { Request, Response, NextFunction } from 'express';
 const { Product, User, sequelize } = require('../models');
 
-exports.createProduct = async (req, res, next) => {
+export const createProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const {
     name,
     price,
@@ -14,7 +19,7 @@ exports.createProduct = async (req, res, next) => {
     phoneNumber,
   } = req.body;
   const image = req.file ? req.file.path : '';
-  const userId = req.user.id;
+  const userId = req.user!.id;
 
   try {
     const product = await Product.create({
@@ -36,13 +41,17 @@ exports.createProduct = async (req, res, next) => {
   }
 };
 
-exports.getAllProducts = async (req, res, next) => {
-  let page = req.query.page;
+export const getAllProducts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  let page: number = parseInt(req.query.page as string);
   if (!page) page = 1;
   const limit = 6;
   let category = req.query.category;
   let condition = req.query.condition;
-  let query = req.query.q;
+  let query: string = req.query.q as string;
 
   const queryArr = [];
 
@@ -83,7 +92,7 @@ exports.getAllProducts = async (req, res, next) => {
     const numOfProducts = result.count;
     const numOfPages = Math.ceil(numOfProducts / limit);
 
-    const categoryCounts = await Product.findAll({
+    const categoryCounts: Array<any> = await Product.findAll({
       group: 'category',
       attributes: [
         'category',
@@ -91,7 +100,7 @@ exports.getAllProducts = async (req, res, next) => {
       ],
     });
 
-    const count = {};
+    const count: Record<string, any> = {};
     for (let elem of categoryCounts) {
       count[elem.category] = elem.get('count');
     }
@@ -109,7 +118,11 @@ exports.getAllProducts = async (req, res, next) => {
   }
 };
 
-exports.getAProduct = async (req, res, next) => {
+export const getAProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     let product = await Product.findOne({
       where: { productId: req.params.productId },
@@ -128,7 +141,11 @@ exports.getAProduct = async (req, res, next) => {
   }
 };
 
-exports.deleteProduct = async (req, res, next) => {
+export const deleteProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const productId = req.params.productId;
   try {
     const product = await Product.findOne({
@@ -147,7 +164,11 @@ exports.deleteProduct = async (req, res, next) => {
   }
 };
 
-exports.editProduct = async (req, res, next) => {
+export const editProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const productId = req.params.productId;
   const {
     name,
@@ -181,7 +202,11 @@ exports.editProduct = async (req, res, next) => {
   }
 };
 
-exports.editImage = async (req, res, next) => {
+export const editImage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const productId = req.params.productId;
   const path = req.file ? req.file.path : '';
 
