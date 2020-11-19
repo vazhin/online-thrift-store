@@ -19,7 +19,16 @@ export const createProduct = async (
     phoneNumber,
   } = req.body;
   const image = req.file ? req.file.path : '';
-  const userId = req.user!.id;
+
+  interface User {
+    id: number;
+    username: string;
+    email: string;
+    image: string;
+    userId: string;
+  }
+
+  const userId = (req.user as User).id;
 
   try {
     const product = await Product.create({

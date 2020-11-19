@@ -1,12 +1,13 @@
-const fs = require('fs');
-const bcrypt = require('bcrypt');
+import fs from 'fs';
+import { Request, Response, NextFunction } from 'express';
+import bcrypt from 'bcrypt';
 const saltRounds = 10;
 
 const { User } = require('../models');
 
-exports.signup = async (req, res, next) => {
+exports.signup = async (req: Request, res: Response, next: NextFunction) => {
   const { username, email, password } = req.body;
-  image = 'uploads/users/no-profile-image.png';
+  const image = 'uploads/users/no-profile-image.png';
 
   bcrypt.hash(password, saltRounds, async (err, hash) => {
     if (err) {
@@ -30,7 +31,7 @@ exports.signup = async (req, res, next) => {
   });
 };
 
-exports.getUser = async (req, res, next) => {
+exports.getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     let user = await User.findOne({
       where: { userId: req.params.userId },
@@ -47,7 +48,7 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
-exports.editImage = async (req, res, next) => {
+exports.editImage = async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.params.userId;
   const path = req.file ? req.file.path : '';
 

@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec ts-node src/server.ts",
-    "build": "tsc -p ."
+    "start": "nodemon --exec ts-node --files src/server.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -25,6 +25,7 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/compression": "^1.7.0",
     "@types/connect-flash": "0.0.36",
     "@types/cookie-parser": "^1.4.2",
