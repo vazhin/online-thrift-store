@@ -8,6 +8,8 @@ export const createProduct = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log('PRODUCT CONTROLLER!!!!!!!!!!!!!!!!!');
+
   const {
     name,
     price,
@@ -20,15 +22,7 @@ export const createProduct = async (
   } = req.body;
   const image = req.file ? req.file.path : '';
 
-  interface User {
-    id: number;
-    username: string;
-    email: string;
-    image: string;
-    userId: string;
-  }
-
-  const userId = (req.user as User).id;
+  const userId = (req.user as { id: number }).id;
 
   try {
     const product = await Product.create({

@@ -1,6 +1,6 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import bcrypt from 'bcrypt';
 
 const { User } = require('../models');
 
@@ -19,7 +19,7 @@ passport.use(
   })
 );
 
-passport.serializeUser((user, done) => {
+passport.serializeUser((user: { userId: string }, done) => {
   done(null, user.userId); // only the user ID is serialized to the session
 });
 
