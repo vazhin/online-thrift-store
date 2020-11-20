@@ -8,8 +8,6 @@ export const createProduct = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('PRODUCT CONTROLLER!!!!!!!!!!!!!!!!!');
-
   const {
     name,
     price,
