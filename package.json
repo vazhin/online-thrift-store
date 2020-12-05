@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test": "cross-env NODE_ENV=test jest",
     "watch-test": "npm run test -- --watchAll",
     "db:migrate:test": "cross-env NODE_ENV=test npx sequelize-cli db:migrate",
     "db:migrate:undo:test": "cross-env NODE_ENV=test npx sequelize-cli db:migrate:undo:all"
